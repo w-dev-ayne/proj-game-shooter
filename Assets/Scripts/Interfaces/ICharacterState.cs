@@ -1,4 +1,5 @@
 public interface ICharacterState
 {
-    void Handle(CharacterController controller);
+    void Enter(CharacterController controller);
+    void Exit(CharacterController controller);
 }

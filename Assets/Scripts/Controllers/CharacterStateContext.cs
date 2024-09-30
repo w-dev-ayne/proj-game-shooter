@@ -11,15 +11,15 @@ public class CharacterStateContext
     }
 
     // 상태 전환
-    public void Transition()
-    {
-        CurrentState.Handle(characterController);
-    }
-
-    // 상태 전환
     public void Transition(ICharacterState state)
     {
+        CurrentState.Exit(characterController);
         CurrentState = state;
-        CurrentState.Handle(characterController);
+        CurrentState.Enter(characterController);
+    }
+
+    public void Overlay(ICharacterState state)
+    {
+        state.Enter(characterController);
     }
 }
