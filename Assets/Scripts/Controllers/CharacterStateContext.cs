@@ -13,7 +13,7 @@ public class CharacterStateContext
     // 상태 전환
     public void Transition(ICharacterState state)
     {
-        CurrentState.Exit(characterController);
+        CurrentState?.Exit(characterController);
         CurrentState = state;
         CurrentState.Enter(characterController);
     }

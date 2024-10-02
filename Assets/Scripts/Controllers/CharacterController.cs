@@ -9,16 +9,12 @@ public class CharacterController : MonoBehaviour
     
     private CharacterStateContext stateContext;
     
-    [SerializeField]
-    private Joystick moveJoystick;
-    [SerializeField]
-    private Joystick attackJoystick;
+    public Joystick moveJoystick;
+    public Joystick attackJoystick;
 
     public float moveSpeed = 1.0f;
     public float rotateSpeed = 1.0f;
 
-    public Vector2 moveDirection;
-    public Vector2 rotateDirection;
 
     private void Start()
     {
@@ -37,7 +33,7 @@ public class CharacterController : MonoBehaviour
     private void Move()
     {
         stateContext.Transition(moveState);
-        stateContext.Overlay(rotateState);
+        //stateContext.Overlay(rotateState);
     }
 
     private void Attack()

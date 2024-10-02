@@ -6,17 +6,39 @@ using UnityEngine;
 public class CharacterMoveState : MonoBehaviour, ICharacterState
 {
         private CharacterController characterController;
+        private Vector3 targetDirection;
 
         public void Enter(CharacterController characterController)
         { 
+                this.characterController = characterController;
+                StartCoroutine(Move());
                 // 로직 처리
                 // 애니메이션도 처리
         }
 
-        public IEnumerator Move()
+        private IEnumerator Move()
         {
+                Debug.Log("Start Move");
+                
+                
+                WaitForEndOfFrame oneFrame = new WaitForEndOfFrame();
+                while (true)
+                {
+                        targetDirection = new Vector3(-characterController.moveJoystick.input.x, 0,
+                                -characterController.moveJoystick.input.y);
+                        
+                        if (targetDirection != Vector3.zero)
+                        {
+                                Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+                                characterController.transform.rotation = targetRotation;
+                        }
+                        
+                        characterController.transform.position += targetDirection * characterController.moveSpeed * Time.deltaTime;
+                        
+                        yield return oneFrame;
+                }
+                
                 // 트랙패드 방향으로 움직임 구현
-                yield return null;
         }
         
         public void Exit(CharacterController characterController)

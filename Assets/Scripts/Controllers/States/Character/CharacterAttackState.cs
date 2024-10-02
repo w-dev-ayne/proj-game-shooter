@@ -7,7 +7,7 @@ public class CharacterAttackState : MonoBehaviour, ICharacterState
 
     public void Enter(CharacterController characterController)
     {
-                
+        this.characterController = characterController;
     }
 
     public IEnumerator Attack()
