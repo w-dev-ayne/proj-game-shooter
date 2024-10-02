@@ -9,14 +9,14 @@ public class CharaterRotateState : MonoBehaviour, ICharacterState
 
         public void Enter(CharacterController characterController)
         {
+                Debug.Log("Enter Rotate State");
                 this.characterController = characterController;
-                
                 StartCoroutine(Rotate());
         }
 
         private IEnumerator Rotate()
         {
-                Debug.Log("Start Rotate");
+         
                 WaitForEndOfFrame oneFrame = new WaitForEndOfFrame();
                 
                 while (true)
@@ -40,6 +40,7 @@ public class CharaterRotateState : MonoBehaviour, ICharacterState
 
         public void Exit(CharacterController characterController)
         {
+                Debug.Log("Exit Rotate State");
                 StopAllCoroutines();
         }
 }

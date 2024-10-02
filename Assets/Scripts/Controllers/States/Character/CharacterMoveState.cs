@@ -9,7 +9,8 @@ public class CharacterMoveState : MonoBehaviour, ICharacterState
         private Vector3 targetDirection;
 
         public void Enter(CharacterController characterController)
-        { 
+        {
+                Debug.Log("Enter Move State");
                 this.characterController = characterController;
                 StartCoroutine(Move());
                 // 로직 처리
@@ -18,9 +19,6 @@ public class CharacterMoveState : MonoBehaviour, ICharacterState
 
         private IEnumerator Move()
         {
-                Debug.Log("Start Move");
-                
-                
                 WaitForEndOfFrame oneFrame = new WaitForEndOfFrame();
                 while (true)
                 {
@@ -43,6 +41,7 @@ public class CharacterMoveState : MonoBehaviour, ICharacterState
         
         public void Exit(CharacterController characterController)
         {
+                Debug.Log("Exit Move State");
                 StopAllCoroutines();
         }
 }
