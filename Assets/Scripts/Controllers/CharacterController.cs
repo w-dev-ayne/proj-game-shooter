@@ -14,6 +14,8 @@ public class CharacterController : MonoBehaviour
 
     public float moveSpeed = 1.0f;
     public float rotateSpeed = 1.0f;
+    
+    public BulletPool bulletPool;
 
 
     private void Start()
@@ -22,7 +24,9 @@ public class CharacterController : MonoBehaviour
         this.stateContext = new CharacterStateContext(this);
 
         moveJoystick.onDrag = Move;
+        
         attackJoystick.onDrag = Attack;
+        attackJoystick.onEndDrag = AttackToMove;
         
         // State 등록
         moveState = this.gameObject.AddComponent<CharacterMoveState>();
@@ -42,8 +46,25 @@ public class CharacterController : MonoBehaviour
         stateContext.Overlay(rotateState);
     }
 
+    private void AttackToMove()
+    {
+        if (moveJoystick.isDragging)
+        {
+            stateContext.Transition(moveState);   
+        }
+    }
+
     public void GetDamage(float amount)
     {
         
     }
+
+    #region DebugMode
+
+    public void OnClickAttackButton()
+    {
+        Attack();
+    }
+
+    #endregion
 }

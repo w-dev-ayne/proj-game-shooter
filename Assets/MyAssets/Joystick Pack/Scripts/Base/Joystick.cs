@@ -28,6 +28,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     public bool isDragging = false;
     public UnityAction onDrag;
+    public UnityAction onEndDrag;
 
     [SerializeField] private float handleRange = 1;
     [SerializeField] private float deadZone = 0;
@@ -140,6 +141,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         input = Vector2.zero;
         handle.anchoredPosition = Vector2.zero;
         isDragging = false;
+        onEndDrag?.Invoke();
     }
 
     protected Vector2 ScreenPointToAnchoredPosition(Vector2 screenPosition)

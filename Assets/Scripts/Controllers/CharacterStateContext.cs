@@ -1,6 +1,6 @@
 public class CharacterStateContext
 {
-    public ICharacterState CurrentState { get; set; }
+    private ICharacterState CurrentState { get; set; }
 
     private readonly CharacterController characterController;
 
