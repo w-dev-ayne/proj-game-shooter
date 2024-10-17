@@ -28,16 +28,17 @@ public class CharacterController : MonoBehaviour
     {
         // State Context 등록
         this.stateContext = new CharacterStateContext(this);
-
-        moveJoystick.onDrag = Move;
-        
-        attackJoystick.onDrag = Attack;
-        attackJoystick.onEndDrag = AttackToMove;
+        animatorController.cc = this;
         
         // State 등록
         moveState = this.gameObject.AddComponent<CharacterMoveState>();
         rotateState = this.gameObject.AddComponent<CharaterRotateState>();
         attackState = this.gameObject.AddComponent<CharacterAttackState>();
+        
+        moveJoystick.onDrag = Move;
+        
+        attackJoystick.onDrag = Attack;
+        attackJoystick.onEndDrag = AttackToMove;
     }
 
     private void Move()

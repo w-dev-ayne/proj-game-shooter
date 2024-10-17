@@ -5,14 +5,14 @@ using UnityEngine;
 // 캐릭터 움직임 상태
 public class CharacterMoveState : MonoBehaviour, ICharacterState
 {
-        private CharacterController characterController;
+        private CharacterController cc;
         private Vector3 targetDirection;
 
-        public void Enter(CharacterController characterController)
+        public void Enter(CharacterController cc)
         {
                 Debug.Log("Enter Move State");
-                this.characterController = characterController;
-                characterController.animator.SetBool(CharacterAnimatorParameters.IsMove, true);
+                this.cc = cc;
+                this.cc.animatorController.StartMove();
                 StartCoroutine(Move());
                 // 로직 처리
                 // 애니메이션도 처리
@@ -23,16 +23,16 @@ public class CharacterMoveState : MonoBehaviour, ICharacterState
                 WaitForEndOfFrame oneFrame = new WaitForEndOfFrame();
                 while (true)
                 {
-                        targetDirection = new Vector3(-characterController.moveJoystick.input.x, 0,
-                                -characterController.moveJoystick.input.y);
+                        targetDirection = new Vector3(-cc.moveJoystick.input.x, 0,
+                                -cc.moveJoystick.input.y);
                         
                         if (targetDirection != Vector3.zero)
                         {
                                 Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-                                characterController.transform.rotation = targetRotation;
+                                cc.transform.rotation = targetRotation;
                         }
                         
-                        characterController.transform.position += targetDirection * characterController.moveSpeed * Time.deltaTime;
+                        cc.transform.position += targetDirection * cc.moveSpeed * Time.deltaTime;
                         
                         yield return oneFrame;
                 }
@@ -40,10 +40,10 @@ public class CharacterMoveState : MonoBehaviour, ICharacterState
                 // 트랙패드 방향으로 움직임 구현
         }
         
-        public void Exit(CharacterController characterController)
+        public void Exit(CharacterController cc)
         {
                 Debug.Log("Exit Move State");
-                characterController.animator.SetBool(CharacterAnimatorParameters.IsMove, false);
+                this.cc.animatorController.FinishMove();
                 StopAllCoroutines();
         }
 }

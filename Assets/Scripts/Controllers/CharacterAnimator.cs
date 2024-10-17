@@ -2,9 +2,33 @@ using UnityEngine;
 
 public class CharacterAnimator : AnimatorController
 {
+    public CharacterController cc;
+    
+    public void StartAttack()
+    {
+        animator.SetBool(CharacterAnimatorParameters.IsAttack, true);
+    }
+    
     public void Attack()
     {
-        float duration = GetClipDurationByName("Shoot");
+        animator.SetTrigger(CharacterAnimatorParameters.Attack);
+    }
+
+    public void FinishAttack()
+    {
+        animator.SetBool(CharacterAnimatorParameters.IsAttack, false);
+    }
+
+    public void StartMove()
+    {
+        animator.speed = cc.moveSpeed / 2;
+        animator.SetBool(CharacterAnimatorParameters.IsMove, true);
+    }
+
+    public void FinishMove()
+    {
+        animator.speed = 1;
+        animator.SetBool(CharacterAnimatorParameters.IsMove, false);
     }
 }
 

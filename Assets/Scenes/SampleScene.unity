@@ -708,7 +708,7 @@ MonoBehaviour:
   attackJoystick: {fileID: 132775259}
   attackSpeed: 4
   attackParticle: {fileID: 1415008125}
-  moveSpeed: 10
+  moveSpeed: 5
   rotateSpeed: 1
   bulletPool: {fileID: 0}
   animator: {fileID: 997511413}
@@ -730,6 +730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31201a25be343bb97ab2c8cc36f06e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cc: {fileID: 0}
 --- !u!1001 &1415008121
 PrefabInstance:
   m_ObjectHideFlags: 0

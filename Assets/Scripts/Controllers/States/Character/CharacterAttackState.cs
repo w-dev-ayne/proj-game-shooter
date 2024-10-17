@@ -3,35 +3,35 @@ using UnityEngine;
 
 public class CharacterAttackState : MonoBehaviour, ICharacterState
 {
-    private CharacterController characterController;
+    private CharacterController cc;
 
-    public void Enter(CharacterController characterController)
+    public void Enter(CharacterController cc)
     {
-        this.characterController = characterController;
+        this.cc = cc;
         
-        this.characterController.animatorController.Attack();
-        characterController.animator.SetBool(CharacterAnimatorParameters.IsAttack, true);
+        this.cc.animatorController.StartAttack();
         StartCoroutine(Attack());
     }
 
     public IEnumerator Attack()
     {
-        WaitForSeconds attackSpeed = new WaitForSeconds(1.0f / characterController.attackSpeed);
-        while (characterController.attackJoystick.isDragging)
+        WaitForSeconds attackSpeed = new WaitForSeconds(1.0f / cc.attackSpeed);
+        while (cc.attackJoystick.isDragging)
         {
-            characterController.animator.SetTrigger(CharacterAnimatorParameters.Attack);
-            characterController.attackParticle.Play();
+            this.cc.animatorController.Attack();
+            cc.attackParticle.Play();
             // Bullet bullet = characterController.bulletPool.TakeFromPool() as Bullet;
             //bullet 발사 로직 구현
             yield return attackSpeed;
         }
         // LookAt 방향으로 공격 구현
-        Exit(characterController);
+        Exit(cc);
     }
     
-    public void Exit(CharacterController characterController)
+    public void Exit(CharacterController cc)
     {
-        characterController.animator.SetBool(CharacterAnimatorParameters.IsAttack, false);
+        this.cc.animatorController.FinishAttack();
+        
         StopAllCoroutines();
     }
 }

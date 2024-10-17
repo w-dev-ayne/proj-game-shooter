@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class CharaterRotateState : MonoBehaviour, ICharacterState
 {
-        private CharacterController characterController;
+        private CharacterController cc;
         private Vector3 targetDirection;
 
-        public void Enter(CharacterController characterController)
+        public void Enter(CharacterController cc)
         {
                 Debug.Log("Enter Rotate State");
-                this.characterController = characterController;
+                this.cc = cc;
                 StartCoroutine(Rotate());
         }
 
@@ -19,24 +19,24 @@ public class CharaterRotateState : MonoBehaviour, ICharacterState
          
                 WaitForEndOfFrame oneFrame = new WaitForEndOfFrame();
                 
-                while (characterController.attackJoystick.isDragging)
+                while (cc.attackJoystick.isDragging)
                 {
-                        targetDirection = new Vector3(-characterController.attackJoystick.input.x, 0,
-                                -characterController.attackJoystick.input.y);
+                        targetDirection = new Vector3(-cc.attackJoystick.input.x, 0,
+                                -cc.attackJoystick.input.y);
                         // 목표 회전 각도
                         Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
                         // 현재 회전에서 목표 회전으로 회전
-                        characterController.transform.rotation = Quaternion.RotateTowards(
-                                characterController.transform.rotation,
+                        cc.transform.rotation = Quaternion.RotateTowards(
+                                cc.transform.rotation,
                                 targetRotation,
-                                characterController.rotateSpeed * Time.deltaTime * 180 // 가변적인 rotateSpeed 적용
+                                cc.rotateSpeed * Time.deltaTime * 180 // 가변적인 rotateSpeed 적용
                         );       
                         yield return oneFrame;
                 } 
-                Exit(characterController);
+                Exit(cc);
         }
 
-        public void Exit(CharacterController characterController)
+        public void Exit(CharacterController cc)
         {
                 Debug.Log("Exit Rotate State");
                 StopAllCoroutines();
