@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class CharacterAttackState : MonoBehaviour, ICharacterState
+public class CharacterAttackState : Rotatable, ICharacterState
 {
     private CharacterController cc;
 
@@ -11,6 +11,7 @@ public class CharacterAttackState : MonoBehaviour, ICharacterState
         
         this.cc.animatorController.StartAttack();
         StartCoroutine(Attack());
+        StartCoroutine(Rotate(cc, cc.attackJoystick));
     }
 
     public IEnumerator Attack()

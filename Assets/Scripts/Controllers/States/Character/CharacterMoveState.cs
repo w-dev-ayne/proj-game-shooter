@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 // 캐릭터 움직임 상태
-public class CharacterMoveState : MonoBehaviour, ICharacterState
+public class CharacterMoveState : Rotatable, ICharacterState
 {
         private CharacterController cc;
         private Vector3 targetDirection;
@@ -14,6 +14,7 @@ public class CharacterMoveState : MonoBehaviour, ICharacterState
                 this.cc = cc;
                 this.cc.animatorController.StartMove();
                 StartCoroutine(Move());
+                StartCoroutine(Rotate(cc, cc.moveJoystick));
                 // 로직 처리
                 // 애니메이션도 처리
         }
@@ -36,7 +37,6 @@ public class CharacterMoveState : MonoBehaviour, ICharacterState
                         
                         yield return oneFrame;
                 }
-                
                 // 트랙패드 방향으로 움직임 구현
         }
         

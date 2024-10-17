@@ -2,24 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharaterRotateState : MonoBehaviour, ICharacterState
+public class Rotatable : MonoBehaviour
 {
-        private CharacterController cc;
         private Vector3 targetDirection;
 
-        public void Enter(CharacterController cc)
+        protected IEnumerator Rotate(CharacterController cc, Joystick joyStick)
         {
-                Debug.Log("Enter Rotate State");
-                this.cc = cc;
-                StartCoroutine(Rotate());
-        }
-
-        private IEnumerator Rotate()
-        {
-         
                 WaitForEndOfFrame oneFrame = new WaitForEndOfFrame();
                 
-                while (cc.attackJoystick.isDragging)
+                while (joyStick.isDragging)
                 {
                         targetDirection = new Vector3(-cc.attackJoystick.input.x, 0,
                                 -cc.attackJoystick.input.y);
@@ -33,12 +24,5 @@ public class CharaterRotateState : MonoBehaviour, ICharacterState
                         );       
                         yield return oneFrame;
                 } 
-                Exit(cc);
-        }
-
-        public void Exit(CharacterController cc)
-        {
-                Debug.Log("Exit Rotate State");
-                StopAllCoroutines();
         }
 }

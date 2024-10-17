@@ -1,6 +1,7 @@
 public class CharacterStateContext
 {
     private ICharacterState CurrentState { get; set; }
+    private ICharacterState OverlayState { get; set; }
 
     private readonly CharacterController characterController;
 
@@ -20,6 +21,8 @@ public class CharacterStateContext
 
     public void Overlay(ICharacterState state)
     {
-        state.Enter(characterController);
+        OverlayState?.Exit(characterController);
+        OverlayState = state;
+        OverlayState.Enter(characterController);
     }
 }

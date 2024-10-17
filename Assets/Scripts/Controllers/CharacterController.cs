@@ -1,7 +1,7 @@
 using UnityEditor.Timeline;
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour
+public class CharacterController : MonoBehaviour, IDamageable
 {
     private ICharacterState moveState;
     private ICharacterState rotateState;
@@ -31,7 +31,6 @@ public class CharacterController : MonoBehaviour
         
         // State 등록
         moveState = this.gameObject.AddComponent<CharacterMoveState>();
-        rotateState = this.gameObject.AddComponent<CharaterRotateState>();
         attackState = this.gameObject.AddComponent<CharacterAttackState>();
         
         moveJoystick.onDrag = Move;
@@ -43,24 +42,22 @@ public class CharacterController : MonoBehaviour
     private void Move()
     {
         stateContext.Transition(moveState);
-        //stateContext.Overlay(rotateState);
     }
 
     private void Attack()
     {
         stateContext.Transition(attackState);
-        stateContext.Overlay(rotateState);
     }
 
     private void AttackToMove()
     {
         if (moveJoystick.isDragging)
         {
-            stateContext.Transition(moveState);   
+            this.Move();   
         }
     }
 
-    public void GetDamage(float amount)
+    public void TakeDamage(float damage)
     {
         
     }

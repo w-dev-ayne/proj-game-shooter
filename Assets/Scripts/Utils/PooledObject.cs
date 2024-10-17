@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PooledObject : MonoBehaviour
 {
-        private ObjectPool pool;
+        protected ObjectPool pool;
 
         public void Release()
         {
