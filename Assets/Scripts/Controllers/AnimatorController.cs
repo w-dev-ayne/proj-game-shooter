@@ -26,15 +26,4 @@ public class AnimatorController : MonoBehaviour
 
         return 0.0f;
     }
-    
-    public virtual void UpdateAnimator()
-    {
-        if (animator == null)
-            return;
-    }
-
-    void Update()
-    {
-        UpdateAnimator();
-    }
 }
