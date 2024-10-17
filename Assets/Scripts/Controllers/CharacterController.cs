@@ -19,8 +19,7 @@ public class CharacterController : MonoBehaviour
     public float rotateSpeed = 1.0f;
     
     public BulletPool bulletPool;
-
-    public Animator animator;
+    
     public CharacterAnimator animatorController;
 
 
@@ -28,7 +27,7 @@ public class CharacterController : MonoBehaviour
     {
         // State Context 등록
         this.stateContext = new CharacterStateContext(this);
-        animatorController.cc = this;
+        animatorController = new CharacterAnimator(this, this.GetComponent<Animator>());
         
         // State 등록
         moveState = this.gameObject.AddComponent<CharacterMoveState>();

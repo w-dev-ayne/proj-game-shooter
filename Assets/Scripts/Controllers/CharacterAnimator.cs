@@ -2,7 +2,12 @@ using UnityEngine;
 
 public class CharacterAnimator : AnimatorController
 {
-    public CharacterController cc;
+    private CharacterController cc;
+
+    public CharacterAnimator(CharacterController cc, Animator animator) : base(animator)
+    {
+        this.cc = cc;
+    }
     
     public void StartAttack()
     {

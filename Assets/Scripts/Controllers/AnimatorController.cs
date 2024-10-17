@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class AnimatorController : MonoBehaviour
+public class AnimatorController
 {
     protected Animator animator;
 
-    void Awake()
+    protected AnimatorController(Animator animator)
     {
-        animator = GetComponent<Animator>();
+        this.animator = animator;
     }
 
     protected float GetClipDurationByName(string clipName)
