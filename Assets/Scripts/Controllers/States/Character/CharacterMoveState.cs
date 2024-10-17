@@ -12,6 +12,7 @@ public class CharacterMoveState : MonoBehaviour, ICharacterState
         {
                 Debug.Log("Enter Move State");
                 this.characterController = characterController;
+                characterController.animator.SetBool(CharacterAnimatorParameters.IsMove, true);
                 StartCoroutine(Move());
                 // 로직 처리
                 // 애니메이션도 처리
@@ -42,6 +43,7 @@ public class CharacterMoveState : MonoBehaviour, ICharacterState
         public void Exit(CharacterController characterController)
         {
                 Debug.Log("Exit Move State");
+                characterController.animator.SetBool(CharacterAnimatorParameters.IsMove, false);
                 StopAllCoroutines();
         }
 }

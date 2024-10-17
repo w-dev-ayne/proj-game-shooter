@@ -12,10 +12,16 @@ public class CharacterController : MonoBehaviour
     public Joystick moveJoystick;
     public Joystick attackJoystick;
 
+    public float attackSpeed = 4.0f;
+    public ParticleSystem attackParticle;
+    
     public float moveSpeed = 1.0f;
     public float rotateSpeed = 1.0f;
     
     public BulletPool bulletPool;
+
+    public Animator animator;
+    public CharacterAnimator animatorController;
 
 
     private void Start()
