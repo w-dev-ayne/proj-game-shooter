@@ -1,11 +1,78 @@
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class EnemyController : MonoBehaviour, IDamageable
 {
+    private StateContext<EnemyController> stateContext;
+
+    private IState<EnemyController> moveState;
+    private IState<EnemyController> attackState;
+    private IState<EnemyController> hitState;
+    private IState<EnemyController> dieState;
+    private IState<EnemyController> victoryState;
+    
+    public EnemyAnimator animatorController;
+
+    public CharacterController cc;
+
+    private const float ATTACK_RANGE = 0.5f;
+    public bool attackCondition = false;
+
+    public float attackSpeed = 2.0f;
     public float hp = 10;
+
+    void Start()
+    {
+        this.stateContext = new StateContext<EnemyController>(this);
+        animatorController = new EnemyAnimator(this, this.GetComponent<Animator>());
+
+        moveState = gameObject.AddComponent<EnemyMoveState>();
+        attackState = gameObject.AddComponent<EnemyAttackState>();
+        hitState = gameObject.AddComponent<EnemyHitState>();
+        dieState = gameObject.AddComponent<EnemyDieState>();
+        victoryState = gameObject.AddComponent<EnemyVictoryState>();
+        
+        // 예외 처리 필요
+        cc = FindObjectOfType<CharacterController>();
+
+        attackCondition = Vector3.Distance(transform.position, cc.transform.position) <= ATTACK_RANGE;
+        
+        Init();
+    }
+
+    void Update()
+    {
+        attackCondition = Vector3.Distance(transform.position, cc.transform.position) <= ATTACK_RANGE; 
+    }
+
+    private void Init()
+    {
+        Move();
+    }
+
+    public void Move()
+    {
+        stateContext.Transition(moveState);
+    }
+
+    public void Attack()
+    {
+        stateContext.Transition(attackState);
+    }
+
+    private void Victory()
+    {
+        stateContext.Transition(victoryState);
+    }
+
+    private void Die()
+    {
+        stateContext.Transition(dieState);
+    }
     
     public void TakeDamage(float damage)
     {
+        stateContext.Transition(hitState);
         Debug.Log("Take Damage");
     }
 }

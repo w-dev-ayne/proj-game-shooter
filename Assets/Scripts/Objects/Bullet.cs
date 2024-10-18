@@ -7,9 +7,17 @@ public class Bullet : PooledObject
     public float attack = 0;
     public ParticleSystem hitParticle;
 
+    private Renderer renderer;
+
+    void Awake()
+    {
+        renderer = GetComponent<Renderer>();
+    }
+
     private void OnEnable()
     {
         this.transform.localScale = Vector3.one / 2;
+        renderer.enabled = true;
         
         Invoke("Release", 5.0f);
     }
@@ -18,15 +26,14 @@ public class Bullet : PooledObject
     {
         if (other.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
-            damageable.TakeDamage(attack);
-            hitParticle.Play();
-            StopAllCoroutines();
-
+            renderer.enabled = false;
             Invoke("Release", hitParticle.duration);
+            hitParticle.Play();
+            StopAllCoroutines(); 
+            damageable.TakeDamage(attack);
             
             //Release();
         }
-        // Return To Pool 구현
     }
 
     public void Shoot(Vector3 direction)

@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour, IDamageable
 {
-    private ICharacterState moveState;
-    private ICharacterState rotateState;
-    private ICharacterState attackState;
+    private IState<CharacterController> idleState;
+    private IState<CharacterController> moveState;
+    private IState<CharacterController> attackState;
     
-    private CharacterStateContext stateContext;
+    private StateContext<CharacterController> stateContext;
     
     public Joystick moveJoystick;
     public Joystick attackJoystick;
@@ -27,10 +27,11 @@ public class CharacterController : MonoBehaviour, IDamageable
     private void Start()
     {
         // State Context 등록
-        this.stateContext = new CharacterStateContext(this);
+        this.stateContext = new StateContext<CharacterController>(this);
         animatorController = new CharacterAnimator(this, this.GetComponent<Animator>());
         
         // State 등록
+        idleState = this.gameObject.AddComponent<CharacterIdleState>();
         moveState = this.gameObject.AddComponent<CharacterMoveState>();
         attackState = this.gameObject.AddComponent<CharacterAttackState>();
         
@@ -38,6 +39,11 @@ public class CharacterController : MonoBehaviour, IDamageable
         
         attackJoystick.onDrag = Attack;
         attackJoystick.onEndDrag = AttackToMove;
+    }
+
+    public void Idle()
+    {
+        stateContext.Transition(idleState);
     }
 
     private void Move()

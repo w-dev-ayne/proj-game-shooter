@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 // 캐릭터 움직임 상태
-public class CharacterMoveState : Rotatable, ICharacterState
+public class CharacterMoveState : Rotatable, IState<CharacterController>
 {
         private CharacterController cc;
         private Vector3 targetDirection;
@@ -22,7 +22,7 @@ public class CharacterMoveState : Rotatable, ICharacterState
         private IEnumerator Move()
         {
                 WaitForEndOfFrame oneFrame = new WaitForEndOfFrame();
-                while (true)
+                while (cc.moveJoystick.isDragging)
                 {
                         targetDirection = new Vector3(-cc.moveJoystick.input.x, 0,
                                 -cc.moveJoystick.input.y);
@@ -37,7 +37,8 @@ public class CharacterMoveState : Rotatable, ICharacterState
                         
                         yield return oneFrame;
                 }
-                // 트랙패드 방향으로 움직임 구현
+
+                cc.Idle();
         }
         
         public void Exit(CharacterController cc)

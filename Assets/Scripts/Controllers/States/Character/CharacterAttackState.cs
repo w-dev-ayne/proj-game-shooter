@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class CharacterAttackState : Rotatable, ICharacterState
+public class CharacterAttackState : Rotatable, IState<CharacterController>
 {
     private CharacterController cc;
 
