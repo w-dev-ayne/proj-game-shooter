@@ -20,6 +20,8 @@ public class ObjectPool : MonoBehaviour
         {
             GameObject pooledObject = Instantiate(objPrefab).gameObject;
             pooledObject.transform.parent = this.transform;
+            pooledObject.transform.localScale = Vector3.one;
+            pooledObject.GetComponent<PooledObject>().pool = this;
             pooledObject.SetActive(false);
             pool.Push(pooledObject.GetComponent<PooledObject>());
         }

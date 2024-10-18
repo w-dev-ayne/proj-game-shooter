@@ -21,7 +21,11 @@ public class CharacterAttackState : Rotatable, ICharacterState
         {
             this.cc.animatorController.Attack();
             cc.attackParticle.Play();
-            // Bullet bullet = characterController.bulletPool.TakeFromPool() as Bullet;
+            Bullet bullet = cc.bulletPool.TakeFromPool() as Bullet;
+            bullet.transform.position = cc.bulletPool.shootPositionTransform.position;
+            Vector3 direction = new Vector3(-cc.attackJoystick.input.x, 0, -cc.attackJoystick.input.y).normalized;
+            bullet.Shoot(direction);
+            
             //bullet 발사 로직 구현
             yield return attackSpeed;
         }

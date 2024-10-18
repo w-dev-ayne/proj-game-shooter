@@ -17,6 +17,7 @@ public class CharacterController : MonoBehaviour, IDamageable
     
     public float moveSpeed = 1.0f;
     public float rotateSpeed = 1.0f;
+    public float bulletSpeed = 1.0f;
     
     public BulletPool bulletPool;
     
