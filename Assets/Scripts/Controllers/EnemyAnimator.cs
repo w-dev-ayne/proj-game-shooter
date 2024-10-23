@@ -5,11 +5,13 @@ public class EnemyAnimator : AnimatorController
     private EnemyController ec;
 
     public float hitDurataion = 0.0f;
+    public float dieDurattion;
 
     public EnemyAnimator(EnemyController ec, Animator animator) : base(animator)
     {
         this.ec = ec;
         hitDurataion = GetClipDurationByName("GetHit");
+        dieDurattion = GetClipDurationByName("Die");
         Debug.Log(hitDurataion.ToString());
     }
 
@@ -45,6 +47,7 @@ public class EnemyAnimator : AnimatorController
 
     public void Die()
     {
+        animator.SetBool(EnemyAnimatorParameters.IsDie, true);
         animator.SetTrigger(EnemyAnimatorParameters.Die);
     }
 
@@ -58,6 +61,7 @@ public static class EnemyAnimatorParameters
 {
     public static int IsMove = Animator.StringToHash("IsMove");
     public static int IsAttack = Animator.StringToHash("IsAttack");
+    public static int IsDie = Animator.StringToHash("IsDie");
     public static int Attack = Animator.StringToHash("Attack");
     public static int Hit = Animator.StringToHash("Hit");
     public static int Die = Animator.StringToHash("Die");

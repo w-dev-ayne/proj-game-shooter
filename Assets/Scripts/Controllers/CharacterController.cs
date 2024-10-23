@@ -1,5 +1,6 @@
 using UnityEditor.Timeline;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CharacterController : MonoBehaviour, IDamageable
 {
@@ -8,16 +9,23 @@ public class CharacterController : MonoBehaviour, IDamageable
     private IState<CharacterController> attackState;
     
     private StateContext<CharacterController> stateContext;
+
+    public UnityEvent onDamage {get; set;}
     
     public Joystick moveJoystick;
     public Joystick attackJoystick;
 
-    public float attackSpeed = 4.0f;
-    public ParticleSystem attackParticle;
     
+    public ParticleSystem attackParticle;
+
+    public CharacterData data;
+
+    public float hp = 100f;
+    public float attack;
     public float moveSpeed = 1.0f;
     public float rotateSpeed = 1.0f;
     public float bulletSpeed = 1.0f;
+    public float attackSpeed = 4.0f;
     
     public BulletPool bulletPool;
     
@@ -26,6 +34,7 @@ public class CharacterController : MonoBehaviour, IDamageable
 
     private void Start()
     {
+        AdjustData();
         // State Context 등록
         this.stateContext = new StateContext<CharacterController>(this);
         animatorController = new CharacterAnimator(this, this.GetComponent<Animator>());
@@ -39,6 +48,18 @@ public class CharacterController : MonoBehaviour, IDamageable
         
         attackJoystick.onDrag = Attack;
         attackJoystick.onEndDrag = AttackToMove;
+
+        bulletPool.cc = this;
+    }
+
+    private void AdjustData()
+    {
+        this.hp = data.hp;
+        this.attack = data.attack;
+        this.moveSpeed = data.moveSpeed;
+        this.rotateSpeed = data.rotateSpeed;
+        this.bulletSpeed = data.bulletSpeed;
+        this.attackSpeed = data.attackSpeed;
     }
 
     public void Idle()

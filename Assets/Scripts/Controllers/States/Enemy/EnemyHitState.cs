@@ -26,6 +26,5 @@ public class EnemyHitState : MonoBehaviour, IState<EnemyController>
     public void Exit(EnemyController ec)
     {
         StopAllCoroutines();
-        Debug.Log("Exit Hit State");
     }
 }

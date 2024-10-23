@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.PlayerLoop;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour, IDamageable
 {
@@ -18,11 +20,23 @@ public class EnemyController : MonoBehaviour, IDamageable
     private const float ATTACK_RANGE = 0.5f;
     public bool attackCondition = false;
 
+
+    public EnemyData data;
     public float attackSpeed = 2.0f;
-    public float hp = 10;
+    public float hp;
+    public float attack;
+    public float moveSpeed;
+
+    public float currentHp;
+    
+    public Image hpBar;
+    
+    public UnityEvent onDamage { get; set; }
 
     void Start()
     {
+        AdjustData();
+        
         this.stateContext = new StateContext<EnemyController>(this);
         animatorController = new EnemyAnimator(this, this.GetComponent<Animator>());
 
@@ -38,6 +52,15 @@ public class EnemyController : MonoBehaviour, IDamageable
         attackCondition = Vector3.Distance(transform.position, cc.transform.position) <= ATTACK_RANGE;
         
         Init();
+    }
+
+    private void AdjustData()
+    {
+        this.hp = data.hp;
+        this.attack = data.attack;
+        this.moveSpeed = data.moveSpeed;
+        this.attackSpeed = data.attackSpeed;
+        currentHp = hp;
     }
 
     void Update()
@@ -72,7 +95,17 @@ public class EnemyController : MonoBehaviour, IDamageable
     
     public void TakeDamage(float damage)
     {
+        if (currentHp <= 0)
+            return;
+        
+        currentHp -= damage;
+        hpBar.fillAmount = currentHp / hp;
+
+        if (currentHp <= 0)
+        {
+            Die();
+            return;
+        }
         stateContext.Transition(hitState);
-        Debug.Log("Take Damage");
     }
 }

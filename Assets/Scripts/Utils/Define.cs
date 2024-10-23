@@ -48,4 +48,15 @@ public class Define
 		Attack,
 		Dead
 	}
+
+	public enum ItemType
+	{
+		None,
+		Heal,
+		Attack,
+		MoveSpeed,
+		AttackSpeed,
+		RotateSpeed,
+		BulletSpeed
+	}
 }
