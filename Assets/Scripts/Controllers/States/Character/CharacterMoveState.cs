@@ -24,8 +24,8 @@ public class CharacterMoveState : Rotatable, IState<CharacterController>
                 WaitForEndOfFrame oneFrame = new WaitForEndOfFrame();
                 while (cc.moveJoystick.isDragging)
                 {
-                        targetDirection = new Vector3(-cc.moveJoystick.input.x, 0,
-                                -cc.moveJoystick.input.y);
+                        targetDirection = new Vector3(cc.moveJoystick.input.x, 0,
+                                cc.moveJoystick.input.y);
                         
                         if (targetDirection != Vector3.zero)
                         {

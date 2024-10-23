@@ -23,7 +23,7 @@ public class CharacterAttackState : Rotatable, IState<CharacterController>
             cc.attackParticle.Play();
             Bullet bullet = cc.bulletPool.TakeFromPool() as Bullet;
             bullet.transform.position = cc.bulletPool.shootPositionTransform.position;
-            Vector3 direction = new Vector3(-cc.attackJoystick.input.x, 0, -cc.attackJoystick.input.y).normalized;
+            Vector3 direction = new Vector3(cc.attackJoystick.input.x, 0, cc.attackJoystick.input.y).normalized;
             bullet.Shoot(direction);
             
             //bullet 발사 로직 구현

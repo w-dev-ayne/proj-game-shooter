@@ -7,17 +7,17 @@ public class Bullet : PooledObject
     public float attack = 0;
     public ParticleSystem hitParticle;
 
-    private Renderer renderer;
+    public GameObject renderer;
 
     void Awake()
     {
-        renderer = GetComponent<Renderer>();
+        
     }
 
     private void OnEnable()
     {
         this.transform.localScale = Vector3.one / 2;
-        renderer.enabled = true;
+        renderer.SetActive(true);
         
         Invoke("Release", 5.0f);
     }
@@ -26,7 +26,7 @@ public class Bullet : PooledObject
     {
         if (other.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
-            renderer.enabled = false;
+            renderer.SetActive(false);
             Invoke("Release", hitParticle.duration);
             hitParticle.Play();
             StopAllCoroutines(); 
