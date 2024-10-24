@@ -33,7 +33,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     
     public UnityEvent onDamage { get; set; }
 
-    void Start()
+    public void Initialize()
     {
         AdjustData();
         
@@ -51,7 +51,7 @@ public class EnemyController : MonoBehaviour, IDamageable
 
         attackCondition = Vector3.Distance(transform.position, cc.transform.position) <= ATTACK_RANGE;
         
-        Init();
+        Move();
     }
 
     private void AdjustData()
@@ -66,11 +66,6 @@ public class EnemyController : MonoBehaviour, IDamageable
     void Update()
     {
         attackCondition = Vector3.Distance(transform.position, cc.transform.position) <= ATTACK_RANGE; 
-    }
-
-    private void Init()
-    {
-        Move();
     }
 
     public void Move()
@@ -91,6 +86,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     private void Die()
     {
         stateContext.Transition(dieState);
+        FindAnyObjectByType<StageManager>().UpdateCurrentLevelKill();
     }
     
     public void TakeDamage(float damage)

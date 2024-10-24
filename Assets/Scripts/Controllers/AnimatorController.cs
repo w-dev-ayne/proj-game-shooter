@@ -19,7 +19,6 @@ public class AnimatorController
         {
             if (clip.name == clipName)
             {
-                Debug.Log($"Found clip {clip.name} Duration {clip.length}");
                 return clip.length;
             }
         }

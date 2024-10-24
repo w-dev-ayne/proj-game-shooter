@@ -7,29 +7,34 @@ public class EnemyFactory : MonoBehaviour
 {
     public GameObject enemyPrefab;
 
-
-    public void GenerateEnemies()
+    public void GenerateEnemies(Level levelData)
     {
-        for (int i = 0; i < 10; i++)
+        for (int eIdx = 0; eIdx < levelData.enemies.Length; eIdx++)
         {
-            int randomX = Random.Range(-50, 50);
-            int randomY = Random.Range(-50, 50);
+            for (int idx = 0; idx < levelData.enemiesNums[eIdx]; idx++)
+            {
+                int randomX = Random.Range(-50, 50);
+                int randomY = Random.Range(-50, 50);
 
-            if (Mathf.Abs(randomX) <= 20)
-            {
-                randomX = randomX <= 0 ? randomX - 20 : randomX + 20;
-            }
-            if (Mathf.Abs(randomY) <= 20)
-            {
-                randomY = randomY <= 0 ? randomY - 20 : randomY + 20;
-            }
+                if (Mathf.Abs(randomX) <= 20)
+                {
+                    randomX = randomX <= 0 ? randomX - 20 : randomX + 20;
+                }
+                if (Mathf.Abs(randomY) <= 20)
+                {
+                    randomY = randomY <= 0 ? randomY - 20 : randomY + 20;
+                }
             
-            GenerateEnemy(new Vector3(randomX, 1.25f, randomY));
+                GenerateEnemy(levelData.enemies[eIdx], new Vector3(randomX, 1.25f, randomY));    
+            }
         }
     }
 
-    private void GenerateEnemy(Vector3 position)
+    private void GenerateEnemy(EnemyData enemyData, Vector3 position)
     {
-        Instantiate(enemyPrefab).transform.position = position;
+        EnemyController enemy = Instantiate(enemyPrefab).GetComponent<EnemyController>();
+        enemy.transform.position = position;
+        enemy.data = enemyData;
+        enemy.Initialize();
     }
 }
