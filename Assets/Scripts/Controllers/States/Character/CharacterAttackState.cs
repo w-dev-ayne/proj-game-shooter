@@ -19,11 +19,23 @@ public class CharacterAttackState : Rotatable, IState<CharacterController>
         WaitForSeconds attackSpeed = new WaitForSeconds(1.0f / cc.attackSpeed);
         while (cc.attackJoystick.isDragging)
         {
+            Vector3 direction = new Vector3(cc.attackJoystick.input.x, 0, cc.attackJoystick.input.y).normalized;
+            if (direction.x == 0.0f & direction.y == 0.0f)
+            {
+                yield return attackSpeed;
+                continue;
+            }
+            
             this.cc.animatorController.Attack();
             cc.attackParticle.Play();
             Bullet bullet = cc.bulletPool.TakeFromPool() as Bullet;
             bullet.transform.position = cc.bulletPool.shootPositionTransform.position;
-            Vector3 direction = new Vector3(cc.attackJoystick.input.x, 0, cc.attackJoystick.input.y).normalized;
+            
+            
+            Debug.Log($"Input : {cc.attackJoystick.input} | Direction : {direction}");
+            
+            
+            
             bullet.Shoot(direction);
             
             //bullet 발사 로직 구현

@@ -33,6 +33,7 @@
 *.bc
 *.nupkg
 *.tar.gz
+*.utmp
 
 # Ignore Unity3D crash logs
 sysinfo.txt
