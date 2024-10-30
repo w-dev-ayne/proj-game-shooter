@@ -50,8 +50,5 @@ public class UI_InGame : UI_Popup
 
     void OnDestroy()
     {
-        StageManager stageManager = FindAnyObjectByType<StageManager>();
-        stageManager.onCurrentLevelStarted -= UpdateCurrentLevel;
-        stageManager.onCurrentLevelKilledUpdated -= UpdateCurrentEnemies;
     }
 }
