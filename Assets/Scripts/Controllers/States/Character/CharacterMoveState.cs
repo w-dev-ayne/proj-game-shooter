@@ -7,22 +7,20 @@ public class CharacterMoveState : Rotatable, IState<CharacterController>
 {
         private CharacterController cc;
         private Vector3 targetDirection;
+        private bool isMoving = false;
 
         public void Enter(CharacterController cc)
         {
                 Debug.Log("Enter Move State");
                 this.cc = cc;
                 this.cc.animatorController.StartMove();
-                StartCoroutine(Move());
-                StartCoroutine(Rotate(cc, cc.moveJoystick));
-                // 로직 처리
-                // 애니메이션도 처리
+                
+                isMoving = true;
         }
 
-        private IEnumerator Move()
+        void FixedUpdate()
         {
-                WaitForEndOfFrame oneFrame = new WaitForEndOfFrame();
-                while (cc.moveJoystick.isDragging)
+                if (isMoving && cc.moveJoystick.isDragging)
                 {
                         targetDirection = new Vector3(cc.moveJoystick.input.x, 0,
                                 cc.moveJoystick.input.y);
@@ -34,17 +32,18 @@ public class CharacterMoveState : Rotatable, IState<CharacterController>
                         }
                         
                         cc.transform.position += targetDirection * cc.moveSpeed * Time.deltaTime;
-                        
-                        yield return oneFrame;
+                        base.Rotate(cc);
                 }
-
-                cc.Idle();
+                else if (isMoving && !cc.moveJoystick.isDragging)
+                {
+                        cc.Idle();
+                }
         }
         
         public void Exit(CharacterController cc)
         {
                 Debug.Log("Exit Move State");
                 this.cc.animatorController.FinishMove();
-                StopAllCoroutines();
+                isMoving = false;
         }
 }

@@ -4,17 +4,18 @@ using UnityEngine;
 public class CharacterAttackState : Rotatable, IState<CharacterController>
 {
     private CharacterController cc;
-
+    private bool isAttacking = false;
+    
     public void Enter(CharacterController cc)
     {
         this.cc = cc;
         
         this.cc.animatorController.StartAttack();
+        isAttacking = true;
         StartCoroutine(Attack());
-        StartCoroutine(Rotate(cc, cc.attackJoystick));
     }
 
-    public IEnumerator Attack()
+    private IEnumerator Attack()
     {
         WaitForSeconds attackSpeed = new WaitForSeconds(1.0f / cc.attackSpeed);
         while (cc.attackJoystick.isDragging)
@@ -38,11 +39,19 @@ public class CharacterAttackState : Rotatable, IState<CharacterController>
         // LookAt 방향으로 공격 구현
         Exit(cc);
     }
+
+    void FixedUpdate()
+    {
+        if (isAttacking && cc.attackJoystick.isDragging)
+        {
+            base.Rotate(cc);
+        }
+    }
     
     public void Exit(CharacterController cc)
     {
         this.cc.animatorController.FinishAttack();
-        
         StopAllCoroutines();
+        isAttacking = false;
     }
 }
