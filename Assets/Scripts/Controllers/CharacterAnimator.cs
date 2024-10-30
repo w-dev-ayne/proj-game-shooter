@@ -12,6 +12,7 @@ public class CharacterAnimator : AnimatorController
     public void StartAttack()
     {
         animator.SetBool(CharacterAnimatorParameters.IsAttack, true);
+        animator.SetTrigger(CharacterAnimatorParameters.Attack);
     }
     
     public void Attack()

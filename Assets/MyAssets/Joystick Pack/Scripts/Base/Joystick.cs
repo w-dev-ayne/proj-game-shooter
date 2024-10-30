@@ -30,6 +30,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     public UnityAction onDrag;
     public UnityAction onEndDrag;
 
+    
     [SerializeField] private float handleRange = 1;
     [SerializeField] private float deadZone = 0;
     [SerializeField] private AxisOptions axisOptions = AxisOptions.Both;
@@ -38,6 +39,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     [SerializeField] protected RectTransform background = null;
     [SerializeField] private RectTransform handle = null;
+    [SerializeField] private RectTransform lineImage;
+    
     private RectTransform baseRect = null;
 
     private Canvas canvas;
@@ -60,6 +63,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         handle.anchorMax = center;
         handle.pivot = center;
         handle.anchoredPosition = Vector2.zero;
+        lineImage.pivot = new Vector2(0.5f, 0.0f);
     }
 
     public virtual void OnPointerDown(PointerEventData eventData)
@@ -80,7 +84,15 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         input = (eventData.position - position) / (radius * canvas.scaleFactor);
         FormatInput();
         HandleInput(input.magnitude, input.normalized, radius, cam);
-        handle.anchoredPosition = input * radius * handleRange;
+        //handle.anchoredPosition = input * radius * handleRange;
+        handle.position = eventData.position;
+
+
+        lineImage.sizeDelta = new Vector2(1, Vector2.Distance(Vector3.zero, handle.anchoredPosition));
+        
+        Vector3 dir = handle.position - background.position; 
+        float z = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        lineImage.transform.localEulerAngles = new Vector3(0, 0, z - 90);
     }
 
     protected virtual void HandleInput(float magnitude, Vector2 normalised, Vector2 radius, Camera cam)
