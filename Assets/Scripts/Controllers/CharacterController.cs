@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -29,11 +30,17 @@ public class CharacterController : MonoBehaviour, IDamageable
     public BulletPool bulletPool;
     
     public CharacterAnimator animatorController;
+    public Rigidbody rb;
 
+    public UnityAction<CharacterController> onStatusChanged;
 
+    public SkillData[] skillDatas;
+    public Skill[] skills;
+    
     private void Start()
     {
         AdjustData();
+        InitializeSkillData();
         // State Context 등록
         this.stateContext = new StateContext<CharacterController>(this);
         animatorController = new CharacterAnimator(this, this.GetComponent<Animator>());
@@ -44,11 +51,14 @@ public class CharacterController : MonoBehaviour, IDamageable
         attackState = this.gameObject.AddComponent<CharacterAttackState>();
         
         moveJoystick.onDrag = Move;
-        
         attackJoystick.onDrag = Attack;
         attackJoystick.onEndDrag = AttackToMove;
+        
+        rb = GetComponent<Rigidbody>();
 
         bulletPool.cc = this;
+        
+        onStatusChanged.Invoke(this);
     }
 
     private void AdjustData()
@@ -59,6 +69,23 @@ public class CharacterController : MonoBehaviour, IDamageable
         this.rotateSpeed = data.rotateSpeed;
         this.bulletSpeed = data.bulletSpeed;
         this.attackSpeed = data.attackSpeed;
+    }
+
+    private void InitializeSkillData()
+    {
+        skills = new Skill[skillDatas.Length];
+
+        for (int i = 0; i < skillDatas.Length; i++)
+        {
+            string typeName = $"{skillDatas[i].type.ToString()}Skill";
+            Type skillType = Type.GetType(typeName);
+            skills[i] = (Skill)Activator.CreateInstance(skillType, new object[] { skillDatas[i] });
+        }
+    }
+
+    public void Skill()
+    {
+        skills[0].Action(this);
     }
 
     public void Idle()
@@ -86,7 +113,7 @@ public class CharacterController : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
-        
+        onStatusChanged.Invoke(this);
     }
 
     #region DebugMode

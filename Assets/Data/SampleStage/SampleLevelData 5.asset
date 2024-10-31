@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b58ae7b4c04e4a98b238d68280b63e18, type: 3}
-  m_Name: SampleLevelData
+  m_Name: SampleLevelData 5
   m_EditorClassIdentifier: 
   enemies:
   - {fileID: 11400000, guid: 27db7260f88ff4a5891bcab819777fec, type: 2}
-  enemiesNums: 02000000
+  enemiesNums: 07000000

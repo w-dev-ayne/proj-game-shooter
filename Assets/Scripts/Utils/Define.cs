@@ -32,6 +32,14 @@ public class Define
 		Max,
 	}
 
+	public enum SkillType
+	{
+		Attack,
+		Buff,
+		Heal,
+		Move
+	}
+
 	public enum ContentType
 	{
 		Animation,

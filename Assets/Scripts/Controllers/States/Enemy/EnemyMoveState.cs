@@ -13,23 +13,8 @@ public class EnemyMoveState : MonoBehaviour, IState<EnemyController>
         this.ec = ec;
         ec.animatorController.StartMove();
         isMoving = true;
-        //StartCoroutine(Move());
     }
-
-    private IEnumerator Move()
-    {
-        WaitForEndOfFrame oneFrame = new WaitForEndOfFrame();
-        
-        while (!ec.attackCondition)
-        {
-            ec.transform.LookAt(ec.cc.transform.position);
-            // 목표 위치로 이동
-            ec.transform.position = Vector3.MoveTowards(transform.position, ec.cc.transform.position, Time.deltaTime);
-            yield return oneFrame;
-        }
-        ec.Attack();
-    }
-
+    
     void FixedUpdate()
     {
         if (isMoving && !ec.attackCondition)

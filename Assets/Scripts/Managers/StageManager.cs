@@ -57,7 +57,7 @@ public class StageManager : MonoBehaviour
     private void StartNextLevel()
     {
         currentLevel++;
-        currentLevelData = levels[currentLevel];
+        currentLevelData = levels[currentLevel - 1];
         currentLevelKilled = 0;
         enemyManager.factory.GenerateEnemies(currentLevelData);
         
@@ -67,6 +67,7 @@ public class StageManager : MonoBehaviour
 
     private void FinishCurrentLevel()
     {
+        Managers.UI.ShowPopupUI<UI_LevelClear>();
         onCurrentLevelFinished?.Invoke(currentLevel, currentLevelData);
         StartNextLevel();
     }

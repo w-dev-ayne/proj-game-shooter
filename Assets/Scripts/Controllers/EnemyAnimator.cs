@@ -12,7 +12,6 @@ public class EnemyAnimator : AnimatorController
         this.ec = ec;
         hitDurataion = GetClipDurationByName("GetHit");
         dieDurattion = GetClipDurationByName("Die");
-        Debug.Log(hitDurataion.ToString());
     }
 
     public void StartAttack()
