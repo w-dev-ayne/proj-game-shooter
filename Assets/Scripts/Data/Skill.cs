@@ -42,7 +42,7 @@ public class Skill : ISkill
     public virtual void Action(CharacterController cc)
     {
         cc.mp -= cost;
-        StageManager.Instance.skillManager.CoolTimer(this);
+        StageManager.Instance.skillManager.CoolTimer(this, coolTime, coolTimeImage);
     }
 
     private IEnumerator CoolTimeRoutine()
