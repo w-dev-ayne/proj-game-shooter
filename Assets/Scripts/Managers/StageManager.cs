@@ -1,7 +1,9 @@
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.TextCore.Text;
 
-public class StageManager : MonoBehaviour
+public class StageManager : Singleton<StageManager>
 {
     private int currentLevel = 0;
 
@@ -16,8 +18,13 @@ public class StageManager : MonoBehaviour
     public UnityAction<int, Level> onCurrentLevelFinished;
     public UnityAction<int, Level> onCurrentLevelKilledUpdated;
 
+    public CharacterController cc;
+    public SkillTimer skillTimer;
+
     void Awake()
     {
+        base.Awake();
+        cc = FindAnyObjectByType<CharacterController>();
         Managers.UI.ShowPopupUI<UI_InGame>();
 
         this.levels = new Level[data.levels.Length];

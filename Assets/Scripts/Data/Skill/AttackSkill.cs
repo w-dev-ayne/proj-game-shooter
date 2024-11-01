@@ -20,7 +20,6 @@ public class AttackSkill : Skill
             GameObject.Instantiate(vfx, cc.transform.position, Quaternion.identity);
             vfx.Play();
         }
-            
 
         foreach (Collider col in colliders)
         {

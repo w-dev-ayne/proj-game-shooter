@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: SkillData 1
   m_EditorClassIdentifier: 
   type: 1
-  amount: 0
+  amount: 10
+  cost: 10
   range: 0
-  duration: 0
-  coolTime: 0
-  vfx: {fileID: 0}
+  duration: 3
+  coolTime: 5
+  vfx: {fileID: 3280519133390621004, guid: a71be3e7990efb040a07565c43cbb198, type: 3}
+  skillIcon: {fileID: 0}

@@ -4,6 +4,7 @@ using UnityEngine;
 public class CharacterData : ScriptableObject
 {
     public float hp = 100f;
+    public float mp = 100f;
     public float attack = 1f;
     public float moveSpeed = 1.0f;
     public float rotateSpeed = 1.0f;

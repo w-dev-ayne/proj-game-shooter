@@ -20,7 +20,10 @@ public class CharacterController : MonoBehaviour, IDamageable
 
     public CharacterData data;
 
+    public float maxHp;
     public float hp = 100f;
+    public float maxMp;
+    public float mp;
     public float attack;
     public float moveSpeed = 1.0f;
     public float rotateSpeed = 1.0f;
@@ -35,11 +38,11 @@ public class CharacterController : MonoBehaviour, IDamageable
     public UnityAction<CharacterController> onStatusChanged;
 
     public SkillData[] skillDatas;
-    public Skill[] skills;
+    private Skill[] skills;
     
     private void Start()
     {
-        AdjustData();
+        InitializeCharacterData();
         InitializeSkillData();
         // State Context 등록
         this.stateContext = new StateContext<CharacterController>(this);
@@ -61,9 +64,12 @@ public class CharacterController : MonoBehaviour, IDamageable
         onStatusChanged.Invoke(this);
     }
 
-    private void AdjustData()
+    private void InitializeCharacterData()
     {
+        this.maxHp = data.hp;
         this.hp = data.hp;
+        this.maxMp = data.mp;
+        this.mp = data.mp;
         this.attack = data.attack;
         this.moveSpeed = data.moveSpeed;
         this.rotateSpeed = data.rotateSpeed;
@@ -83,9 +89,11 @@ public class CharacterController : MonoBehaviour, IDamageable
         }
     }
 
-    public void Skill()
+    public void Skill(int index)
     {
-        skills[0].Action(this);
+        // MP 처리
+        skills[index].Action(this);
+        onStatusChanged.Invoke(this);
     }
 
     public void Idle()

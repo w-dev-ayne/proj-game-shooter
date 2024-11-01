@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: SkillData 3
   m_EditorClassIdentifier: 
   type: 3
-  amount: 0
-  range: 0
+  amount: 3
+  cost: 10
+  range: 5
   duration: 0
   coolTime: 0
   vfx: {fileID: 0}
+  skillIcon: {fileID: 0}

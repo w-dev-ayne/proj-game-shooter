@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 public class UI_InGame : UI_Popup
 {
+    [SerializeField] private GameObject skillButtonPrefab;
     private float maxBarWidth;
     
     enum Objects
@@ -15,9 +16,10 @@ public class UI_InGame : UI_Popup
 
     enum Buttons
     {
-        ReloadButton,
-        GetTextureButton,
-        CaptureButton
+        SkillAButton = 0,
+        SkillBButton = 1,
+        SkillCButton = 2,
+        SkillDButton = 3
     }
 
     enum Texts
@@ -40,22 +42,25 @@ public class UI_InGame : UI_Popup
         BindButton(typeof(Buttons));
         BindText(typeof(Texts));
         
-        StageManager stageManager = FindAnyObjectByType<StageManager>();
-        stageManager.onCurrentLevelStarted += UpdateCurrentLevel;
-        stageManager.onCurrentLevelKilledUpdated += UpdateCurrentEnemies;
-
-        CharacterController cc = FindAnyObjectByType<CharacterController>();
-        cc.onStatusChanged += UpdateCharacterInfo;
+        StageManager.Instance.onCurrentLevelStarted += UpdateCurrentLevel;
+        StageManager.Instance.onCurrentLevelKilledUpdated += UpdateCurrentEnemies;
+        
+        StageManager.Instance.cc.onStatusChanged += UpdateCharacterInfo;
 
         maxBarWidth = GetObject((int)Objects.EnemyNumBarObject).GetComponent<RectTransform>().sizeDelta.x;
+        
+        GetButton((int)Buttons.SkillAButton).gameObject.BindEvent(() => OnClickSkillButton((int)Buttons.SkillAButton));
+        GetButton((int)Buttons.SkillBButton).gameObject.BindEvent(() => OnClickSkillButton((int)Buttons.SkillBButton));
+        GetButton((int)Buttons.SkillCButton).gameObject.BindEvent(() => OnClickSkillButton((int)Buttons.SkillCButton));
+        GetButton((int)Buttons.SkillDButton).gameObject.BindEvent(() => OnClickSkillButton((int)Buttons.SkillDButton));
         
         if (base.Init() == false)
             return false;
         return true;
     }
     
-
-    public void UpdateCurrentEnemies(int currentLevelKilled, Level currentLevelData)
+    // 적 처치 시 UI 업데이트
+    private void UpdateCurrentEnemies(int currentLevelKilled, Level currentLevelData)
     {
         GetText((int)Texts.RemainEnemyText).text =
             $"{currentLevelData.totalEnemiesNum} / {currentLevelData.totalEnemiesNum}";
@@ -67,7 +72,8 @@ public class UI_InGame : UI_Popup
             new Vector2(oneEnemyWidth * (currentLevelData.totalEnemiesNum - currentLevelKilled), barRect.sizeDelta.y);
     }
 
-    public void UpdateCurrentLevel(int currentLevel, Level currentLevelData)
+    // Level 변경 시 UI 업데이트
+    private void UpdateCurrentLevel(int currentLevel, Level currentLevelData)
     {
         Debug.Log("Do");
         GetText((int)Texts.LevelText).text = currentLevel.ToString();
@@ -80,9 +86,10 @@ public class UI_InGame : UI_Popup
             new Vector2(maxBarWidth, barRect.sizeDelta.y);
     }
 
-    public void UpdateCharacterInfo(CharacterController cc)
+     private void UpdateCharacterInfo(CharacterController cc)
     {
         GetText((int)Texts.HPText).text = cc.hp.ToString();
+        GetText((int)Texts.MPText).text = cc.mp.ToString();
         GetText((int)Texts.AttackText).text = cc.attack.ToString();
         GetText((int)Texts.AttackSpeedText).text = cc.attackSpeed.ToString();
         GetText((int)Texts.MoveSpeedText).text = cc.moveSpeed.ToString();
@@ -90,17 +97,8 @@ public class UI_InGame : UI_Popup
         GetText((int)Texts.BulletSpeedText).text = cc.bulletSpeed.ToString();
     }
 
-    public void UpdateCharacterInfo(Level level)
+    private void OnClickSkillButton(int i)
     {
-        
-    }
-
-    public void SetSkillInfo(Skill skill)
-    {
-        
-    }
-
-    void OnDestroy()
-    {
+        StageManager.Instance.cc.Skill(i);
     }
 }

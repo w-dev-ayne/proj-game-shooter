@@ -6,4 +6,12 @@ public class MoveSkill : Skill
     {
         
     }
+
+    public override void Action(CharacterController cc)
+    {
+        base.Action(cc);
+        
+        Vector3 targetPosition = cc.transform.position + (cc.transform.forward * amount);
+        cc.transform.position = targetPosition;
+    }
 }
