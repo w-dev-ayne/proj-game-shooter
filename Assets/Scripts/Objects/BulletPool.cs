@@ -7,9 +7,5 @@ public class BulletPool : ObjectPool
 
     void Start()
     {
-        foreach (Bullet bullet in pool)
-        {
-            bullet.attack = cc.attack;
-        }
     }
 }

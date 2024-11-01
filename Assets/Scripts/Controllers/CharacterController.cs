@@ -86,6 +86,7 @@ public class CharacterController : MonoBehaviour, IDamageable
             string typeName = $"{skillDatas[i].type.ToString()}Skill";
             Type skillType = Type.GetType(typeName);
             skills[i] = (Skill)Activator.CreateInstance(skillType, new object[] { skillDatas[i] });
+            skills[i].coolTimeImage = Managers.UI.FindPopup<UI_InGame>().GetCoolTimeImage(i);
         }
     }
 

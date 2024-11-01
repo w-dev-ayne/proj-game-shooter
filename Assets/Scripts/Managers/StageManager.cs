@@ -1,6 +1,7 @@
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.TextCore.Text;
 
 public class StageManager : Singleton<StageManager>
@@ -19,7 +20,7 @@ public class StageManager : Singleton<StageManager>
     public UnityAction<int, Level> onCurrentLevelKilledUpdated;
 
     public CharacterController cc;
-    public SkillTimer skillTimer;
+    public SkillTimer skillManager;
 
     void Awake()
     {

@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class Bullet : PooledObject
 {
-    public float attack = 0;
     public ParticleSystem hitParticle;
-
     public GameObject renderer;
-
-    void Awake()
-    {
-        
-    }
 
     private void OnEnable()
     {
@@ -30,9 +23,7 @@ public class Bullet : PooledObject
             Invoke("Release", hitParticle.duration);
             hitParticle.Play();
             StopAllCoroutines(); 
-            damageable.TakeDamage(attack);
-            
-            //Release();
+            damageable.TakeDamage(StageManager.Instance.cc.attack);
         }
     }
 

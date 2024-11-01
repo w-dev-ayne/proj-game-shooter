@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Skill : ISkill
 {
@@ -9,12 +10,14 @@ public class Skill : ISkill
     protected float range;
     protected float duration;
     protected float coolTime;
+    public bool isCoolTime;
 
     public Sprite skillIcon;
 
     protected ParticleSystem vfx;
     protected ParticleSystem vfxObject;
-    protected SkillTimer timer;
+
+    public Image coolTimeImage;
     
     public Skill(SkillData data)
     {
@@ -39,6 +42,7 @@ public class Skill : ISkill
     public virtual void Action(CharacterController cc)
     {
         cc.mp -= cost;
+        StageManager.Instance.skillManager.CoolTimer(this);
     }
 
     private IEnumerator CoolTimeRoutine()

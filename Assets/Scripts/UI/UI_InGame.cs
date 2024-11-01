@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class UI_InGame : UI_Popup
 {
@@ -100,5 +101,10 @@ public class UI_InGame : UI_Popup
     private void OnClickSkillButton(int i)
     {
         StageManager.Instance.cc.Skill(i);
+    }
+
+    public Image GetCoolTimeImage(int idx)
+    {
+        return GetButton(idx).transform.GetChild(2).GetComponent<Image>();
     }
 }

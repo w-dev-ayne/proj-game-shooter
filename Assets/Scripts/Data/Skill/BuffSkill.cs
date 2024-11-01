@@ -20,7 +20,7 @@ public class BuffSkill : Skill
         }
 
         cc.attack += amount;
-        StageManager.Instance.skillTimer.BuffTimer(duration, FinishBuff);
+        StageManager.Instance.skillManager.BuffTimer(duration, FinishBuff);
     }
 
     private void FinishBuff(CharacterController cc)
