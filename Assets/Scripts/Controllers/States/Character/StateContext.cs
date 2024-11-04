@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class StateContext<T>
 {
     public IState<T> CurrentState { get; private set; }
@@ -17,6 +19,8 @@ public class StateContext<T>
         CurrentState?.Exit(controller);
         CurrentState = state;
         CurrentState.Enter(controller);
+        
+        Debug.Log($"{nameof(state)} Enter!");
     }
 
     public void Overlay(IState<T> state)

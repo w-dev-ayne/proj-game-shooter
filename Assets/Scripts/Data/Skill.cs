@@ -62,6 +62,13 @@ public class Skill : ISkill
             Debug.Log("Skill Is In Cool Time");
             return false;
         }
+
+        if (cc.mp < amount)
+        {
+            Debug.Log("Low MP");
+            return false;
+        }
+        
         stateContext.Transition(operateState);
         return true;
     }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    public Stack<PooledObject> pool = new Stack<PooledObject>();
+    public Queue<PooledObject> pool = new Queue<PooledObject>();
     public PooledObject objPrefab;
     
     private const int POOL_SIZE = 30;
@@ -23,13 +23,13 @@ public class ObjectPool : MonoBehaviour
             pooledObject.transform.localScale = Vector3.one;
             pooledObject.GetComponent<PooledObject>().pool = this;
             pooledObject.SetActive(false);
-            pool.Push(pooledObject.GetComponent<PooledObject>());
+            pool.Enqueue(pooledObject.GetComponent<PooledObject>());
         }
     }
 
     public PooledObject TakeFromPool()
     {
-        PooledObject takenObject = pool.Pop();
+        PooledObject takenObject = pool.Dequeue();
         takenObject.transform.SetParent(null);
         takenObject.gameObject.SetActive(true);
 
@@ -38,7 +38,7 @@ public class ObjectPool : MonoBehaviour
 
     public void ReturnToPool(PooledObject pooledObject)
     {
-        pool.Push(pooledObject);
+        pool.Enqueue(pooledObject);
         pooledObject.transform.SetParent(this.transform);
         pooledObject.gameObject.SetActive(false);
     }

@@ -15,6 +15,7 @@ public class CharacterAttackState : Rotatable, IState<CharacterController>
         StartCoroutine(Attack());
     }
 
+    // Attack Speed에 맞춰 Bullet Pool에서 꺼내서 발사
     private IEnumerator Attack()
     {
         WaitForSeconds attackSpeed = new WaitForSeconds(1.0f / cc.attackSpeed);
@@ -40,6 +41,7 @@ public class CharacterAttackState : Rotatable, IState<CharacterController>
         Exit(cc);
     }
 
+    // 공격하는 방향으로 회전
     void FixedUpdate()
     {
         if (isAttacking && cc.attackJoystick.isDragging)

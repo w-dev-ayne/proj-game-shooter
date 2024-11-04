@@ -97,25 +97,17 @@ public class CharacterController : MonoBehaviour, IDamageable
     // 캐릭터 스킬 사용
     public void Skill(Skill skill)
     {
-        if (!useMp(skill.cost))
+        if (skill.Action(this))
         {
-            Debug.Log("Low MP");
-            return;
+            UseMp(skill.cost);
+            onStatusChanged.Invoke(this);    
         }
-        skill.Action(this);
-        onStatusChanged.Invoke(this);
     }
 
     // MP 사용 (부족 시 false return)
-    private bool useMp(float amount)
+    private void UseMp(float amount)
     {
-        if (mp < amount)
-        {
-            return false;
-        }
-
         mp -= amount;
-        return true;
     }
     
 
