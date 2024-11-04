@@ -20,15 +20,15 @@ public class CharacterController : MonoBehaviour, IDamageable
 
     public CharacterData data;
 
-    public float maxHp;
-    public float hp = 100f;
-    public float maxMp;
-    public float mp;
-    public float attack;
-    public float moveSpeed = 1.0f;
-    public float rotateSpeed = 1.0f;
-    public float bulletSpeed = 1.0f;
-    public float attackSpeed = 4.0f;
+    public float maxHp { get; private set; }
+    public float hp { get; private set; }
+    public float maxMp { get; private set; }
+    public float mp { get; private set; }
+    public float attack { get; private set; }
+    public float moveSpeed { get; private set; }
+    public float rotateSpeed { get; private set; }
+    public float bulletSpeed { get; private set; }
+    public float attackSpeed { get; private set; }
     
     public BulletPool bulletPool;
     
@@ -44,7 +44,19 @@ public class CharacterController : MonoBehaviour, IDamageable
     {
         InitializeCharacterData();
         InitializeSkillData();
-        // State Context 등록
+        InitializeStateData();
+        
+        moveJoystick.onDrag = Move;
+        attackJoystick.onDrag = Attack;
+        attackJoystick.onEndDrag = AttackToMove;
+        rb = GetComponent<Rigidbody>();
+        bulletPool.cc = this;
+        onStatusChanged.Invoke(this);
+    }
+
+    // 캐릭터 상태 정보 초기화
+    private void InitializeStateData()
+    {
         this.stateContext = new StateContext<CharacterController>(this);
         animatorController = new CharacterAnimator(this, this.GetComponent<Animator>());
         
@@ -52,18 +64,9 @@ public class CharacterController : MonoBehaviour, IDamageable
         idleState = this.gameObject.AddComponent<CharacterIdleState>();
         moveState = this.gameObject.AddComponent<CharacterMoveState>();
         attackState = this.gameObject.AddComponent<CharacterAttackState>();
-        
-        moveJoystick.onDrag = Move;
-        attackJoystick.onDrag = Attack;
-        attackJoystick.onEndDrag = AttackToMove;
-        
-        rb = GetComponent<Rigidbody>();
-
-        bulletPool.cc = this;
-        
-        onStatusChanged.Invoke(this);
     }
 
+    // 캐릭터 기본 데이터 초기화
     private void InitializeCharacterData()
     {
         this.maxHp = data.hp;
@@ -77,6 +80,7 @@ public class CharacterController : MonoBehaviour, IDamageable
         this.attackSpeed = data.attackSpeed;
     }
 
+    // 캐릭터 스킬 생성 및 정보 초기화
     private void InitializeSkillData()
     {
         skills = new Skill[skillDatas.Length];
@@ -86,16 +90,34 @@ public class CharacterController : MonoBehaviour, IDamageable
             string typeName = $"{skillDatas[i].type.ToString()}Skill";
             Type skillType = Type.GetType(typeName);
             skills[i] = (Skill)Activator.CreateInstance(skillType, new object[] { skillDatas[i] });
-            skills[i].coolTimeImage = Managers.UI.FindPopup<UI_InGame>().GetCoolTimeImage(i);
         }
+        Managers.UI.FindPopup<UI_InGame>().SetSkillButtons(skills);
     }
 
-    public void Skill(int index)
+    // 캐릭터 스킬 사용
+    public void Skill(Skill skill)
     {
-        // MP 처리
-        skills[index].Action(this);
+        if (!useMp(skill.cost))
+        {
+            Debug.Log("Low MP");
+            return;
+        }
+        skill.Action(this);
         onStatusChanged.Invoke(this);
     }
+
+    // MP 사용 (부족 시 false return)
+    private bool useMp(float amount)
+    {
+        if (mp < amount)
+        {
+            return false;
+        }
+
+        mp -= amount;
+        return true;
+    }
+    
 
     public void Idle()
     {
@@ -123,6 +145,16 @@ public class CharacterController : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         onStatusChanged.Invoke(this);
+    }
+
+    public void Heal(float amount)
+    {
+        hp += amount;
+    }
+
+    public void SetAttack(float amount)
+    {
+        attack += amount;
     }
 
     #region DebugMode

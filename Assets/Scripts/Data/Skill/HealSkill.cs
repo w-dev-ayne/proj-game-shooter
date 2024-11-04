@@ -8,9 +8,12 @@ public class HealSkill : Skill
         
     }
 
-    public override void Action(CharacterController cc)
+    public override bool Action(CharacterController cc)
     {
-        base.Action(cc);
+        if (!base.Action(cc))
+        {
+            return false;
+        }
 
         if (vfx != null)
         {
@@ -18,6 +21,7 @@ public class HealSkill : Skill
             vfxObject.Play();
         }
         
-        cc.hp += amount;
+        cc.Heal(amount);
+        return true;
     }
 }

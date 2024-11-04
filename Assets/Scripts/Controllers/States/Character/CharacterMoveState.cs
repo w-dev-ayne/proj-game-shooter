@@ -11,7 +11,6 @@ public class CharacterMoveState : Rotatable, IState<CharacterController>
 
         public void Enter(CharacterController cc)
         {
-                Debug.Log("Enter Move State");
                 this.cc = cc;
                 this.cc.animatorController.StartMove();
                 

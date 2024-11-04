@@ -6,11 +6,10 @@ public class Skill : ISkill
 {
     protected Define.SkillType type;
     protected int amount;
-    protected int cost;
+    public int cost { get; }
     protected float range;
     protected float duration;
-    protected float coolTime;
-    public bool isCoolTime;
+    public float coolTime { get; }
 
     public Sprite skillIcon;
 
@@ -18,6 +17,11 @@ public class Skill : ISkill
     protected ParticleSystem vfxObject;
 
     public Image coolTimeImage;
+    
+    private StateContext<Skill> stateContext;
+    private IState<Skill> readyState;
+    private IState<Skill> operateState;
+    private IState<Skill> coolTimeState;
     
     public Skill(SkillData data)
     {
@@ -37,12 +41,34 @@ public class Skill : ISkill
             vfxObject.transform.localPosition = Vector3.zero;
             vfxObject.gameObject.SetActive(false);   
         }
+
+        stateContext = new StateContext<Skill>(this);
+        readyState = new ReadyState();
+        operateState = new OperateState();
+        coolTimeState = new CoolTimeState();
+        
+        stateContext.Transition(readyState);
     }
 
-    public virtual void Action(CharacterController cc)
+    public void Ready()
     {
-        cc.mp -= cost;
-        StageManager.Instance.skillManager.CoolTimer(this, coolTime, coolTimeImage);
+        stateContext.Transition(readyState);
+    }
+
+    public virtual bool Action(CharacterController cc)
+    {
+        if (stateContext.CurrentState == coolTimeState)
+        {
+            Debug.Log("Skill Is In Cool Time");
+            return false;
+        }
+        stateContext.Transition(operateState);
+        return true;
+    }
+
+    public void CoolTime()
+    {
+        stateContext.Transition(coolTimeState);
     }
 
     private IEnumerator CoolTimeRoutine()

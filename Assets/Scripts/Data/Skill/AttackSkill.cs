@@ -8,9 +8,12 @@ public class AttackSkill : Skill
         
     }
     
-    public override void Action(CharacterController cc)
+    public override bool Action(CharacterController cc)
     {
-        base.Action(cc);
+        if (!base.Action(cc))
+        {
+            return false;
+        }
         
         Collider[] colliders = Physics.OverlapSphere(cc.transform.position, range);
         List<EnemyController> enemies = new List<EnemyController>();
@@ -33,5 +36,7 @@ public class AttackSkill : Skill
         {
             enemy.TakeDamage(amount);
         }
+
+        return true;
     }
 }

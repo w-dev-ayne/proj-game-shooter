@@ -10,6 +10,8 @@ public class UI_InGame : UI_Popup
     [SerializeField] private GameObject skillButtonPrefab;
     private float maxBarWidth;
     
+    public Dictionary<Skill, Button> skillButtons = new Dictionary<Skill, Button>();
+    
     enum Objects
     {
         EnemyNumBarObject,
@@ -50,14 +52,21 @@ public class UI_InGame : UI_Popup
 
         maxBarWidth = GetObject((int)Objects.EnemyNumBarObject).GetComponent<RectTransform>().sizeDelta.x;
         
-        GetButton((int)Buttons.SkillAButton).gameObject.BindEvent(() => OnClickSkillButton((int)Buttons.SkillAButton));
-        GetButton((int)Buttons.SkillBButton).gameObject.BindEvent(() => OnClickSkillButton((int)Buttons.SkillBButton));
-        GetButton((int)Buttons.SkillCButton).gameObject.BindEvent(() => OnClickSkillButton((int)Buttons.SkillCButton));
-        GetButton((int)Buttons.SkillDButton).gameObject.BindEvent(() => OnClickSkillButton((int)Buttons.SkillDButton));
-        
         if (base.Init() == false)
             return false;
         return true;
+    }
+
+    // Skill 버튼에 각 Skill 할당 및 Skill 쿨타임 이미지 오브젝트 할당
+    public void SetSkillButtons(Skill[] skills)
+    {
+        for (int i = 0; i < skills.Length; i++)
+        {
+            skillButtons[skills[i]] = GetButton(i);
+            Skill skill = skills[i]; // 값 복사해서 스킬버튼에 할당하기
+            GetButton(i).gameObject.BindEvent(() => OnClickSkillButton(skill));
+            skills[i].coolTimeImage = GetButton(i).transform.GetChild(2).GetComponent<Image>();
+        }
     }
     
     // 적 처치 시 UI 업데이트
@@ -87,6 +96,7 @@ public class UI_InGame : UI_Popup
             new Vector2(maxBarWidth, barRect.sizeDelta.y);
     }
 
+    // 캐릭터 정보 업데이트 시 UI 변경
      private void UpdateCharacterInfo(CharacterController cc)
     {
         GetText((int)Texts.HPText).text = cc.hp.ToString();
@@ -98,13 +108,8 @@ public class UI_InGame : UI_Popup
         GetText((int)Texts.BulletSpeedText).text = cc.bulletSpeed.ToString();
     }
 
-    private void OnClickSkillButton(int i)
+    private void OnClickSkillButton(Skill skill)
     {
-        StageManager.Instance.cc.Skill(i);
-    }
-
-    public Image GetCoolTimeImage(int idx)
-    {
-        return GetButton(idx).transform.GetChild(2).GetComponent<Image>();
+        StageManager.Instance.cc.Skill(skill);
     }
 }

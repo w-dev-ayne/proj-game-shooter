@@ -7,11 +7,16 @@ public class MoveSkill : Skill
         
     }
 
-    public override void Action(CharacterController cc)
+    public override bool Action(CharacterController cc)
     {
-        base.Action(cc);
+        if (!base.Action(cc))
+        {
+            return false;
+        }
         
         Vector3 targetPosition = cc.transform.position + (cc.transform.forward * amount);
         cc.transform.position = targetPosition;
+
+        return true;
     }
 }

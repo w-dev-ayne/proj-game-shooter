@@ -1,6 +1,6 @@
 public class StateContext<T>
 {
-    private IState<T> CurrentState { get; set; }
+    public IState<T> CurrentState { get; private set; }
     private IState<T> OverlayState { get; set; }
 
     private readonly T controller;

@@ -1,4 +1,4 @@
 public interface ISkill
 {
-    public void Action(CharacterController cc);
+    public bool Action(CharacterController cc);
 }

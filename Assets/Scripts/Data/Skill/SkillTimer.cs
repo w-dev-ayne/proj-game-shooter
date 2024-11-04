@@ -5,26 +5,23 @@ using UnityEngine.UI;
 
 public class SkillTimer : MonoBehaviour
 {
-    public void CoolTimer(Skill skill, float coolTime, Image coolTimeImage)
+    public void CoolTimer(Skill skill)
     {
-        skill.isCoolTime = true;
-        StartCoroutine(CoolTimerRoutine(skill, coolTime, coolTimeImage));
+        StartCoroutine(CoolTimerRoutine(skill));
     }
 
-    private IEnumerator CoolTimerRoutine(Skill skill, float coolTime, Image coolTimeImage)
+    private IEnumerator CoolTimerRoutine(Skill skill)
     {
         WaitForEndOfFrame oneFrame = new WaitForEndOfFrame();
-        coolTimeImage.gameObject.SetActive(true);
-        float timer = coolTime;
+        float timer = skill.coolTime;
         while (timer > 0)
         {
             timer -= Time.deltaTime;
-            coolTimeImage.fillAmount = timer / coolTime;
+            skill.coolTimeImage.fillAmount = timer / skill.coolTime;
             yield return oneFrame;
         }
         
-        coolTimeImage.gameObject.SetActive(false);
-        skill.isCoolTime = false;
+        skill.Ready();
     }
     
     public void BuffTimer(float duration, UnityAction<CharacterController> callback)

@@ -9,9 +9,12 @@ public class BuffSkill : Skill
         
     }
 
-    public override void Action(CharacterController cc)
+    public override bool Action(CharacterController cc)
     {
-        base.Action(cc);
+        if (!base.Action(cc))
+        {
+            return false;
+        }
         
         if (vfx != null)
         {
@@ -19,13 +22,15 @@ public class BuffSkill : Skill
             vfxObject.Play();
         }
 
-        cc.attack += amount;
+        cc.SetAttack(amount);
         StageManager.Instance.skillManager.BuffTimer(duration, FinishBuff);
+
+        return true;
     }
 
     private void FinishBuff(CharacterController cc)
     {
-        cc.attack -= amount;
+        cc.SetAttack(-amount);
         vfxObject.Stop();
         cc.onStatusChanged.Invoke(cc);
     }
