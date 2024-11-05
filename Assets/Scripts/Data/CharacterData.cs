@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Character Data", menuName = "Character Data")]
-public class CharacterData : ScriptableObject
+public class CharacterData : PostData
 {
     public float hp = 100f;
     public float mp = 100f;
