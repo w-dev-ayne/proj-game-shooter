@@ -5,10 +5,17 @@ using UnityEngine;
 public class GetData
 {
     public bool success;
-    public string error;
+    public Error error;
     public string msg;
     public string data;
     public string token;
+    
+    [System.Serializable]
+    public partial class Error
+    {
+        public string code;
+        public string msg;
+    }
 
     public void Print()
     {
@@ -19,3 +26,4 @@ public class GetData
         Debug.Log($"Token : {token}");
     }
 }
+

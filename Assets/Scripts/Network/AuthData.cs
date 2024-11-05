@@ -3,6 +3,17 @@ using UnityEngine;
 public class RegisterAuthData : PostData
 {
     public string username;
+    public string loginId;
+    public string loginPassword;
+    public string loginPassword2;
+
+    public RegisterAuthData(string username, string loginId, string loginPassword, string loginPassword2)
+    {
+        this.username = username;
+        this.loginId = loginId;
+        this.loginPassword = loginPassword;
+        this.loginPassword2 = loginPassword2;
+    }
 }
 
 public class LoginAuthData : PostData
