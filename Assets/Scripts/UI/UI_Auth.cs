@@ -75,7 +75,7 @@ public class UI_Auth : UI_Popup
 
     private void OnLoginSuccess(string message)
     {
-        Debug.Log("LoginComplete");
+        Debug.Log("Login Success");
     }
 
     private void OnLoginFailed(string message)

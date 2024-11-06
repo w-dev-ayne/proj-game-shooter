@@ -8,7 +8,7 @@ public class ObjectPool : MonoBehaviour
     
     private const int POOL_SIZE = 30;
 
-    void Awake()
+    protected virtual void Awake()
     {
         Initialize();
     }
@@ -21,7 +21,7 @@ public class ObjectPool : MonoBehaviour
             GameObject pooledObject = Instantiate(objPrefab).gameObject;
             pooledObject.transform.parent = this.transform;
             pooledObject.transform.localScale = Vector3.one;
-            pooledObject.GetComponent<PooledObject>().pool = this;
+            pooledObject.GetComponent<PooledObject>().pool = this;    
             pooledObject.SetActive(false);
             pool.Enqueue(pooledObject.GetComponent<PooledObject>());
         }
