@@ -40,5 +40,4 @@ public class CameraShake : MonoBehaviour
             perlin.FrequencyGain = 0f;
         }
     }
-    
 }

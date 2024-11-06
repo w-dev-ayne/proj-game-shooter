@@ -37,6 +37,6 @@ public class AttackSkill : Skill
             enemy.TakeDamage(amount);
         }
 
-        return true;
+        return true;  
     }
 }
