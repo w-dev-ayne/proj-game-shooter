@@ -7,6 +7,9 @@ public class FloorSwitcher : MonoBehaviour
     
     private Camera camera;
     private int currentFloor = 3;
+    private Vector3 enterDirection = Vector3.zero; 
+    
+    //other.GetComponent<Rigidbody>().velocity;
 
     void Awake()
     {
@@ -15,23 +18,28 @@ public class FloorSwitcher : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        SwitchCameraCullingMask(other);
+        if (other.CompareTag("Player"))
+        {
+            if (enterDirection != Vector3.zero && Vector3.Dot(enterDirection, other.transform.forward) > 0)
+            {
+                return;
+            }
+            enterDirection = other.GetComponent<Rigidbody>().linearVelocity;
+            SwitchCameraCullingMask();
+        }
     }
 
-
-    private void SwitchCameraCullingMask(Collider other)
+    
+    private void SwitchCameraCullingMask()
     {
-        if (other.gameObject.tag == "Player")
+        currentFloor = (currentFloor == 3) ? 2 : 3;
+        if (currentFloor == 2)
         {
-            currentFloor = (currentFloor == 3) ? 2 : 3;
-            if (currentFloor == 2)
-            {
-                camera.cullingMask = ~((1 << 6) | (1 << 11));    
-            }
-            else if (currentFloor == 3)
-            {
-                camera.cullingMask = ~(1 << 6);
-            }
+            camera.cullingMask = ~((1 << 6) | (1 << 11));    
+        }
+        else if (currentFloor == 3)
+        {
+            camera.cullingMask = ~(1 << 6);
         }
     }
 }
