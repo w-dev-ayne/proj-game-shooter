@@ -7,7 +7,15 @@ public class FloorSwitcher : MonoBehaviour
     
     private Camera camera;
     private int currentFloor = 3;
-    private Vector3 enterDirection = Vector3.zero; 
+    private float enterDirection = 0;
+    private float exitDirection = 0;
+    
+    public enum Direction{
+        x,
+        z
+    }
+
+    public Direction direction;
     
     //other.GetComponent<Rigidbody>().velocity;
 
@@ -20,12 +28,24 @@ public class FloorSwitcher : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (enterDirection != Vector3.zero && Vector3.Dot(enterDirection, other.transform.forward) > 0)
+            enterDirection = (direction == Direction.x) ? other.transform.forward.x : other.transform.forward.z;
+            
+            Debug.Log(enterDirection);
+            // SwitchCameraCullingMask();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            exitDirection = (direction == Direction.x) ? other.transform.forward.x : other.transform.forward.z;
+
+            if ((enterDirection < 0) == (exitDirection < 0))
             {
-                return;
+                SwitchCameraCullingMask();
             }
-            enterDirection = other.GetComponent<Rigidbody>().linearVelocity;
-            SwitchCameraCullingMask();
+            
         }
     }
 
