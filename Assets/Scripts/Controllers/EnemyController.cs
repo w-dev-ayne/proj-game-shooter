@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour, IDamageable
 {
+    public Define.EnemyAttackType attackType;
+    public ObjectPool bulletPool;
+    
     private StateContext<EnemyController> stateContext;
 
     private IState<EnemyController> moveState;
@@ -17,7 +20,7 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     public CharacterController cc;
 
-    private const float ATTACK_RANGE = 0.5f;
+    private const float ATTACK_RANGE = 10f;
     public bool attackCondition = false;
 
 
@@ -26,6 +29,8 @@ public class EnemyController : MonoBehaviour, IDamageable
     public float hp;
     public float attack;
     public float moveSpeed;
+    public float attackRange;
+    public float bulletSpeed;
 
     public float currentHp;
     
@@ -41,7 +46,17 @@ public class EnemyController : MonoBehaviour, IDamageable
         animatorController = new EnemyAnimator(this, this.GetComponent<Animator>());
 
         moveState = gameObject.AddComponent<EnemyMoveState>();
-        attackState = gameObject.AddComponent<EnemyAttackState>();
+
+        switch (attackType)
+        {
+            case Define.EnemyAttackType.Melee:
+                attackState = gameObject.AddComponent<EnemyAttackState>();
+                break;
+            case Define.EnemyAttackType.Projectile:
+                attackState = gameObject.AddComponent<EnemyBAttackState>();
+                break;
+        }
+        
         hitState = gameObject.AddComponent<EnemyHitState>();
         dieState = gameObject.AddComponent<EnemyDieState>();
         victoryState = gameObject.AddComponent<EnemyVictoryState>();
@@ -49,7 +64,7 @@ public class EnemyController : MonoBehaviour, IDamageable
         // 예외 처리 필요
         cc = FindObjectOfType<CharacterController>();
 
-        attackCondition = Vector3.Distance(transform.position, cc.transform.position) <= ATTACK_RANGE;
+        attackCondition = Vector3.Distance(transform.position, cc.transform.position) <= attackRange;
         
         Move();
     }
@@ -60,12 +75,14 @@ public class EnemyController : MonoBehaviour, IDamageable
         this.attack = data.attack;
         this.moveSpeed = data.moveSpeed;
         this.attackSpeed = data.attackSpeed;
+        this.attackRange = data.attackRange;
+        this.bulletSpeed = data.bulletSpeed;
         currentHp = hp;
     }
 
     void Update()
     {
-        attackCondition = Vector3.Distance(transform.position, cc.transform.position) <= ATTACK_RANGE; 
+        attackCondition = Vector3.Distance(transform.position, cc.transform.position) <= attackRange; 
     }
 
     public void Move()

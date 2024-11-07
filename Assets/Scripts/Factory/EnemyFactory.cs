@@ -35,7 +35,7 @@ public class EnemyFactory : MonoBehaviour
 
     private void GenerateEnemy(EnemyData enemyData, Vector3 position)
     {
-        EnemyController enemy = Instantiate(enemyPrefab).GetComponent<EnemyController>();
+        EnemyController enemy = Instantiate(enemyData.prefab).GetComponent<EnemyController>();
         enemy.transform.position = position;
         enemy.data = enemyData;
         enemy.Initialize();

@@ -136,6 +136,7 @@ public class CharacterController : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
+        hp -= damage;
         onStatusChanged.Invoke(this);
     }
 

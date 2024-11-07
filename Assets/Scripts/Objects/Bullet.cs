@@ -7,6 +7,7 @@ public class Bullet : PooledObject
 {
     public ParticleSystem hitParticle;
     public GameObject renderer;
+    private float damage;
 
     private void OnEnable()
     {
@@ -27,22 +28,23 @@ public class Bullet : PooledObject
             Invoke("Release", hitParticle.duration);
             hitParticle.Play();
             StopAllCoroutines(); 
-            damageable.TakeDamage(StageManager.Instance.cc.attack);
+            damageable.TakeDamage(this.damage);
         }
     }
 
-    public void Shoot(Vector3 direction)
+    public void Shoot(Vector3 direction, float speed, float damage)
     {
-        StartCoroutine(CoShoot(direction));
+        this.damage = damage;
+        StartCoroutine(CoShoot(direction, speed));
     }
 
-    private IEnumerator CoShoot(Vector3 direction)
+    private IEnumerator CoShoot(Vector3 direction, float speed)
     {
         WaitForEndOfFrame oneFrame = new WaitForEndOfFrame();
 
         while (true)
         {
-            this.transform.position += direction * 30 * Time.deltaTime;
+            this.transform.position += direction * 30 * speed * Time.deltaTime;
             yield return oneFrame;
         }
     }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ede83954824e7ea69481a6c8e60e3c, type: 3}
   m_Name: EnemyAData
   m_EditorClassIdentifier: 
+  prefab: {fileID: 1678583604939642834, guid: 037ef1dea798c488ca7d5243dfc1c40e, type: 3}
   hp: 10
   attack: 1
   attackSpeed: 2

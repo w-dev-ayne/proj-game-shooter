@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ObjectPool : MonoBehaviour
 {
     public Queue<PooledObject> pool = new Queue<PooledObject>();
     public PooledObject objPrefab;
     
-    private const int POOL_SIZE = 30;
+    [SerializeField]
+    private int poolSize = 30;
 
     protected virtual void Awake()
     {
@@ -16,7 +18,7 @@ public class ObjectPool : MonoBehaviour
     private void Initialize()
     {
         // Pooled Object 생성 후 비활성화
-        for (int i = 0; i < POOL_SIZE; i++)
+        for (int i = 0; i < poolSize; i++)
         {
             GameObject pooledObject = Instantiate(objPrefab).gameObject;
             pooledObject.transform.parent = this.transform;

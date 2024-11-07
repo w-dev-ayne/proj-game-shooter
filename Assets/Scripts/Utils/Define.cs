@@ -40,6 +40,14 @@ public class Define
 		Move
 	}
 
+	public enum EnemyAttackType
+	{
+		Melee,
+		Projectile,
+		Laser
+	}
+	
+
 	public enum ContentType
 	{
 		Animation,
