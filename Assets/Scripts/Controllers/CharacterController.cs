@@ -47,6 +47,7 @@ public class CharacterController : MonoBehaviour, IDamageable
         InitializeStateData();
         
         moveJoystick.onDrag = Move;
+        moveJoystick.onEndDrag = MoveToAttack;
         attackJoystick.onDrag = Attack;
         attackJoystick.onEndDrag = AttackToMove;
         rb = GetComponent<Rigidbody>();
@@ -131,6 +132,14 @@ public class CharacterController : MonoBehaviour, IDamageable
         if (moveJoystick.isDragging)
         {
             this.Move();   
+        }
+    }
+
+    private void MoveToAttack()
+    {
+        if (attackJoystick.isDragging)
+        {
+            this.Attack();
         }
     }
 
