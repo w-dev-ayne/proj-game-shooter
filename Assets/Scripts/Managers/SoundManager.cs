@@ -30,10 +30,10 @@ public class SoundManager
 	public float bgmVolume = 0.5f;
 	public float speechVolume = 1.0f;
 	
-#if UNITY_IOS
-	[DllImport("__Internal")]
-	private static extern void SetAudioSessionCategory();
-#endif
+// #if UNITY_IOS
+// 	[DllImport("__Internal")]
+// 	private static extern void SetAudioSessionCategory();
+// #endif
 
 	public void Init()
 	{
@@ -66,9 +66,9 @@ public class SoundManager
 			Debug.Log($"Load Default Clip {clip.name}");
 		}
 		
-#if !UNITY_EDITOR && UNITY_IOS
-		SetAudioSessionCategory();
-#endif
+// #if !UNITY_EDITOR && UNITY_IOS
+// 		SetAudioSessionCategory();
+// #endif
 
 	}
 

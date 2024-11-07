@@ -22,6 +22,8 @@ public class FloorSwitcher : MonoBehaviour
     void Awake()
     {
         camera = Camera.main;
+
+        currentFloor = upFloor == 3 ? 3 : 2;
     }
     
     private void OnTriggerEnter(Collider other)
@@ -52,14 +54,31 @@ public class FloorSwitcher : MonoBehaviour
     
     private void SwitchCameraCullingMask()
     {
-        currentFloor = (currentFloor == 3) ? 2 : 3;
-        if (currentFloor == 2)
+        if (upFloor == 3)
         {
-            camera.cullingMask = ~((1 << 6) | (1 << 11));    
+            currentFloor = (currentFloor == 3) ? 2 : 3;
+            if (currentFloor == 2)
+            {
+                camera.cullingMask = ~((1 << 6) | (1 << 11));    
+            }
+            else if (currentFloor == 3)
+            {
+                camera.cullingMask = ~(1 << 6);
+            }    
         }
-        else if (currentFloor == 3)
+
+        if (upFloor == 2)
         {
-            camera.cullingMask = ~(1 << 6);
+            currentFloor = (currentFloor == 2) ? 1 : 2;
+            
+            if (currentFloor == 1)
+            {
+                camera.cullingMask = ~((1 << 6) | (1 << 10) | (1 << 11));    
+            }
+            else if (currentFloor == 2)
+            {
+                camera.cullingMask = ~((1 << 6) | (1 << 11));
+            }
         }
     }
 }
