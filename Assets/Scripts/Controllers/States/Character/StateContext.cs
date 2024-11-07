@@ -19,8 +19,6 @@ public class StateContext<T>
         CurrentState?.Exit(controller);
         CurrentState = state;
         CurrentState.Enter(controller);
-        
-        Debug.Log($"{nameof(state)} Enter!");
     }
 
     public void Overlay(IState<T> state)

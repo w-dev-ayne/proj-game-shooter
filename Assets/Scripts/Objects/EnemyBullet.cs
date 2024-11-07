@@ -18,7 +18,6 @@ public class EnemyBullet : PooledObject
     {
         if (other.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
-            Debug.Log("Hit Ch");
             renderer.GetComponent<Renderer>().enabled = false;
             Invoke("Release", hitParticle.duration);
             hitParticle.Play();
