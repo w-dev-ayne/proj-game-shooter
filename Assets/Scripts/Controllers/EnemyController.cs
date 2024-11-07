@@ -50,10 +50,10 @@ public class EnemyController : MonoBehaviour, IDamageable
         switch (attackType)
         {
             case Define.EnemyAttackType.Melee:
-                attackState = gameObject.AddComponent<EnemyAttackState>();
+                attackState = gameObject.AddComponent<EnemyMeleeAttackState>();
                 break;
             case Define.EnemyAttackType.Projectile:
-                attackState = gameObject.AddComponent<EnemyBAttackState>();
+                attackState = gameObject.AddComponent<EnemyProjectileAttackState>();
                 break;
         }
         

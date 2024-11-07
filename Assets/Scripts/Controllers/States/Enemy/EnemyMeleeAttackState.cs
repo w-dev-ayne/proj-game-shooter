@@ -1,31 +1,31 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBAttackState : MonoBehaviour, IState<EnemyController>
+public class EnemyMeleeAttackState : MonoBehaviour, IState<EnemyController>
 {
     private EnemyController ec;
     
     public void Enter(EnemyController ec)
     {
         this.ec = ec;
+        this.ec.animatorController.StartAttack();
+
         StartCoroutine(Attack());
     }
-
     
-    private IEnumerator Attack()
+    public IEnumerator Attack()
     {
         WaitForSeconds attackSpeed = new WaitForSeconds(1.0f / ec.attackSpeed);
-
         while (ec.attackCondition)
         {
             this.ec.animatorController.Attack();
-
-            EnemyBullet bullet = ec.bulletPool.TakeFromPool() as EnemyBullet;
-            Vector3 target = ec.cc.transform.position;
-            bullet.Shoot(target, ec.bulletSpeed, ec.attack);
+            // cc.attackParticle.Play();
+            
+            //bullet 발사 로직 구현
             yield return attackSpeed;
         }
-        
+        // LookAt 방향으로 공격 구현
         ec.Move();
     }
 
