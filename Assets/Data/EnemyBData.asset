@@ -17,5 +17,5 @@ MonoBehaviour:
   attack: 1
   attackSpeed: 1
   moveSpeed: 1
-  attackRange: 5
+  attackRange: 10
   bulletSpeed: 1

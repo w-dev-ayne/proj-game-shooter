@@ -17,10 +17,13 @@ public class EnemyProjectileAttackState : MonoBehaviour, IState<EnemyController>
     private IEnumerator Attack()
     {
         WaitForSeconds attackSpeed = new WaitForSeconds(1.0f / ec.attackSpeed);
+        WaitForSeconds attackDelay = new WaitForSeconds(0.3f);
 
         while (ec.attackCondition)
         {
             this.ec.animatorController.Attack();
+            yield return attackDelay;
+            
             EnemyBullet bullet = ec.bulletPool.TakeFromPool() as EnemyBullet;
             Vector3 target = ec.cc.transform.position;
             bullet.Shoot(target, ec.bulletSpeed, ec.attack);
