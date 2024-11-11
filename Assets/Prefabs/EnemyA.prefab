@@ -233,6 +233,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e699175b21ee4ea09c1d83b43d27b51f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackType: 0
+  bulletPool: {fileID: 0}
   cc: {fileID: 0}
   attackCondition: 0
   data: {fileID: 11400000, guid: 27db7260f88ff4a5891bcab819777fec, type: 2}
@@ -240,6 +242,8 @@ MonoBehaviour:
   hp: 10
   attack: 0
   moveSpeed: 0
+  attackRange: 0
+  bulletSpeed: 0
   currentHp: 0
   hpBar: {fileID: 5914941170233625479}
 --- !u!54 &9073372940743693986
@@ -289,7 +293,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1.5
+  m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &2756057454623521765

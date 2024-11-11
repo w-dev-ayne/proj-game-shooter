@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework.Internal.Builders;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyFactory : MonoBehaviour
 {
@@ -36,7 +37,12 @@ public class EnemyFactory : MonoBehaviour
     private void GenerateEnemy(EnemyData enemyData, Vector3 position)
     {
         EnemyController enemy = Instantiate(enemyData.prefab).GetComponent<EnemyController>();
-        enemy.transform.position = position;
+
+        if (NavMesh.SamplePosition(position, out NavMeshHit hit, 100, 0))
+        {
+            enemy.transform.position = hit.position;
+        }
+        
         enemy.data = enemyData;
         enemy.Initialize();
     }

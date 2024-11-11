@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
@@ -16,8 +17,9 @@ public class EnemyController : MonoBehaviour, IDamageable
     private IState<EnemyController> dieState;
     private IState<EnemyController> victoryState;
     
+    public NavMeshAgent agent { get; private set; }
+    
     public EnemyAnimator animatorController;
-
     public CharacterController cc;
 
     private const float ATTACK_RANGE = 10f;
@@ -41,6 +43,8 @@ public class EnemyController : MonoBehaviour, IDamageable
     public void Initialize()
     {
         AdjustData();
+        InitializeNavMeshData();
+        
         
         this.stateContext = new StateContext<EnemyController>(this);
         animatorController = new EnemyAnimator(this, this.GetComponent<Animator>());
@@ -78,6 +82,12 @@ public class EnemyController : MonoBehaviour, IDamageable
         this.attackRange = data.attackRange;
         this.bulletSpeed = data.bulletSpeed;
         currentHp = hp;
+    }
+
+    private void InitializeNavMeshData()
+    {
+        agent = gameObject.AddComponent<NavMeshAgent>();
+        agent.speed = moveSpeed;
     }
 
     void Update()

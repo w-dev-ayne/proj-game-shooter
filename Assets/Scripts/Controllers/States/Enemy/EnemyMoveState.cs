@@ -13,6 +13,19 @@ public class EnemyMoveState : MonoBehaviour, IState<EnemyController>
         this.ec = ec;
         ec.animatorController.StartMove();
         isMoving = true;
+        StartCoroutine(UpdateDestination());
+        ec.agent.isStopped = false;
+    }
+
+    private IEnumerator UpdateDestination()
+    {
+        WaitForSeconds wait = new WaitForSeconds(1.0f);
+
+        while (true)
+        {
+            ec.agent.SetDestination(ec.cc.transform.position);
+            yield return wait;
+        }
     }
     
     void FixedUpdate()
@@ -21,7 +34,8 @@ public class EnemyMoveState : MonoBehaviour, IState<EnemyController>
         {
             ec.transform.LookAt(ec.cc.transform.position);
             // 목표 위치로 이동
-            ec.transform.position = Vector3.MoveTowards(transform.position, ec.cc.transform.position, Time.deltaTime);
+            
+            //ec.transform.position = Vector3.MoveTowards(transform.position, ec.cc.transform.position, Time.deltaTime);
         }
         else if (isMoving && ec.attackCondition)
         {
@@ -31,6 +45,7 @@ public class EnemyMoveState : MonoBehaviour, IState<EnemyController>
 
     public void Exit(EnemyController ec)
     {
+        ec.agent.isStopped = true;
         StopAllCoroutines();
         isMoving = false;
         ec.animatorController.FinishMove();

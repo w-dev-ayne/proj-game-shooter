@@ -20,6 +20,8 @@ public class EnemyMeleeAttackState : MonoBehaviour, IState<EnemyController>
         while (ec.attackCondition)
         {
             this.ec.animatorController.Attack();
+            ec.cc.TakeDamage(ec.attack);
+            
             // cc.attackParticle.Play();
             
             //bullet 발사 로직 구현
