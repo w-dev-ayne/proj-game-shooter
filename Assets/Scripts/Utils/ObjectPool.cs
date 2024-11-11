@@ -40,7 +40,13 @@ public class ObjectPool : MonoBehaviour
 
     public void ReturnToPool(PooledObject pooledObject)
     {
-        pool.Enqueue(pooledObject);
+        if (pool == null)
+        {
+            Destroy(this);
+            return;
+        }
+            
+        pool.Enqueue(pooledObject); 
         pooledObject.transform.SetParent(this.transform);
         pooledObject.gameObject.SetActive(false);
     }

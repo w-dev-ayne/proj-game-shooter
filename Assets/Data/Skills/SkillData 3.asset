@@ -19,4 +19,4 @@ MonoBehaviour:
   duration: 0
   coolTime: 0
   vfx: {fileID: 0}
-  skillIcon: {fileID: 0}
+  skillIcon: {fileID: 21300000, guid: 3244bbf34533210439e12720ed1c8116, type: 3}
