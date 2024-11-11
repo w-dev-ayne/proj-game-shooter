@@ -39,6 +39,7 @@ public class CharacterController : MonoBehaviour, IDamageable
 
     public SkillData[] skillDatas;
     private Skill[] skills;
+    public Transform skillRange;
     
     private void Start()
     {

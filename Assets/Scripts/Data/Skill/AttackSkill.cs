@@ -18,6 +18,9 @@ public class AttackSkill : Skill
         Collider[] colliders = Physics.OverlapSphere(cc.transform.position, range);
         List<EnemyController> enemies = new List<EnemyController>();
 
+        cc.skillRange.localScale = Vector3.one * (range * 2);
+        cc.skillRange.gameObject.SetActive(true);
+
         if (vfx != null)
         {
             GameObject.Instantiate(vfx, cc.transform.position, Quaternion.identity);
