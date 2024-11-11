@@ -94,7 +94,7 @@ public class CharacterController : MonoBehaviour, IDamageable
         }
         Managers.UI.FindPopup<UI_InGame>().SetSkillButtons(skills);
     }
-
+ 
     // 캐릭터 스킬 사용
     public void Skill(Skill skill)
     {
@@ -157,6 +157,11 @@ public class CharacterController : MonoBehaviour, IDamageable
     public void SetAttack(float amount)
     {
         attack += amount;
+    }
+
+    private void OnDestroy()
+    {
+        
     }
 
     #region DebugMode

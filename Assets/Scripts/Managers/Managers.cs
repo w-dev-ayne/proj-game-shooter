@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using static Define;
 
@@ -15,13 +16,23 @@ public class Managers : MonoBehaviour
     private static ResourceManager s_resourceManager = new ResourceManager();
     private static SceneManagerEx s_sceneManager = new SceneManagerEx();
     private static SoundManager s_soundManager = new SoundManager();
+
+    private static EnemyManager enemyManager = new EnemyManager();
+    private static StageManager stageManager = new StageManager();
+    
     
     public static UIManager UI { get { Init(); return s_uiManager; } }
     public static ResourceManager Resource { get { Init(); return s_resourceManager; } }
     public static SceneManagerEx Scene { get { Init(); return s_sceneManager; } }
     public static SoundManager Sound {  get { Init(); return s_soundManager; } }
-
-    private void Start() 
+    
+    
+    public static EnemyManager Enemy { get { Init(); return enemyManager; } }
+    public static StageManager Stage { get { Init(); return stageManager; } }
+    
+    
+    
+    private void Awake() 
     {
         Init();
     }
@@ -40,8 +51,10 @@ public class Managers : MonoBehaviour
             s_resourceManager.Init();
             s_sceneManager.Init();
             s_soundManager.Init();
-            
-            //s_airarManager = InstantiateMonoBehaviourManager<AirarManager>();
+
+            enemyManager = InstantiateMonoBehaviourManager<EnemyManager>();
+            stageManager = InstantiateMonoBehaviourManager<StageManager>();
+            stageManager.Init();
 
             Application.targetFrameRate = 60;
         }

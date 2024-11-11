@@ -37,7 +37,7 @@ public class Skill : ISkill
         if (vfx != null)
         {
             vfxObject = GameObject.Instantiate(vfx) as ParticleSystem;
-            vfxObject.transform.parent = StageManager.Instance.cc.transform;
+            vfxObject.transform.parent = Managers.Stage.cc.transform;
             vfxObject.transform.localPosition = Vector3.zero;
             vfxObject.gameObject.SetActive(false);   
         }

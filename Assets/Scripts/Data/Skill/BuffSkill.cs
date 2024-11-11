@@ -22,7 +22,7 @@ public class BuffSkill : Skill
         }
 
         cc.SetAttack(amount);
-        StageManager.Instance.skillManager.BuffTimer(duration, FinishBuff);
+        Managers.Stage.skillTimer.BuffTimer(duration, FinishBuff);
 
         return true;
     }

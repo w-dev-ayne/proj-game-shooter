@@ -36,6 +36,7 @@ public class SceneManagerEx
     string GetSceneName(Define.Scene type)
     {
         string name = System.Enum.GetName(typeof(Define.Scene), type);
+        name += "Scene";
         char[] letters = name.ToLower().ToCharArray();
         letters[0] = char.ToUpper(letters[0]);
         return new string(letters);

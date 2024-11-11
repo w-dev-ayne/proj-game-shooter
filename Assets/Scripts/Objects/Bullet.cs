@@ -7,7 +7,13 @@ public class Bullet : PooledObject
 {
     public ParticleSystem hitParticle;
     public GameObject renderer;
+    private Rigidbody rb;
     private float damage;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     private void OnEnable()
     {
@@ -30,6 +36,10 @@ public class Bullet : PooledObject
             StopAllCoroutines(); 
             damageable.TakeDamage(this.damage);
         }
+        else
+        {
+            Release();
+        }
     }
 
     public void Shoot(Vector3 direction, float speed, float damage)
@@ -44,7 +54,8 @@ public class Bullet : PooledObject
 
         while (true)
         {
-            this.transform.position += direction * 30 * speed * Time.deltaTime;
+            this.rb.MovePosition(this.transform.position + direction * 30 * speed * Time.deltaTime);
+            // this.transform.position += direction * 30 * speed * Time.deltaTime;
             yield return oneFrame;
         }
     }

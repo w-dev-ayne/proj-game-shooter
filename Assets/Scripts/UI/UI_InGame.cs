@@ -45,10 +45,9 @@ public class UI_InGame : UI_Popup
         BindButton(typeof(Buttons));
         BindText(typeof(Texts));
         
-        StageManager.Instance.onCurrentLevelStarted += UpdateCurrentLevel;
-        StageManager.Instance.onCurrentLevelKilledUpdated += UpdateCurrentEnemies;
-        
-        StageManager.Instance.cc.onStatusChanged += UpdateCharacterInfo;
+        Managers.Stage.onCurrentLevelStarted += UpdateCurrentLevel;
+        Managers.Stage.onCurrentLevelKilledUpdated += UpdateCurrentEnemies;
+        Managers.Stage.cc.onStatusChanged += UpdateCharacterInfo;
 
         maxBarWidth = GetObject((int)Objects.EnemyNumBarObject).GetComponent<RectTransform>().sizeDelta.x;
         
@@ -110,6 +109,6 @@ public class UI_InGame : UI_Popup
 
     private void OnClickSkillButton(Skill skill)
     {
-        StageManager.Instance.cc.Skill(skill);
+        Managers.Stage.cc.Skill(skill);
     }
 }

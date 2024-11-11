@@ -34,6 +34,6 @@ public class SkillTimer : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         Debug.Log("Finish Duration");
-        callback.Invoke(StageManager.Instance.cc);
+        callback.Invoke(Managers.Stage.cc);
     }
 }

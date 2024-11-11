@@ -103,7 +103,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     private void Die()
     {
         stateContext.Transition(dieState);
-        FindAnyObjectByType<StageManager>().UpdateCurrentLevelKill();
+        Managers.Stage.UpdateCurrentLevelKill();
     }
     
     public void TakeDamage(float damage)

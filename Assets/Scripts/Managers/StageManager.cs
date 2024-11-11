@@ -12,18 +12,21 @@ public class StageManager : Singleton<StageManager>
     public Level currentLevelData;
     public int currentLevelKilled = 0;
 
-    public EnemyManager enemyManager;
-
     public UnityAction<int, Level> onCurrentLevelStarted;
     public UnityAction<int, Level> onCurrentLevelFinished;
     public UnityAction<int, Level> onCurrentLevelKilledUpdated;
 
     public CharacterController cc;
-    public SkillTimer skillManager;
+    public SkillTimer skillTimer;
 
-    void Awake()
+    void Start()
     {
-        base.Awake();
+        
+    }
+
+    public void Init()
+    {
+        //base.Awake();
         cc = FindAnyObjectByType<CharacterController>();
         Managers.UI.ShowPopupUI<UI_InGame>();
 
@@ -33,10 +36,6 @@ public class StageManager : Singleton<StageManager>
         {
             this.levels[i] = new Level(data.levels[i]);
         }
-    }
-
-    void Start()
-    {
         StartNextLevel();
     }
 
@@ -66,7 +65,7 @@ public class StageManager : Singleton<StageManager>
         currentLevel++;
         currentLevelData = levels[currentLevel - 1];
         currentLevelKilled = 0;
-        enemyManager.factory.GenerateEnemies(currentLevelData);
+        Managers.Enemy.factory.GenerateEnemies(currentLevelData);
         
         Debug.Log($"Starting stage {currentLevel}");
         onCurrentLevelStarted?.Invoke(currentLevel, currentLevelData);

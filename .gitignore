@@ -41,6 +41,7 @@ sysinfo.txt
 # Visual Studio / MonoDevelop generated files
 .vscode/
 .vs/
+.vsconfig
 *.csproj
 *.pidb
 *.sln
