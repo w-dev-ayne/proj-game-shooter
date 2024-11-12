@@ -3,6 +3,7 @@ public class Level
     public EnemyData[] enemies;
     public int[] enemiesNums;
     public int totalEnemiesNum;
+    public int currentEnemiesNum;
 
     public Level(LevelData data)
     {
@@ -17,5 +18,6 @@ public class Level
         }
 
         totalEnemiesNum = amount;
+        currentEnemiesNum = totalEnemiesNum;
     }
 }

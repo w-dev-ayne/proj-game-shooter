@@ -34,7 +34,7 @@ public class Managers : MonoBehaviour
     
     private void Awake() 
     {
-        Init();
+        //Init();
     }
 
     private static void Init()
@@ -52,11 +52,22 @@ public class Managers : MonoBehaviour
             s_sceneManager.Init();
             s_soundManager.Init();
 
-            enemyManager = InstantiateMonoBehaviourManager<EnemyManager>();
-            stageManager = InstantiateMonoBehaviourManager<StageManager>();
-            stageManager.Init();
-
             Application.targetFrameRate = 60;
+        }
+    }
+
+    public static void SceneInit()
+    {
+        switch (s_sceneManager.CurrentSceneType)
+        {
+            case Define.Scene.Auth:
+                break;
+            case Define.Scene.Lobby:
+                break;
+            case Define.Scene.Game:
+                enemyManager = InstantiateMonoBehaviourManager<EnemyManager>();
+                stageManager = InstantiateMonoBehaviourManager<StageManager>();
+                break;
         }
     }
 

@@ -44,12 +44,19 @@ public class UI_InGame : UI_Popup
         BindObject(typeof(Objects));
         BindButton(typeof(Buttons));
         BindText(typeof(Texts));
+        maxBarWidth = GetObject((int)Objects.EnemyNumBarObject).GetComponent<RectTransform>().sizeDelta.x;
         
+        Debug.Log(Managers.Stage);
         Managers.Stage.onCurrentLevelStarted += UpdateCurrentLevel;
         Managers.Stage.onCurrentLevelKilledUpdated += UpdateCurrentEnemies;
         Managers.Stage.cc.onStatusChanged += UpdateCharacterInfo;
 
-        maxBarWidth = GetObject((int)Objects.EnemyNumBarObject).GetComponent<RectTransform>().sizeDelta.x;
+        UpdateCurrentLevel(Managers.Stage.currentLevelData);
+        UpdateCharacterInfo(Managers.Stage.cc);
+
+        
+        
+        SetSkillButtons(Managers.Stage.cc.skills);
         
         if (base.Init() == false)
             return false;
@@ -71,23 +78,24 @@ public class UI_InGame : UI_Popup
     }
     
     // 적 처치 시 UI 업데이트
-    private void UpdateCurrentEnemies(int currentLevelKilled, Level currentLevelData)
+    private void UpdateCurrentEnemies(Level currentLevelData)
     {
+        Debug.Log("UpdateCurrentEnemies");
         GetText((int)Texts.RemainEnemyText).text =
-            $"{currentLevelData.totalEnemiesNum} / {currentLevelData.totalEnemiesNum}";
+            $"{currentLevelData.currentEnemiesNum} / {currentLevelData.totalEnemiesNum}";
         
         // Enemy Status Bar Width 변경
         float oneEnemyWidth = maxBarWidth / currentLevelData.totalEnemiesNum;
         RectTransform barRect = GetObject((int)Objects.EnemyNumBarObject).GetComponent<RectTransform>();
         barRect.sizeDelta =
-            new Vector2(oneEnemyWidth * (currentLevelData.totalEnemiesNum - currentLevelKilled), barRect.sizeDelta.y);
+            new Vector2(oneEnemyWidth * (currentLevelData.currentEnemiesNum), barRect.sizeDelta.y);
     }
 
     // Level 변경 시 UI 업데이트
-    private void UpdateCurrentLevel(int currentLevel, Level currentLevelData)
+    private void UpdateCurrentLevel(Level currentLevelData)
     {
         Debug.Log("Do");
-        GetText((int)Texts.LevelText).text = currentLevel.ToString();
+        GetText((int)Texts.LevelText).text = Managers.Stage.currentLevel.ToString();
         GetText((int)Texts.RemainEnemyText).text =
             $"{currentLevelData.totalEnemiesNum} / {currentLevelData.totalEnemiesNum}";
         

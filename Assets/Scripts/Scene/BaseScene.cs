@@ -24,6 +24,7 @@ public class BaseScene : MonoBehaviour
         {
             Managers.Resource.Instantiate("UI/EventSystem").name = "@EventSystem";
         }
+        Managers.SceneInit();
         return true;
     }
 

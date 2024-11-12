@@ -1,4 +1,5 @@
 using System.Collections;
+using Mono.Cecil.Cil;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,15 +34,7 @@ public class Skill : ISkill
         coolTime = data.coolTime;
         vfx = data.vfx;
         skillIcon = data.skillIcon;
-
-        if (vfx != null)
-        {
-            vfxObject = GameObject.Instantiate(vfx) as ParticleSystem;
-            vfxObject.transform.parent = Managers.Stage.cc.transform;
-            vfxObject.transform.localPosition = Vector3.zero;
-            vfxObject.gameObject.SetActive(false);   
-        }
-
+        
         stateContext = new StateContext<Skill>(this);
         readyState = new ReadyState();
         operateState = new OperateState();
@@ -68,6 +61,16 @@ public class Skill : ISkill
             Debug.Log("Low MP");
             return false;
         }
+        
+        // 스킬 VFX 오브젝트 생성 및 초기화
+        if (vfxObject == null)
+        {
+            vfxObject = GameObject.Instantiate(vfx) as ParticleSystem;
+            vfxObject.transform.parent = Managers.Stage.cc.transform;
+            vfxObject.transform.localPosition = Vector3.zero;
+            vfxObject.gameObject.SetActive(false);   
+        }
+
         
         stateContext.Transition(operateState);
         return true;

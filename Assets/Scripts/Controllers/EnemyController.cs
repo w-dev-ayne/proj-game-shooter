@@ -113,7 +113,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     private void Die()
     {
         stateContext.Transition(dieState);
-        Managers.Stage.UpdateCurrentLevelKill();
+        Managers.Stage.UpdateEnemyNum();
     }
     
     public void TakeDamage(float damage)

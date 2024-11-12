@@ -9,7 +9,8 @@ public class GameScene : BaseScene
 
         SceneType = Define.Scene.Game;
         Debug.Log($"{SceneType} Init");
-
+        Managers.UI.ShowPopupUI<UI_InGame>();
+        
         return true;
     }
 }

@@ -3,32 +3,31 @@ using UnityEngine.Events;
 using UnityEngine.Serialization;
 using UnityEngine.TextCore.Text;
 
-public class StageManager : Singleton<StageManager>
+public class StageManager : MonoBehaviour
 {
-    private int currentLevel = 0;
+    public int currentLevel { get; private set; } = 0;
 
     public StageData data;
-    public Level[] levels;
-    public Level currentLevelData;
-    public int currentLevelKilled = 0;
+    public Level[] levels { get; private set; }
+    public Level currentLevelData { get; private set; }
 
-    public UnityAction<int, Level> onCurrentLevelStarted;
-    public UnityAction<int, Level> onCurrentLevelFinished;
-    public UnityAction<int, Level> onCurrentLevelKilledUpdated;
+    public UnityAction<Level> onCurrentLevelStarted;
+    public UnityAction<Level> onCurrentLevelFinished;
+    public UnityAction<Level> onCurrentLevelKilledUpdated;
 
     public CharacterController cc;
     public SkillTimer skillTimer;
 
-    void Start()
+    void Awake()
     {
-        
+        Init();
+        Debug.Log("Hello I'm Stage Manager");
     }
 
-    public void Init()
+    private void Init()
     {
         //base.Awake();
         cc = FindAnyObjectByType<CharacterController>();
-        Managers.UI.ShowPopupUI<UI_InGame>();
 
         this.levels = new Level[data.levels.Length];
 
@@ -39,12 +38,12 @@ public class StageManager : Singleton<StageManager>
         StartNextLevel();
     }
 
-    public void UpdateCurrentLevelKill()
+    public void UpdateEnemyNum()
     {
-        currentLevelKilled++;
-        onCurrentLevelKilledUpdated?.Invoke(currentLevelKilled, currentLevelData);
+        currentLevelData.currentEnemiesNum--;
+        onCurrentLevelKilledUpdated?.Invoke(currentLevelData);
 
-        if (currentLevelKilled == currentLevelData.totalEnemiesNum)
+        if (currentLevelData.currentEnemiesNum == 0)
         {
             FinishCurrentLevel();
         }
@@ -64,17 +63,16 @@ public class StageManager : Singleton<StageManager>
     {
         currentLevel++;
         currentLevelData = levels[currentLevel - 1];
-        currentLevelKilled = 0;
         Managers.Enemy.factory.GenerateEnemies(currentLevelData);
         
         Debug.Log($"Starting stage {currentLevel}");
-        onCurrentLevelStarted?.Invoke(currentLevel, currentLevelData);
+        onCurrentLevelStarted?.Invoke(currentLevelData);
     }
 
     private void FinishCurrentLevel()
     {
         Managers.UI.ShowPopupUI<UI_LevelClear>();
-        onCurrentLevelFinished?.Invoke(currentLevel, currentLevelData);
+        onCurrentLevelFinished?.Invoke(currentLevelData);
         StartNextLevel();
     }
 }

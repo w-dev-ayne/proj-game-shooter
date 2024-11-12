@@ -23,8 +23,8 @@ public class AttackSkill : Skill
 
         if (vfx != null)
         {
-            GameObject.Instantiate(vfx, cc.transform.position, Quaternion.identity);
-            vfx.Play();
+            vfxObject.gameObject.SetActive(true);
+            vfxObject.Play();
         }
 
         foreach (Collider col in colliders)

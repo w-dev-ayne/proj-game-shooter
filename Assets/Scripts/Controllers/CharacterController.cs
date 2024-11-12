@@ -38,10 +38,20 @@ public class CharacterController : MonoBehaviour, IDamageable
     public UnityAction<CharacterController> onStatusChanged;
 
     public SkillData[] skillDatas;
-    private Skill[] skills;
+    public Skill[] skills { get; private set; }
     public Transform skillRange;
-    
-    private void Start()
+
+    void Awake()
+    {
+        Init();
+    }
+
+    void Start()
+    {
+        
+    }
+
+    public void Init()
     {
         InitializeCharacterData();
         InitializeSkillData();
@@ -53,7 +63,7 @@ public class CharacterController : MonoBehaviour, IDamageable
         attackJoystick.onEndDrag = AttackToMove;
         rb = GetComponent<Rigidbody>();
         bulletPool.cc = this;
-        onStatusChanged.Invoke(this);
+        onStatusChanged?.Invoke(this);
     }
 
     // 캐릭터 상태 정보 초기화
@@ -93,7 +103,7 @@ public class CharacterController : MonoBehaviour, IDamageable
             Type skillType = Type.GetType(typeName);
             skills[i] = (Skill)Activator.CreateInstance(skillType, new object[] { skillDatas[i] });
         }
-        Managers.UI.FindPopup<UI_InGame>().SetSkillButtons(skills);
+        // Managers.UI.FindPopup<UI_InGame>().SetSkillButtons(skills);
     }
  
     // 캐릭터 스킬 사용
