@@ -53,9 +53,6 @@ public class UI_InGame : UI_Popup
 
         UpdateCurrentLevel(Managers.Stage.currentLevelData);
         UpdateCharacterInfo(Managers.Stage.cc);
-
-        
-        
         SetSkillButtons(Managers.Stage.cc.skills);
         
         if (base.Init() == false)
@@ -80,7 +77,6 @@ public class UI_InGame : UI_Popup
     // 적 처치 시 UI 업데이트
     private void UpdateCurrentEnemies(Level currentLevelData)
     {
-        Debug.Log("UpdateCurrentEnemies");
         GetText((int)Texts.RemainEnemyText).text =
             $"{currentLevelData.currentEnemiesNum} / {currentLevelData.totalEnemiesNum}";
         
@@ -94,7 +90,6 @@ public class UI_InGame : UI_Popup
     // Level 변경 시 UI 업데이트
     private void UpdateCurrentLevel(Level currentLevelData)
     {
-        Debug.Log("Do");
         GetText((int)Texts.LevelText).text = Managers.Stage.currentLevel.ToString();
         GetText((int)Texts.RemainEnemyText).text =
             $"{currentLevelData.totalEnemiesNum} / {currentLevelData.totalEnemiesNum}";
