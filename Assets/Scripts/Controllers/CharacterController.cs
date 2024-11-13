@@ -163,6 +163,8 @@ public class CharacterController : MonoBehaviour, IDamageable
     public void Heal(float amount)
     {
         hp += amount;
+        if (hp > maxHp)
+            hp = maxMp;
     }
 
     public void SetAttack(float amount)
