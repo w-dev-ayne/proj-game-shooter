@@ -20,6 +20,7 @@ public class StageManager : MonoBehaviour
 
     void Awake()
     {
+        Application.targetFrameRate = 60;
         Init();
         Debug.Log("Hello I'm Stage Manager");
     }
