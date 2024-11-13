@@ -27,7 +27,7 @@ public class StageManager : MonoBehaviour
 
     private void Init()
     {
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 120;
         //base.Awake();
         cc = FindAnyObjectByType<CharacterController>();
 

@@ -3,12 +3,16 @@ using UnityEngine.UI;
 
 public class StatusUI : MonoBehaviour
 {
+    [SerializeField] private CharacterController cc;
     [SerializeField] private Image hpImage;
     [SerializeField] private Image mpImage;
     
     private void Start()
     {
-        Managers.Stage.cc.onStatusChanged += UpdateStatus;
+        if (cc == null)
+            this.transform.parent.GetComponent<CharacterController>();
+        
+        cc.onStatusChanged += UpdateStatus;
     }
 
     private void UpdateStatus(CharacterController cc)

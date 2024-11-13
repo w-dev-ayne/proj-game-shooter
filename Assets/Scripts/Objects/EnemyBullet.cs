@@ -19,6 +19,8 @@ public class EnemyBullet : PooledObject
     {
         if (other.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
+            if (!other.CompareTag("Player"))
+                return;
             renderer.GetComponent<Renderer>().enabled = false;
             Invoke("Release", hitParticle.duration);
             hitParticle.Play();
