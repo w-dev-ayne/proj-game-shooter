@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: MainCharacterData
   m_EditorClassIdentifier: 
   hp: 100
+  mp: 100
+  attack: 2
   moveSpeed: 5
   rotateSpeed: 5
   bulletSpeed: 1
-  attackSpeed: 4
+  attackSpeed: 3

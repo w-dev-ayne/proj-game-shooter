@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -15,6 +16,7 @@ public class UI_InGame : UI_Popup
     enum Objects
     {
         EnemyNumBarObject,
+        InstructionObject
     }
 
     enum Buttons
@@ -35,8 +37,8 @@ public class UI_InGame : UI_Popup
         MoveSpeedText,
         RotateSpeedText,
         BulletSpeedText,
-        
         RemainEnemyText,
+        InstructionText
     }
 
     public override bool Init()
@@ -54,6 +56,9 @@ public class UI_InGame : UI_Popup
         UpdateCurrentLevel(Managers.Stage.currentLevelData);
         UpdateCharacterInfo(Managers.Stage.cc);
         SetSkillButtons(Managers.Stage.cc.skills);
+        
+        GetObject((int)Objects.InstructionObject).SetActive(false);
+        Managers.Instruction.Init(GetObject((int)Objects.InstructionObject), GetText((int)Texts.InstructionText));
         
         if (base.Init() == false)
             return false;

@@ -10,8 +10,12 @@ public class HealSkill : Skill
 
     public override bool Action(CharacterController cc)
     {
-        if(cc.hp == cc.maxHp)
+        if (cc.hp == cc.maxHp)
+        {
+            Managers.Instruction.InstructionOn(InstructionDefine.MAX_HP);
             return false;
+        }
+            
         
         if (!base.Action(cc))
         {

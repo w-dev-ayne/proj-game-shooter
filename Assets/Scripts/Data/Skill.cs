@@ -53,12 +53,14 @@ public class Skill : ISkill
         if (stateContext.CurrentState == coolTimeState)
         {
             Debug.Log("Skill Is In Cool Time");
+            Managers.Instruction.InstructionOn(InstructionDefine.COOL_TIME);
             return false;
         }
 
         if (cc.mp < amount)
         {
             Debug.Log("Low MP");
+            Managers.Instruction.InstructionOn(InstructionDefine.LOW_MP);
             return false;
         }
         
