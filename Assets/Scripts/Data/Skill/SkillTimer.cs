@@ -1,10 +1,13 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class SkillTimer : MonoBehaviour
 {
+    public List<bool> completes = new List<bool>();
+    
     public void CoolTimer(Skill skill)
     {
         StartCoroutine(CoolTimerRoutine(skill));
@@ -35,5 +38,31 @@ public class SkillTimer : MonoBehaviour
         yield return new WaitForSeconds(duration);
         Debug.Log("Finish Duration");
         callback.Invoke(Managers.Stage.cc);
+    }
+
+    public void DelayTimer(float duration, float range, UnityAction callback)
+    {
+        StartCoroutine(DelayTimerRoutine(duration, range, callback));
+    }
+    
+    private IEnumerator DelayTimerRoutine(float duration, float range, UnityAction callback)
+    {
+        WaitForEndOfFrame oneFrame = new WaitForEndOfFrame();
+        float timer = 0;
+        Transform rangeObj = Managers.Stage.cc.skillRange;
+        Transform rangeParent = Managers.Stage.cc.skillRangeParent;
+        
+        rangeParent.localScale = Vector3.one * (2 * range);
+        rangeObj.localScale = Vector3.zero;
+        rangeParent.gameObject.SetActive(true);
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            rangeObj.localScale += Vector3.one * (Time.deltaTime / duration);
+            yield return oneFrame;
+        }
+        rangeParent.gameObject.SetActive(false);
+        callback.Invoke();
     }
 }

@@ -40,6 +40,7 @@ public class CharacterController : MonoBehaviour, IDamageable
     public SkillData[] skillDatas;
     public Skill[] skills { get; private set; }
     public Transform skillRange;
+    public Transform skillRangeParent;
 
     void Awake()
     {

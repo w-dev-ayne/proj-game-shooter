@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   amount: 10
-  cost: 10
+  cost: 0
   range: 0
   duration: 0
+  delay: 0
+  vfxOnDelay: 0
   coolTime: 0
   vfx: {fileID: 8771972552311404798, guid: bbf9e36a48d6c5648a13889afab076fd, type: 3}
   skillIcon: {fileID: 21300000, guid: 7f12f2c539e55bd408cf87bf45992876, type: 3}

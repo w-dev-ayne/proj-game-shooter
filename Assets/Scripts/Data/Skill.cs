@@ -10,6 +10,8 @@ public class Skill : ISkill
     public int cost { get; }
     protected float range;
     protected float duration;
+    protected float delay;
+    protected bool vfxOnDelay;
     public float coolTime { get; }
 
     public Sprite skillIcon;
@@ -32,6 +34,9 @@ public class Skill : ISkill
         range = data.range;
         duration = data.duration;
         coolTime = data.coolTime;
+        delay = data.delay;
+        this.vfxOnDelay = data.vfxOnDelay;
+        
         vfx = data.vfx;
         skillIcon = data.skillIcon;
         
@@ -69,6 +74,7 @@ public class Skill : ISkill
         {
             vfxObject = GameObject.Instantiate(vfx) as ParticleSystem;
             vfxObject.transform.parent = Managers.Stage.cc.transform;
+            vfxObject.transform.localScale = (range == 0) ? Vector3.one : vfxObject.transform.localScale * range;
             vfxObject.transform.localPosition = Vector3.zero;
             vfxObject.gameObject.SetActive(false);   
         }

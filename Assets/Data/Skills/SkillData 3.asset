@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39698c380d2044c8ba628c8b4b298f94, type: 3}
   m_Name: SkillData 3
   m_EditorClassIdentifier: 
-  type: 3
-  amount: 3
-  cost: 10
-  range: 5
+  type: 0
+  amount: 2
+  cost: 0
+  range: 10
   duration: 0
-  coolTime: 0
-  vfx: {fileID: 0}
+  delay: 3
+  vfxOnDelay: 1
+  coolTime: 5
+  vfx: {fileID: 8176230078092200170, guid: 3355f6bfa6db8b24281b827de929694c, type: 3}
   skillIcon: {fileID: 21300000, guid: 3244bbf34533210439e12720ed1c8116, type: 3}
