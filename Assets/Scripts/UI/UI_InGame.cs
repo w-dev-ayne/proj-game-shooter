@@ -70,7 +70,7 @@ public class UI_InGame : UI_Popup
             GetButton(i).gameObject.BindEvent(() => OnClickSkillButton(skill));
             if(skill.skillIcon != null)
                 GetButton(i).transform.GetChild(0).GetComponent<Image>().sprite = skill.skillIcon;
-            skills[i].coolTimeImage = GetButton(i).transform.GetChild(2).GetComponent<Image>();
+            skills[i].coolTimeImage = GetButton(i).transform.GetChild(1).GetComponent<Image>();
         }
     }
     

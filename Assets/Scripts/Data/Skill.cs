@@ -63,7 +63,7 @@ public class Skill : ISkill
         }
         
         // 스킬 VFX 오브젝트 생성 및 초기화
-        if (vfxObject == null)
+        if (vfx != null && vfxObject == null)
         {
             vfxObject = GameObject.Instantiate(vfx) as ParticleSystem;
             vfxObject.transform.parent = Managers.Stage.cc.transform;

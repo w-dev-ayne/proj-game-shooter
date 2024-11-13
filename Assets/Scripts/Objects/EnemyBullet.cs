@@ -9,6 +9,7 @@ public class EnemyBullet : PooledObject
 
     private void OnEnable()
     {
+        this.transform.localScale = Vector3.one / 3;
         this.transform.localPosition = Vector3.zero;
         renderer.GetComponent<Renderer>().enabled = true;
         Invoke("Release", 5.0f);
@@ -23,6 +24,10 @@ public class EnemyBullet : PooledObject
             hitParticle.Play();
             StopAllCoroutines(); 
             damageable.TakeDamage(damage);
+        }
+        else
+        {
+            Release();
         }
     }
 

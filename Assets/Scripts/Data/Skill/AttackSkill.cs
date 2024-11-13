@@ -23,6 +23,8 @@ public class AttackSkill : Skill
 
         if (vfx != null)
         {
+            vfxObject.transform.SetParent(null);
+            vfxObject.transform.localPosition = cc.transform.position;
             vfxObject.gameObject.SetActive(true);
             vfxObject.Play();
         }
