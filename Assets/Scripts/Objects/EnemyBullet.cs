@@ -29,6 +29,8 @@ public class EnemyBullet : PooledObject
         }
         else
         {
+            if (other.CompareTag("Bullet"))
+                return;
             Release();
         }
     }

@@ -5,6 +5,7 @@ public class BulletPool : ObjectPool
 {
     public CharacterController cc;
     public Transform shootPositionTransform;
+    public ParticleSystem attackParticle;
     public CameraShake cameraShake;
 
     protected override void Awake()

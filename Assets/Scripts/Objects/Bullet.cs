@@ -22,7 +22,6 @@ public class Bullet : PooledObject
         this.transform.localScale = Vector3.one / 2;
         renderer.SetActive(true);
         collider.enabled = true;
-        
         Invoke("Release", 5.0f);
     }
 
@@ -30,8 +29,8 @@ public class Bullet : PooledObject
     {
         if (other.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
-            BulletPool bPool = pool as BulletPool;
-            bPool.CameraShake();
+            
+            
             renderer.SetActive(false);
             Invoke("Release", hitParticle.duration);
             hitParticle.Play();
@@ -47,6 +46,8 @@ public class Bullet : PooledObject
 
     public void Shoot(Vector3 direction, float speed, float damage)
     {
+        BulletPool bPool = pool as BulletPool;
+        bPool.CameraShake();
         this.damage = damage;
         StartCoroutine(CoShoot(direction, speed));
     }

@@ -15,9 +15,6 @@ public class CharacterController : MonoBehaviour, IDamageable
     public Joystick moveJoystick;
     public Joystick attackJoystick;
 
-    
-    public ParticleSystem attackParticle;
-
     public CharacterData data;
 
     public float maxHp { get; private set; }

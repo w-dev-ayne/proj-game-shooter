@@ -31,7 +31,7 @@ public class CharacterAttackState : Rotatable, IState<CharacterController>
             }
             
             this.cc.animatorController.Attack();
-            cc.attackParticle.Play();
+            cc.bulletPool.attackParticle.Play();
             Bullet bullet = cc.bulletPool.TakeFromPool() as Bullet;
             bullet.transform.position = cc.bulletPool.shootPositionTransform.position;
             bullet.Shoot(direction, cc.bulletSpeed,cc.attack);
