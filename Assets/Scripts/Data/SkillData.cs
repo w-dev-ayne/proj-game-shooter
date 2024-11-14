@@ -15,4 +15,5 @@ public class SkillData : ScriptableObject
     public float coolTime;
     public ParticleSystem vfx;
     public Sprite skillIcon;
+    public string description;
 }

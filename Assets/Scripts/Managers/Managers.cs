@@ -20,6 +20,7 @@ public class Managers : MonoBehaviour
     private static EnemyManager enemyManager = new EnemyManager();
     private static StageManager stageManager = new StageManager();
     private static InstructionManager instructionManager = new InstructionManager();
+    private static StatManager statManager = new StatManager();
     
     
     public static UIManager UI { get { Init(); return s_uiManager; } }
@@ -31,6 +32,7 @@ public class Managers : MonoBehaviour
     public static EnemyManager Enemy { get { Init(); return enemyManager; } }
     public static StageManager Stage { get { Init(); return stageManager; } }
     public static InstructionManager Instruction {get {Init(); return instructionManager;}}
+    public static StatManager Stat { get { Init(); return statManager; } }
     
     
     
@@ -65,6 +67,7 @@ public class Managers : MonoBehaviour
             case Define.Scene.Auth:
                 break;
             case Define.Scene.Lobby:
+                statManager = InstantiateMonoBehaviourManager<StatManager>();
                 break;
             case Define.Scene.Game:
                 enemyManager = InstantiateMonoBehaviourManager<EnemyManager>();

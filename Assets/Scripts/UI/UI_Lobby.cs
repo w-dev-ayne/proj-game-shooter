@@ -4,7 +4,9 @@ public class UI_Lobby : UI_Popup
 {
     enum Buttons
     {
-        GameStartButton
+        GameStartButton,
+        SkillButton,
+        StatButton,
     }
     
     public override bool Init()
@@ -12,6 +14,7 @@ public class UI_Lobby : UI_Popup
         BindButton(typeof(Buttons));
         
         GetButton((int)Buttons.GameStartButton).gameObject.BindEvent(OnClickGameStartButton);
+        GetButton((int)Buttons.StatButton).gameObject.BindEvent(OnClickStatButton);
         
         return base.Init();
     }
@@ -19,5 +22,10 @@ public class UI_Lobby : UI_Popup
     private void OnClickGameStartButton()
     {
         Managers.Scene.ChangeScene(Define.Scene.Game);
+    }
+
+    private void OnClickStatButton()
+    {
+        Managers.UI.ShowPopupUI<UI_Stat>();
     }
 }

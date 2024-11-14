@@ -81,6 +81,7 @@ public class UIManager
 		GameObject go = Managers.Resource.Instantiate($"UI/Popup/{name}");
 		T popup = Utils.GetOrAddComponent<T>(go);
 		_popupStack.Push(popup);
+		popup.AfterInStackInit();
 
 		if (parent != null)
 			go.transform.SetParent(parent);
@@ -97,7 +98,8 @@ public class UIManager
 
 	public T FindPopup<T>() where T : UI_Popup
 	{
-		return _popupStack.Where(x => x.GetType() == typeof(T)).FirstOrDefault() as T;
+		return _popupStack.OfType<T>().FirstOrDefault() as T;
+		//return _popupStack.Where(x => x.GetType() == typeof(T)).FirstOrDefault() as T;
 	}
 
 

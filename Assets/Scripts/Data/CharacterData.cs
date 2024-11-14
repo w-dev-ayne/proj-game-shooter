@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 [CreateAssetMenu(fileName = "New Character Data", menuName = "Character Data")]
 public class CharacterData : PostData

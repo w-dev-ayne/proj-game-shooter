@@ -23,7 +23,11 @@ public class UI_Popup : UI_Base
         //SetButtonSound();
         return true;
     }
-    
+
+    public virtual void AfterInStackInit()
+    {
+        
+    }
 
     void SetButtonSound()
     {
