@@ -2,17 +2,16 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System.Reflection;
-using Unity.Android.Types;
 using UnityEngine.Events;
 
-public class StatManager : MonoBehaviour
+public class StatManager : Singleton<StatManager>
 {
     [SerializeField]
     private CharacterData cData;
 
     private int initPoint = 0;
-    public int currentPoint = 5;
-    
+    public int currentPoint { get; private set; }
+
     [Header("Stat Control UI")]
     [SerializeField] public Color defaultColor;
     [SerializeField] public Color updatedColor;
@@ -26,7 +25,6 @@ public class StatManager : MonoBehaviour
 
     public void Init()
     {
-        currentPoint = 5;
         initPoint = currentPoint;
         InstantiateStatButtons();
     }
@@ -94,5 +92,10 @@ public class StatManager : MonoBehaviour
             field.SetValue(cData, updateValue);
         }
         currentPoint = 0;
+    }
+
+    public void SetCurrentPoint(int stat)
+    {
+        this.currentPoint = stat;
     }
 }

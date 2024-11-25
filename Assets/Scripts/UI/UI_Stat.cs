@@ -1,5 +1,3 @@
-using Unity.VisualScripting;
-using UnityEditor.TerrainTools;
 using UnityEngine;
 
 public class UI_Stat : UI_Popup

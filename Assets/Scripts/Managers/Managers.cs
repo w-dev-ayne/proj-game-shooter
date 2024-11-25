@@ -67,7 +67,9 @@ public class Managers : MonoBehaviour
             case Define.Scene.Auth:
                 break;
             case Define.Scene.Lobby:
-                statManager = InstantiateMonoBehaviourManager<StatManager>();
+                
+                if(StatManager.Instance == null)
+                    statManager = InstantiateMonoBehaviourManager<StatManager>();
                 break;
             case Define.Scene.Game:
                 enemyManager = InstantiateMonoBehaviourManager<EnemyManager>();

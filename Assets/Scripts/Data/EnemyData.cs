@@ -11,4 +11,5 @@ public class EnemyData : ScriptableObject
     public float moveSpeed = 1.0f;
     public float attackRange = 1.0f;
     public float bulletSpeed = 2.0f;
+    public int gainStat = 0;
 }

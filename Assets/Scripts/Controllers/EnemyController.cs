@@ -33,6 +33,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     public float moveSpeed;
     public float attackRange;
     public float bulletSpeed;
+    public int stat;
 
     public float currentHp;
     
@@ -81,6 +82,7 @@ public class EnemyController : MonoBehaviour, IDamageable
         this.attackSpeed = data.attackSpeed;
         this.attackRange = data.attackRange;
         this.bulletSpeed = data.bulletSpeed;
+        this.stat = data.gainStat;
         currentHp = hp;
     }
 
@@ -113,6 +115,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     private void Die()
     {
         stateContext.Transition(dieState);
+        TakeStat();
         Managers.Stage.UpdateEnemyNum();
     }
     
@@ -130,5 +133,10 @@ public class EnemyController : MonoBehaviour, IDamageable
             return;
         }
         stateContext.Transition(hitState);
+    }
+
+    private void TakeStat()
+    {
+        Managers.Stage.statCount += this.stat;
     }
 }

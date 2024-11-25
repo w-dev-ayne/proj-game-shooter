@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -32,6 +31,7 @@ public class UI_InGame : UI_Popup
         HPText,
         LevelText,
         MPText,
+        StatText,
         AttackText,
         AttackSpeedText,
         MoveSpeedText,
@@ -84,7 +84,7 @@ public class UI_InGame : UI_Popup
     {
         GetText((int)Texts.RemainEnemyText).text =
             $"{currentLevelData.currentEnemiesNum} / {currentLevelData.totalEnemiesNum}";
-        
+        GetText((int)Texts.StatText).text = Managers.Stage.statCount.ToString();
         // Enemy Status Bar Width 변경
         float oneEnemyWidth = maxBarWidth / currentLevelData.totalEnemiesNum;
         RectTransform barRect = GetObject((int)Objects.EnemyNumBarObject).GetComponent<RectTransform>();

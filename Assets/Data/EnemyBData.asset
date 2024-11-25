@@ -19,3 +19,4 @@ MonoBehaviour:
   moveSpeed: 1
   attackRange: 10
   bulletSpeed: 1
+  gainStat: 1

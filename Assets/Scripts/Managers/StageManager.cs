@@ -18,6 +18,8 @@ public class StageManager : MonoBehaviour
     public CharacterController cc;
     public SkillTimer skillTimer;
 
+    public int statCount = 0; 
+
     void Awake()
     {
         
@@ -37,6 +39,8 @@ public class StageManager : MonoBehaviour
         {
             this.levels[i] = new Level(data.levels[i]);
         }
+
+        statCount = 0;
         StartNextLevel();
     }
 
@@ -56,14 +60,23 @@ public class StageManager : MonoBehaviour
         
     }
 
-    public void FinishStage()
+    private void FinishStage()
     {
-        
+        Debug.Log("FinishStage");
+        Managers.Stat.SetCurrentPoint(statCount);
+        Managers.Scene.ChangeScene(Define.Scene.Lobby);
     }
 
     private void StartNextLevel()
     {
         currentLevel++;
+
+        if (currentLevel == levels.Length + 1)
+        {
+            FinishStage();
+            return;
+        }
+        
         currentLevelData = levels[currentLevel - 1];
         Managers.Enemy.factory.GenerateEnemies(currentLevelData);
         
