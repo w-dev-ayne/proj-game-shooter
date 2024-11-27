@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class UI_Auth : UI_Popup
 {
-    private AuthController authController;
-    
     enum Objects
     {
         RegisterObject,
@@ -31,8 +29,6 @@ public class UI_Auth : UI_Popup
     
     public override bool Init()
     {
-        authController = new AuthController();
-        
         BindObject(typeof(Objects));
         BindButton(typeof(Buttons));
         BindText(typeof(Texts));
@@ -53,7 +49,7 @@ public class UI_Auth : UI_Popup
         string inputPassword = GetText((int)Texts.RegisterPasswordText).text;
         string inputPassword2 = GetText((int)Texts.RegisterPassword2Text).text;
         
-        authController.Register(inputUserName, inputId, inputPassword, inputPassword2, OnRegisterSuccess, OnRegisterFailed);
+        Managers.Network.authController.Register(inputUserName, inputId, inputPassword, inputPassword2, OnRegisterSuccess, OnRegisterFailed);
     }
 
     private void OnRegisterSuccess(string message)
@@ -70,7 +66,7 @@ public class UI_Auth : UI_Popup
     {
         string inputId = GetText((int)Texts.LoginIdText).text;
         string inputPassword = GetText((int)Texts.LoginPasswordText).text;
-        authController.Login(inputId, inputPassword, OnLoginSuccess, OnLoginFailed);
+        Managers.Network.authController.Login(inputId, inputPassword, OnLoginSuccess, OnLoginFailed);
     }
 
     private void OnLoginSuccess(string message)

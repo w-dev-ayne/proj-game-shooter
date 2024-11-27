@@ -21,6 +21,7 @@ public class Managers : MonoBehaviour
     private static StageManager stageManager = new StageManager();
     private static InstructionManager instructionManager = new InstructionManager();
     private static StatManager statManager = new StatManager();
+    private static NetworkManager networkManager = new NetworkManager();
     
     
     public static UIManager UI { get { Init(); return s_uiManager; } }
@@ -33,6 +34,7 @@ public class Managers : MonoBehaviour
     public static StageManager Stage { get { Init(); return stageManager; } }
     public static InstructionManager Instruction {get {Init(); return instructionManager;}}
     public static StatManager Stat { get { Init(); return statManager; } }
+    public static NetworkManager Network { get { Init(); return networkManager; } }
     
     
     
@@ -65,11 +67,14 @@ public class Managers : MonoBehaviour
         switch (s_sceneManager.CurrentSceneType)
         {
             case Define.Scene.Auth:
+                if(NetworkManager.Instance == null)
+                    networkManager = InstantiateMonoBehaviourManager<NetworkManager>();
                 break;
             case Define.Scene.Lobby:
-                
                 if(StatManager.Instance == null)
                     statManager = InstantiateMonoBehaviourManager<StatManager>();
+                if(NetworkManager.Instance == null)
+                    networkManager = InstantiateMonoBehaviourManager<NetworkManager>();
                 break;
             case Define.Scene.Game:
                 enemyManager = InstantiateMonoBehaviourManager<EnemyManager>();

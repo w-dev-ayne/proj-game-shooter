@@ -50,6 +50,8 @@ public class UI_Stat : UI_Popup
     private void OnClickCompleteButton()
     {
         Managers.Stat.ApplyAllCommands();
+        
+        Managers.Network.cDataController.UpdateCharacterData();
         ClosePopupUI();
     }
 
