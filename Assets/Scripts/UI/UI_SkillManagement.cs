@@ -12,7 +12,7 @@ public class UI_SkillManagement : UI_Popup
 
     enum Buttons
     {
-        
+        SkillDrawButton
     }
 
     enum Texts
@@ -26,6 +26,7 @@ public class UI_SkillManagement : UI_Popup
         BindButton(typeof(Buttons));
         BindText(typeof(Texts));
         
+        GetButton((int)Buttons.SkillDrawButton).gameObject.BindEvent(OnClickSkillDrawButton);
         
         if (!base.Init())
             return false;
@@ -42,5 +43,10 @@ public class UI_SkillManagement : UI_Popup
                              $"DELAY : {data.delay}\n" +
                              $"COOLTIME : {data.coolTime}\n";
         GetText((int)Texts.DescriptionText).text = description;
+    }
+
+    private void OnClickSkillDrawButton()
+    {
+        Managers.UI.ShowPopupUI<UI_SkillDraw>();
     }
 }
