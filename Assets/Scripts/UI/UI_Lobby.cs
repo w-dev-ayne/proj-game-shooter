@@ -15,6 +15,7 @@ public class UI_Lobby : UI_Popup
         
         GetButton((int)Buttons.GameStartButton).gameObject.BindEvent(OnClickGameStartButton);
         GetButton((int)Buttons.StatButton).gameObject.BindEvent(OnClickStatButton);
+        GetButton((int)Buttons.SkillButton).gameObject.BindEvent(OnClickSkillButton);
         
         return base.Init();
     }
@@ -27,5 +28,10 @@ public class UI_Lobby : UI_Popup
     private void OnClickStatButton()
     {
         Managers.UI.ShowPopupUI<UI_Stat>();
+    }
+
+    private void OnClickSkillButton()
+    {
+        Managers.UI.ShowPopupUI<UI_SkillManagement>();
     }
 }
