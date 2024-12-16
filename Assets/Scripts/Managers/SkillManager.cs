@@ -2,15 +2,12 @@ using UnityEngine;
 
 public class SkillManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public SkillData[] skills;
+    public SkillData[] equippedSkills;
 
-    // Update is called once per frame
-    void Update()
+    public void GetSKills()
     {
         
     }
+    
 }
