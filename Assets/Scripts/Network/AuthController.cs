@@ -8,11 +8,11 @@ public class AuthController : APILoader
     {
         RegisterAuthData data = new RegisterAuthData(username, id, password, passwowrd2);
         
-        GetData message = await base.PostAPI($"{NetworkDefine.Host}/auth/register", data);
+        GetData<string> message = await base.PostAPI<string>("/auth/register", data);
         
         if (message.success)
         {
-            OnRegisterSuccess?.Invoke(message.data);
+            OnRegisterSuccess?.Invoke(message.data.ToString());
         }
         else
         {
@@ -24,11 +24,11 @@ public class AuthController : APILoader
     {
         LoginAuthData data = new LoginAuthData(inputId, inputPassword);
         
-        GetData message = await base.PostAPI($"{NetworkDefine.Host}/auth/login", data);
+        GetData<string> message = await base.PostAPI<string>($"/auth/login", data);
         
         if (message.success)
         {
-            base.SetToken(message.token);
+            Managers.Network.SetToken(message.token);
             OnLoginSuccess?.Invoke("Success");    
         }
         else

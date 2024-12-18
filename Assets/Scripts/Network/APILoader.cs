@@ -3,16 +3,15 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Threading.Tasks;
-using UnityEditor;
 
 public class APILoader
 {
-    private string token = null;
-    protected async Task GetAPI(string url, object data = null, object overrideData = null)
+    
+    protected async Task GetAPI(string endPoint, object data = null, object overrideData = null)
     {
-        using (UnityWebRequest request = UnityWebRequest.Get(url))
+        using (UnityWebRequest request = UnityWebRequest.Get($"{Managers.Network.host}{endPoint}"))
         {
-            request.SetRequestHeader("Authorization", "Bearer " + token);
+            request.SetRequestHeader("Authorization", "Bearer " + Managers.Network.token);
             
             var operation = request.SendWebRequest();
             while (!operation.isDone)
@@ -31,21 +30,30 @@ public class APILoader
             }
         }
     }
-
-    protected async Task<GetData> PostAPI(string url, PostData data = null)
+    
+    /// <summary>
+    /// PostAPI 호출 함수
+    /// </summary>
+    /// <param name="endPoint">API Endpoint</param>
+    /// <param name="data">Post시 Body에 포함될 Data, PostData를 상속받은 Class</param>
+    /// <typeparam name="T">Response의 Data로 Return 받을 (Serializable)클래스 (자료형)</typeparam>
+    /// <returns></returns>
+    protected async Task<GetData<T>> PostAPI<T>(string endPoint, PostData data = null)
     {
         // 데이터 JSON으로 변환
         string json = JsonUtility.ToJson(data);
         string sanitizedJson = Regex.Replace(json, @"\u200B|\u200C|\u200D", ""); // 필요에 따라 특수 문자를 추가
         byte[] jsonToSend = Encoding.UTF8.GetBytes(sanitizedJson);
 
+        Debug.Log($"{Managers.Network.host}{endPoint}");
+        
         // UnityWebRequest 생성
-        using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
+        using (UnityWebRequest request = new UnityWebRequest($"{Managers.Network.host}{endPoint}", "POST"))
         {
             request.uploadHandler = new UploadHandlerRaw(jsonToSend);
             request.downloadHandler = new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
-            request.SetRequestHeader("Authorization", "Bearer " + token);
+            request.SetRequestHeader("Authorization", "Bearer " + Managers.Network.token);
 
             // 요청 전송 및 대기
             var operation = request.SendWebRequest();
@@ -63,15 +71,9 @@ public class APILoader
                 Debug.LogError("Error: " + request.error);
             }
 
-            GetData result = JsonUtility.FromJson<GetData>(request.downloadHandler.text);
+            GetData<T> result = JsonUtility.FromJson<GetData<T>>(request.downloadHandler.text);
 
             return result;
         }
     }
-
-    protected void SetToken(string value)
-    {
-        token = value;
-    }
-    
 }

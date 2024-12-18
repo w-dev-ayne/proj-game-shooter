@@ -9,22 +9,27 @@ public class SkillManager : Singleton<SkillManager>
     void Awake()
     {
         base.Awake();
-        dataController = new SkillDataController();
+    }
+
+    void Start()
+    {
+        DrawSkill();
     }
 
     public void GetSkills()
     {
-        dataController.GetUserSkills();
+        //dataController.GetUserSkills();
     }
 
-    public void DrawSkill()
+    public async void DrawSkill()
     {
-        dataController.DrawSkill();
+        await Managers.Network.skillController.DrawSkill();
+        Debug.Log("Skill Drew");
     }
 
     public void UpgradeSkill()
     {
-        dataController.UpgradeSkill();
+        //dataController.UpgradeSkill();
     }
     
 }

@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class SkillDataController : APILoader
@@ -7,12 +8,14 @@ public class SkillDataController : APILoader
     
     public void GetUserSkills()
     {
-        base.GetAPI($"{NetworkDefine.Host}/api", null, skillsData);
+        base.GetAPI("/api", null, skillsData);
     }
 
-    public void DrawSkill()
+    public async Task DrawSkill()
     {
-        
+        GetData<SkillNetworkData> response =  await base.PostAPI<SkillNetworkData>("/skill/draw");
+        response.Print();
+        Debug.Log(response.data.name);
     }
 
     public void UpgradeSkill()

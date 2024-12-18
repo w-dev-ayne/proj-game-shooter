@@ -2,12 +2,12 @@ using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 [System.Serializable]
-public class GetData
+public class GetData<T>
 {
     public bool success;
+    public T data;
     public Error error;
     public string msg;
-    public string data;
     public string token;
     
     [System.Serializable]

@@ -33,8 +33,3 @@ public class LoginAuthData : PostData
         Debug.Log(loginPassword);
     }
 }
-
-public class LoginTokenAuthData : GetData
-{
-    public string token;
-}

@@ -9,16 +9,16 @@ public class CharacterDataController : APILoader
 
     public void GetCharacterData()
     {
-        base.GetAPI($"{NetworkDefine.Host}/userInfo", null, cData);
+        base.GetAPI($"/userInfo", null, cData);
     }
 
     public void CreateCharacterData()
     {
-        base.PostAPI($"{NetworkDefine.Host}/insert", cData);
+        base.PostAPI<string>("/insert", cData);
     }
     
     public void UpdateCharacterData()
     {
-        base.PostAPI($"{NetworkDefine.Host}/update", cData);
+        base.PostAPI<string>($"/update", cData);
     }
 }
