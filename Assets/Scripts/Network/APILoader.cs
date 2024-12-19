@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 public class APILoader
 {
     
-    protected async Task GetAPI(string endPoint, object data = null, object overrideData = null)
+    protected async Task<GetData<T>> GetAPI<T>(string endPoint, object data = null)
     {
         using (UnityWebRequest request = UnityWebRequest.Get($"{Managers.Network.host}{endPoint}"))
         {
@@ -22,12 +22,16 @@ public class APILoader
             if (request.result == UnityWebRequest.Result.Success)
             {
                 string json = request.downloadHandler.text;
-                JsonUtility.FromJsonOverwrite(json, overrideData);
+                Debug.Log($"Response : {json}");
             }
             else
             {
                 Debug.LogError(request.error);
             }
+            
+            GetData<T> result = JsonUtility.FromJson<GetData<T>>(request.downloadHandler.text);
+
+            return result;
         }
     }
     
@@ -38,7 +42,7 @@ public class APILoader
     /// <param name="data">Post시 Body에 포함될 Data, PostData를 상속받은 Class</param>
     /// <typeparam name="T">Response의 Data로 Return 받을 (Serializable)클래스 (자료형)</typeparam>
     /// <returns></returns>
-    protected async Task<GetData<T>> PostAPI<T>(string endPoint, PostData data = null)
+    protected async Task<GetData<T>> PostAPI<T>(string endPoint, PostData data = null, bool isNeedToken = true)
     {
         // 데이터 JSON으로 변환
         string json = JsonUtility.ToJson(data);
@@ -53,7 +57,8 @@ public class APILoader
             request.uploadHandler = new UploadHandlerRaw(jsonToSend);
             request.downloadHandler = new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
-            request.SetRequestHeader("Authorization", "Bearer " + Managers.Network.token);
+            if(isNeedToken)
+                request.SetRequestHeader("Authorization", "Bearer " + Managers.Network.token);
 
             // 요청 전송 및 대기
             var operation = request.SendWebRequest();

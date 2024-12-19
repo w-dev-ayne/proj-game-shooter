@@ -11,6 +11,17 @@ public class CharacterData : PostData
     public float rotateSpeed = 1.0f;
     public float bulletSpeed = 1.0f;
     public float attackSpeed = 4.0f;
+
+    public void FetchData(CharacterNetworkData networkData)
+    {
+        hp = networkData.hp;
+        mp = networkData.mp;
+        attack = networkData.attack;
+        moveSpeed = networkData.moveSpeed;
+        rotateSpeed = networkData.rotateSpeed;
+        bulletSpeed = networkData.bulletSpeed;
+        attackSpeed = networkData.attackSpeed;
+    }
 }
 
 [System.Serializable]

@@ -7,7 +7,7 @@ public class NetworkManager : Singleton<NetworkManager>
 
     public string host { get; private set; } = "http://localhost:3000";
     public string token { get; private set; } =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXJ2aWNlIjoiVVNFUiIsInRva2VuVHlwZSI6ImFjY2Vzc1Rva2VuIiwiaWQiOjgsImlhdCI6MTczNDUzMTQ0MH0.MYJOpr-NRpfMcb33WF0lK-pW9EUPcjPpDh6eEd7NBxQ";
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXJ2aWNlIjoiVVNFUiIsInRva2VuVHlwZSI6ImFjY2Vzc1Rva2VuIiwiaWQiOjExLCJpYXQiOjE3MzQ1ODUxNzF9.XSyYL0Zc1yE9ii_www-W4xYHI9FDYiiUe8yN2NYllZ4";
 
     public AuthController authController;
     public CharacterDataController cDataController;

@@ -8,7 +8,7 @@ public class AuthController : APILoader
     {
         RegisterAuthData data = new RegisterAuthData(username, id, password, passwowrd2);
         
-        GetData<string> message = await base.PostAPI<string>("/auth/register", data);
+        GetData<string> message = await base.PostAPI<string>("/auth/register", data, false);
         
         if (message.success)
         {

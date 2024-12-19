@@ -8,7 +8,7 @@ public class SkillDataController : APILoader
     
     public void GetUserSkills()
     {
-        base.GetAPI("/api", null, skillsData);
+        base.GetAPI<string>("/api", null);
     }
 
     public async Task DrawSkill()
