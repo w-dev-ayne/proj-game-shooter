@@ -15,7 +15,7 @@ public class NetworkManager : Singleton<NetworkManager>
 
     void Awake()
     {
-        Debug.Log(host);
+        base.Awake();
         Init();
     }
 

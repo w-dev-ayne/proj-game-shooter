@@ -9,7 +9,7 @@ public class CharacterDataController : APILoader
 
     public async void GetCharacterData()
     {
-        GetData<CharacterNetworkData> nData = await base.GetAPI<CharacterNetworkData>($"/userInfo", null);
+        GetData<CharacterNetworkData> nData = await base.GetAPI<CharacterNetworkData>($"/character", null);
         cData.FetchData(nData.data);
     }
 
