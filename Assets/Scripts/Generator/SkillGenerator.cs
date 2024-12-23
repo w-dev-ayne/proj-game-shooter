@@ -1,9 +1,12 @@
 using System;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 
 public class SkillGenerator : EditorWindow
 {
+    public NetworkConfig config;
+    
     public int id;
     public string name;
     public Define.SkillType type;
@@ -25,7 +28,7 @@ public class SkillGenerator : EditorWindow
         GetWindow<SkillGenerator>("Skill Generator");
     }
 
-    private void OnGUI()
+    private async void OnGUI()
     {
         GUILayout.Label("Skill Properties", EditorStyles.boldLabel);
         
@@ -44,20 +47,13 @@ public class SkillGenerator : EditorWindow
 
         if (GUILayout.Button("Generate"))
         {
-            GenerateSkill();
+            await GenerateSkill();
         }
     }
 
-    private void GenerateSkill()
+    private async Task GenerateSkill()
     {
-        string folderPath = "Assets/Data/Skills";
-
-        if (!AssetDatabase.IsValidFolder(folderPath))
-        {
-            AssetDatabase.CreateFolder("Assets", "Data/Skills");
-        }
-        
-        SkillSData newSkill = ScriptableObject.CreateInstance<SkillSData>();
+        SkillData newSkill = new SkillData();
 
         newSkill.name = name;
         newSkill.type = this.type;
@@ -73,11 +69,10 @@ public class SkillGenerator : EditorWindow
         newSkill.isEquipped = isEquipped;
         newSkill.skillIcon = skillIcon;
 
-        string assetPath = $"{folderPath}/{name}.asset";
-        AssetDatabase.CreateAsset(newSkill, assetPath);
-        AssetDatabase.SaveAssets();
-        
-        EditorUtility.DisplayDialog("Skill Generator", $"Skill {name} generated at {assetPath}", "OK");
-        
+        SkillNetworkData newSkillData = new SkillNetworkData();
+        newSkillData.FetchData(newSkill);
+
+        SkillDataController dataController = new SkillDataController();
+        await dataController.AddSkill(newSkillData, config);
     }
 }

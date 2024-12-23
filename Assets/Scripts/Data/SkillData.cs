@@ -58,6 +58,11 @@ public class SkillData
     public string description;
     public bool isEquipped;
 
+    public SkillData()
+    {
+        
+    }
+    
     public SkillData(SkillNetworkData data)
     {
         FetchData(data);
@@ -65,8 +70,6 @@ public class SkillData
 
     public void FetchData(SkillNetworkData data)
     {
-        Debug.Log(data.vfxOnDelay);
-        Debug.Log(data.vfxOnDelay == "Y");
         id = data.id;
         name = data.name;
         type = (Define.SkillType)Enum.Parse(typeof(Define.SkillType), data.type);
@@ -85,7 +88,7 @@ public class SkillData
 }
 
 [System.Serializable]
-public class SkillNetworkData
+public class SkillNetworkData : PostData
 {
     public int id;
     public string name;
@@ -101,4 +104,22 @@ public class SkillNetworkData
     public string skillIcon;
     public string description;
     public string isEquipped;
+    
+    public void FetchData(SkillData data)
+    {
+        id = data.id;
+        name = data.name;
+        type = data.type.ToString();
+        amount = data.amount;
+        cost = data.cost;
+        range = data.range;
+        duration = data.duration;
+        delay = data.delay;
+        vfxOnDelay = data.vfxOnDelay ? "Y" : "N";
+        coolTime = data.coolTime;
+        vfx = data.vfx?.ToString();
+        skillIcon = null;
+        description = data.description;
+        isEquipped = data.isEquipped ? "Y" : "N";
+    }
 }

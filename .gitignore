@@ -95,3 +95,5 @@ sysinfo.txt
 # Ignore Unity Collaborate metadata
 /[Cc]ollab/
 Assets/MyAssets/_Creepy_Cat/3D Games Effects Pack Free/_Showroom/Textures/Hard_Surface_01_Metal.tif
+Assets/Configuration/NetworkConfig.asset
+Assets/Configuration/NetworkConfig.asset.meta

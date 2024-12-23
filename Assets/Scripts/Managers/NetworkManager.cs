@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class NetworkManager : Singleton<NetworkManager>
 {
+    [SerializeField] private NetworkConfig config;
     [SerializeField] private CharacterData cData;
 
     public string host { get; private set; } = "http://localhost:3000";
@@ -24,6 +25,9 @@ public class NetworkManager : Singleton<NetworkManager>
         authController = new AuthController();
         cDataController = new CharacterDataController(this.cData);
         skillController = new SkillDataController();
+
+        host = $"http://{config.host}:{config.port}";
+        token = config.token;
     }
 
     public void SetToken(string value)

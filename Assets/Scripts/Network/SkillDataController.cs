@@ -18,6 +18,11 @@ public class SkillDataController : APILoader
      
     }
 
+    public async Task AddSkill(SkillNetworkData data, NetworkConfig config)
+    {
+        await base.EditorPostAPI<string>("/admin/skill/add", config, data, false);
+    }
+
     public void UpgradeSkill()
     {
         
