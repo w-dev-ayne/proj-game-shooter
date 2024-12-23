@@ -1,10 +1,10 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SkillManager : Singleton<SkillManager>
 {
-    public SkillDataController dataController;
     public SkillData[] skills;
-    public SkillData[] equippedSkills;
+    private SkillData[] equippedSkills;
 
     void Awake()
     {
@@ -13,12 +13,22 @@ public class SkillManager : Singleton<SkillManager>
 
     void Start()
     {
-        DrawSkill();
+        GetSkills();
     }
 
-    public void GetSkills()
+    private void GetSkills()
     {
-        //dataController.GetUserSkills();
+        Managers.Network.skillController.GetUserSkills();
+    }
+
+    public void FetchSkill(SkillNetworkData[] skills)
+    {
+        this.skills = new SkillData[skills.Length];
+        
+        for (int i = 0; i < skills.Length; i++)
+        {
+            this.skills[i] = new SkillData(skills[i]);
+        }
     }
 
     public async void DrawSkill()

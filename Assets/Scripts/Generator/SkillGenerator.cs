@@ -57,7 +57,7 @@ public class SkillGenerator : EditorWindow
             AssetDatabase.CreateFolder("Assets", "Data/Skills");
         }
         
-        SkillData newSkill = ScriptableObject.CreateInstance<SkillData>();
+        SkillSData newSkill = ScriptableObject.CreateInstance<SkillSData>();
 
         newSkill.name = name;
         newSkill.type = this.type;

@@ -93,6 +93,7 @@ public class CharacterController : MonoBehaviour, IDamageable
     // 캐릭터 스킬 생성 및 정보 초기화
     private void InitializeSkillData()
     {
+        skillDatas = Managers.Skill.skills;
         skills = new Skill[skillDatas.Length];
 
         for (int i = 0; i < skillDatas.Length; i++)

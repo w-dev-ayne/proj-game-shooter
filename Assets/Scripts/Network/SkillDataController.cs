@@ -3,12 +3,11 @@ using UnityEngine;
 
 public class SkillDataController : APILoader
 {
-    public SkillsData skillsData = new SkillsData();
-    public SkillData skillData = new SkillData();
-    
-    public void GetUserSkills()
+    public async Task GetUserSkills()
     {
-        base.GetAPI<string>("/api", null);
+        GetData<SkillNetworkData[]> response = await base.GetAPI<SkillNetworkData[]>("/skill/user", null); 
+        Debug.Log(response.data.Length);
+        Managers.Skill.FetchSkill(response.data);
     }
 
     public async Task DrawSkill()
@@ -16,6 +15,7 @@ public class SkillDataController : APILoader
         GetData<SkillNetworkData> response =  await base.PostAPI<SkillNetworkData>("/skill/draw");
         response.Print();
         Debug.Log(response.data.name);
+     
     }
 
     public void UpgradeSkill()
