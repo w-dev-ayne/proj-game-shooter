@@ -43,6 +43,8 @@ public class UI_InGame : UI_Popup
 
     public override bool Init()
     {
+        Debug.Log("INGAME INIT");
+        
         BindObject(typeof(Objects));
         BindButton(typeof(Buttons));
         BindText(typeof(Texts));

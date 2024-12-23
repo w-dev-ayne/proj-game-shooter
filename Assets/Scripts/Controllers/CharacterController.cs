@@ -49,7 +49,7 @@ public class CharacterController : MonoBehaviour, IDamageable
         
     }
 
-    public void Init()
+    private void Init()
     {
         InitializeCharacterData();
         InitializeSkillData();
@@ -62,6 +62,8 @@ public class CharacterController : MonoBehaviour, IDamageable
         rb = GetComponent<Rigidbody>();
         bulletPool.cc = this;
         onStatusChanged?.Invoke(this);
+
+        
     }
 
     // 캐릭터 상태 정보 초기화
@@ -79,6 +81,7 @@ public class CharacterController : MonoBehaviour, IDamageable
     // 캐릭터 기본 데이터 초기화
     private void InitializeCharacterData()
     {
+        data = Managers.Character.data;
         this.maxHp = data.hp;
         this.hp = data.hp;
         this.maxMp = data.mp;

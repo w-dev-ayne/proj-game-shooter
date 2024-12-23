@@ -47,12 +47,13 @@ public class UI_SkillManagement : UI_Popup
 
     public void SetDescriptionText(SkillData data)
     {
-        string description = $"TYPE : {data.type}\n" +
+        string description = $"SKILL NAME : {data.name}\n" +
+                             $"TYPE : {data.type}\n" +
                              $"AMOUNT : {data.amount}\n" +
                              $"COST : {data.cost}\n" +
                              $"RANGE : {data.range}\n" +
                              $"DURATION : {data.duration}\n" +
-                             $"VFX ON DELAY : {data.vfxOnDelay}" +
+                             $"VFX ON DELAY : {data.vfxOnDelay}\n" +
                              $"DELAY : {data.delay}\n" +
                              $"COOLTIME : {data.coolTime}\n";
         GetText((int)Texts.DescriptionText).text = description;

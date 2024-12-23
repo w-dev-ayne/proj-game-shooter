@@ -1,20 +1,10 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SkillManager : Singleton<SkillManager>
+public class SkillManager
 {
     public SkillData[] skills;
     private SkillData[] equippedSkills;
-
-    void Awake()
-    {
-        base.Awake();
-    }
-
-    void Start()
-    {
-        GetSkills();
-    }
 
     private void GetSkills()
     {

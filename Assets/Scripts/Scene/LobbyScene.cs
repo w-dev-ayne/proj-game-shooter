@@ -13,6 +13,9 @@ public class LobbyScene : BaseScene
 
         SceneType = Define.Scene.Lobby;
         Debug.Log($"{SceneType} Init");
+        
+        Managers.Network.cDataController.GetCharacterData();
+        Managers.Network.skillController.GetUserSkills();
 
         return true;
     }
