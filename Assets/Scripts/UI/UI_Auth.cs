@@ -37,6 +37,9 @@ public class UI_Auth : UI_Popup
         GetButton((int)Buttons.LoginButton).gameObject.BindEvent(OnClickLoginButton);
         GetButton((int)Buttons.LoginRegisterButton).gameObject.BindEvent(OnClickLoginRegisterButton);
         
+        GetObject((int)Objects.LoginObject).GetComponent<EnterNavigation>().onClickEnter.AddListener(OnClickLoginButton);
+        GetObject((int)Objects.RegisterObject).GetComponent<EnterNavigation>().onClickEnter.AddListener(OnClickRegisterButton);
+        
         if (!base.Init())
             return false;
         return true;
