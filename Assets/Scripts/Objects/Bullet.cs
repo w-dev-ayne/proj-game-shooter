@@ -29,8 +29,8 @@ public class Bullet : PooledObject
     {
         if (other.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
-            BulletPool bPool = pool as BulletPool;
-            bPool.CameraShake();
+            /*BulletPool bPool = pool as BulletPool;
+            bPool.CameraShake();*/
             
             renderer.SetActive(false);
             Invoke("Release", hitParticle.duration);

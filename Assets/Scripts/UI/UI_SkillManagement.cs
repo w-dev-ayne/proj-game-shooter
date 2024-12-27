@@ -12,7 +12,8 @@ public class UI_SkillManagement : UI_Popup
 
     enum Buttons
     {
-        SkillDrawButton
+        SkillDrawButton,
+        CloseButton
     }
 
     enum Texts
@@ -27,6 +28,7 @@ public class UI_SkillManagement : UI_Popup
         BindText(typeof(Texts));
         
         GetButton((int)Buttons.SkillDrawButton).gameObject.BindEvent(OnClickSkillDrawButton);
+        GetButton((int)Buttons.CloseButton).gameObject.BindEvent(ClosePopupUI);
         
         LoadSkillData();
         

@@ -6,7 +6,6 @@ using UnityEngine.Events;
 
 public class StatManager : Singleton<StatManager>
 {
-    [SerializeField]
     private CharacterData cData;
 
     private int initPoint = 0;
@@ -25,6 +24,7 @@ public class StatManager : Singleton<StatManager>
 
     public void Init()
     {
+        cData = Managers.Character.data;
         initPoint = Managers.UserInfo.data.characterPoint;
         currentPoint = initPoint;
         onPointChange.Invoke(currentPoint);

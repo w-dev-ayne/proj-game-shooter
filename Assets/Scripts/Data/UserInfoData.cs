@@ -5,6 +5,7 @@ public class UserInfoData
     public int level;
     public int skillPoint;
     public int characterPoint;
+    public int skilldrawPoint;
 
     public void FetchData(UserInfoNetworkData data)
     {
@@ -12,6 +13,7 @@ public class UserInfoData
         level = data.level;
         skillPoint = data.skillPoint;
         characterPoint = data.characterPoint;
+        skilldrawPoint = data.skilldrawPoint;
     }
 }
 
@@ -22,4 +24,5 @@ public class UserInfoNetworkData : PostData
     public int level;
     public int skillPoint;
     public int characterPoint;
+    public int skilldrawPoint;
 }
