@@ -18,6 +18,7 @@ public class Managers : MonoBehaviour
     private static SoundManager s_soundManager = new SoundManager();
     private static SkillManager s_skillManager = new SkillManager();
     private static CharacterManager s_characterManager = new CharacterManager();
+    private static UserInfoManager s_userInfoManager = new UserInfoManager();
 
     private static EnemyManager enemyManager = new EnemyManager();
     private static StageManager stageManager = new StageManager();
@@ -33,6 +34,7 @@ public class Managers : MonoBehaviour
     public static SoundManager Sound {  get { Init(); return s_soundManager; } }
     public static CharacterManager Character { get { Init(); return s_characterManager; }}
     public static SkillManager Skill { get { Init(); return s_skillManager; } }
+    public static UserInfoManager UserInfo { get {Init(); return s_userInfoManager; }}
     
     public static EnemyManager Enemy { get { Init(); return enemyManager; } }
     public static StageManager Stage { get { Init(); return stageManager; } }

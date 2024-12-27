@@ -12,6 +12,7 @@ public class NetworkManager : Singleton<NetworkManager>
     public AuthController authController;
     public CharacterDataController cDataController;
     public SkillDataController skillController;
+    public UserInfoDataController userInfoDataController;
 
     void Awake()
     {
@@ -24,6 +25,7 @@ public class NetworkManager : Singleton<NetworkManager>
         authController = new AuthController();
         cDataController = new CharacterDataController();
         skillController = new SkillDataController();
+        userInfoDataController = new UserInfoDataController();
 
         host = $"http://{config.host}:{config.port}";
         token = config.token;

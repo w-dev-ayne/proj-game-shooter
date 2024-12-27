@@ -25,7 +25,9 @@ public class StatManager : Singleton<StatManager>
 
     public void Init()
     {
-        initPoint = currentPoint;
+        initPoint = Managers.UserInfo.data.characterPoint;
+        currentPoint = initPoint;
+        onPointChange.Invoke(currentPoint);
         InstantiateStatButtons();
     }
 
@@ -84,14 +86,16 @@ public class StatManager : Singleton<StatManager>
 
     public void ApplyAllCommands()
     {
+        CharacterUpgradeNetworkData data = new CharacterUpgradeNetworkData();
         while (commands.Count > 0)
         {
             StatButton button = commands.Pop();
-            FieldInfo field = cData.GetType().GetField(button.statName); 
-            float updateValue = (float)field.GetValue(cData) + button.upAmount;
-            field.SetValue(cData, updateValue);
+            FieldInfo field = data.GetType().GetField(button.statName); 
+            int updateValue = (int)field.GetValue(data) + 1;
+            field.SetValue(data, updateValue);
         }
         currentPoint = 0;
+        Managers.Character.UpgradeData(data);
     }
 
     public void SetCurrentPoint(int stat)

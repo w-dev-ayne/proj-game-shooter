@@ -34,3 +34,15 @@ public class CharacterNetworkData
     public float bulletSpeed = 1.0f;
     public float attackSpeed = 4.0f;
 }
+
+[System.Serializable]
+public class CharacterUpgradeNetworkData : PostData
+{
+    public int hp;
+    public int mp;
+    public int attack;
+    public int moveSpeed;
+    public int rotateSpeed;
+    public int bulletSpeed;
+    public int attackSpeed;
+}

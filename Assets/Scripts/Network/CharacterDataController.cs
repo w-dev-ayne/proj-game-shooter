@@ -1,3 +1,6 @@
+using System.Threading.Tasks;
+using UnityEditor.VersionControl;
+
 public class CharacterDataController : APILoader
 {
     public async void GetCharacterData()
@@ -14,5 +17,11 @@ public class CharacterDataController : APILoader
     public void UpdateCharacterData()
     {
         //base.PostAPI<string>($"/update", cData);
+    }
+
+    public async Task<bool> UpdateCharacterUpgradeData(CharacterUpgradeNetworkData data)
+    {
+        GetData<string> response = await base.PostAPI<string>("/character/upgrade", data);
+        return response.success;
     }
 }
