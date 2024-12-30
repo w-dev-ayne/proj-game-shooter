@@ -18,7 +18,7 @@ public class CharacterDataController : APILoader
         //base.PostAPI<string>($"/update", cData);
     }
 
-    public async Task<bool> UpdateCharacterUpgradeData(CharacterUpgradeNetworkData data)
+    public async Task<bool> UpgradeCharacter(CharacterUpgradeNetworkData data)
     {
         GetData<string> response = await base.PostAPI<string>("/character/upgrade", data);
         return response.success;

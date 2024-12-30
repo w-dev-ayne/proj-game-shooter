@@ -9,8 +9,8 @@ public class SkillData
     public int id;
     public string name;
     public Define.SkillType type;
-    public int amount;
-    public int cost;
+    public float amount;
+    public float cost;
     public float range;
     public float duration;
     public float delay;
@@ -51,13 +51,34 @@ public class SkillData
 }
 
 [System.Serializable]
+public class SkillUpgradeData
+{
+    public float amount;
+    public float cost;
+    public float range;
+    public float duration;
+    public float delay;
+    public float cooltime;
+
+    public void FetchData(SkillData data)
+    {
+        amount = data.amount;
+        cost = data.cost;
+        range = data.range;
+        duration = data.duration;
+        delay = data.delay;
+        cooltime = data.coolTime;
+    }
+}
+
+[System.Serializable]
 public class SkillNetworkData : PostData
 {
     public int id;
     public string name;
     public string type;
-    public int amount;
-    public int cost;
+    public float amount;
+    public float cost;
     public float range;
     public float duration;
     public float delay;
@@ -140,4 +161,16 @@ public class SkillUpgradeConfiguration
         Debug.Log($"Delay : {delay}");
         Debug.Log($"CoolTime : {cooltime}");
     }
+}
+
+[System.Serializable]
+public class SkillUpgradeNetworkData : PostData
+{
+    public int skillId;
+    public int amount;
+    public int cost;
+    public int range;
+    public int duration;
+    public int delay;
+    public int cooltime;
 }

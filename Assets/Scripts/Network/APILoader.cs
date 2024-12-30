@@ -47,8 +47,6 @@ public class APILoader
         string json = JsonUtility.ToJson(data);
         string sanitizedJson = Regex.Replace(json, @"\u200B|\u200C|\u200D", ""); // 필요에 따라 특수 문자를 추가
         byte[] jsonToSend = Encoding.UTF8.GetBytes(sanitizedJson);
-
-        Debug.Log($"{Managers.Network.host}{endPoint}");
         
         // UnityWebRequest 생성
         using (UnityWebRequest request = new UnityWebRequest($"{Managers.Network.host}{endPoint}", "POST"))

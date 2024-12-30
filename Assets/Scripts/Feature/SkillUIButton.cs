@@ -18,7 +18,7 @@ public class SkillUIButton : MonoBehaviour
         // this.icon.sprite = skillData.skillIcon;
         this.GetComponent<Button>().onClick.AddListener(() =>
         {
-            Managers.UI.FindPopup<UI_SkillManagement>().SetDescriptionText(this.skillData);
+            Managers.UI.FindPopup<UI_SkillManagement>().OnClickSkillButton(this);
         });
     }
 }

@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class UI_Stat : UI_Popup
+public class UI_SkillUpgrade : UI_Popup
 {
     enum Objects
     {
-        CharacterInfoObject
+        SkillInfoObject
     }
 
     enum Buttons
@@ -19,48 +19,45 @@ public class UI_Stat : UI_Popup
     {
         CurrentPointText
     }
-    
+
     public override bool Init()
     {
         BindObject(typeof(Objects));
         BindButton(typeof(Buttons));
         BindText(typeof(Texts));
         
+        
         GetButton((int)Buttons.CompleteButton).gameObject.BindEvent(OnClickCompleteButton);
         GetButton((int)Buttons.UndoButton).gameObject.BindEvent(OnClickUndoButton);
         GetButton((int)Buttons.CancelButton).gameObject.BindEvent(OnClickCancelButton);
         GetButton((int)Buttons.CloseButton).gameObject.BindEvent(ClosePopupUI);
 
-        GetText((int)Texts.CurrentPointText).text = Managers.Stat.currentPoint.ToString();
-        Managers.Stat.onPointChange += UpdateCurrentPointText;
-        
+        GetText((int)Texts.CurrentPointText).text = Managers.SkillUpgrade.currentPoint.ToString();
+        Managers.SkillUpgrade.onPointChange += UpdateCurrentPointText;
+        //GetButton((int)Buttons.CompleteButton)
+
         return base.Init();
     }
 
-    public override void AfterInStackInit()
+    public Transform GetSkillInfoObject()
     {
-        Managers.Stat.Init();
-    }
-
-    public Transform GetCharacterInfoObject()
-    {
-        return GetObject((int)Objects.CharacterInfoObject).transform;
+        return GetObject((int)Objects.SkillInfoObject).transform;
     }
 
     private void OnClickCompleteButton()
     {
-        Managers.Stat.ApplyAllCommands();
+        Managers.SkillUpgrade.ApplyAllCommands();
         ClosePopupUI();
     }
 
     private void OnClickUndoButton()
     {
-        Managers.Stat.PopCommand();
+        Managers.SkillUpgrade.PopCommand();
     }
 
     private void OnClickCancelButton()
     {
-        Managers.Stat.PopAllCommands();
+        Managers.SkillUpgrade.PopAllCommands();
     }
 
     private void UpdateCurrentPointText(int currentPoint)

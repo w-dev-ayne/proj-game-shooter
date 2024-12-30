@@ -1,9 +1,19 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StatButton : MonoBehaviour
 {
+    private enum ButtonType
+    {
+        Character,
+        Skill
+    }
+    
+    [SerializeField]
+    private ButtonType buttonType = ButtonType.Character;
+    
     [SerializeField]
     private TextMeshProUGUI statNameText;
     [SerializeField]
@@ -22,7 +32,7 @@ public class StatButton : MonoBehaviour
     {
         this.initValue = (float)initValue;
         this.statName = statName;
-        this.upAmount = (float)Managers.Character.config.GetType().GetField(statName).GetValue(Managers.Character.config);
+        this.upAmount = (float)Managers.Skill.config.GetType().GetField(statName).GetValue(Managers.Skill.config);
         
         this.statNameText.text = this.statName;
         this.statValueText.text = ((float)initValue).ToString();
@@ -38,7 +48,15 @@ public class StatButton : MonoBehaviour
 
     private void OnClickUpButton()
     {
-        Managers.Stat.PushCommand(this);
+        switch (this.buttonType)
+        {
+            case ButtonType.Character:
+                Managers.Stat.PushCommand(this);
+                break;
+            case ButtonType.Skill:
+                Managers.SkillUpgrade.PushCommand(this);
+                break;
+        }
     }
 
     public void Do()

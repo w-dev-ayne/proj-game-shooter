@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class Skill : ISkill
 {
     protected Define.SkillType type;
-    protected int amount;
-    public int cost { get; }
+    protected float amount;
+    public float cost { get; }
     protected float range;
     protected float duration;
     protected float delay;

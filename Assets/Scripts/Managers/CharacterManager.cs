@@ -26,7 +26,7 @@ public class CharacterManager
 
     public async void UpgradeData(CharacterUpgradeNetworkData data)
     {
-        bool success = await Managers.Network.cDataController.UpdateCharacterUpgradeData(data);
+        bool success = await Managers.Network.cDataController.UpgradeCharacter(data);
 
         if (success)
         {

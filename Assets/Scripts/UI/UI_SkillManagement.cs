@@ -4,6 +4,7 @@ using UnityEngine.PlayerLoop;
 public class UI_SkillManagement : UI_Popup
 {
     [SerializeField] private GameObject skillUIButtonPrefab;
+    public SkillUIButton currentSelectedButton;
     
     enum Objects
     {
@@ -13,7 +14,8 @@ public class UI_SkillManagement : UI_Popup
     enum Buttons
     {
         SkillDrawButton,
-        CloseButton
+        CloseButton,
+        SkillUpgradeButton
     }
 
     enum Texts
@@ -29,6 +31,7 @@ public class UI_SkillManagement : UI_Popup
         
         GetButton((int)Buttons.SkillDrawButton).gameObject.BindEvent(OnClickSkillDrawButton);
         GetButton((int)Buttons.CloseButton).gameObject.BindEvent(ClosePopupUI);
+        GetButton((int)Buttons.SkillUpgradeButton).gameObject.BindEvent(OnClickSkillUpgradeButton);
         
         LoadSkillData();
         
@@ -47,7 +50,17 @@ public class UI_SkillManagement : UI_Popup
         }
     }
 
-    public void SetDescriptionText(SkillData data)
+    public void OnClickSkillButton(SkillUIButton button = null)
+    {
+        if (button != null)
+            currentSelectedButton = button;
+        if (currentSelectedButton == null)
+            return;
+        SetDescriptionText(currentSelectedButton.skillData);
+        Managers.SkillUpgrade.SetSkillData(currentSelectedButton.skillData);
+    }
+
+    private void SetDescriptionText(SkillData data)
     {
         string description = $"SKILL NAME : {data.name}\n" +
                              $"TYPE : {data.type}\n" +
@@ -64,5 +77,11 @@ public class UI_SkillManagement : UI_Popup
     private void OnClickSkillDrawButton()
     {
         Managers.UI.ShowPopupUI<UI_SkillDraw>();
+    }
+
+    private void OnClickSkillUpgradeButton()
+    {
+        Managers.UI.ShowPopupUI<UI_SkillUpgrade>();
+        Managers.SkillUpgrade.Init();
     }
 }

@@ -14,6 +14,7 @@ public class LobbyScene : BaseScene
         SceneType = Define.Scene.Lobby;
         Debug.Log($"{SceneType} Init");
         
+        Managers.UserInfo.GetUserInfo();
         Managers.Character.Initialize();
         Managers.Skill.Initialize();
 

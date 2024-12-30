@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class SkillDataController : APILoader
 {
-    public async Task GetUserSkills()
+    public async Task<bool> GetUserSkills()
     {
         GetData<SkillNetworkData[]> response = await base.GetAPI<SkillNetworkData[]>("/skill/user", null); 
         Managers.Skill.FetchSkill(response.data);
+        return response.success;
     }
 
-    public async Task DrawSkill()
+    public async Task<bool> DrawSkill()
     {
         GetData<SkillNetworkData> response =  await base.PostAPI<SkillNetworkData>("/skill/draw");
         Debug.Log(response.data.name);
-     
+        return response.success;
     }
 
     public async Task AddSkill(SkillNetworkData data, NetworkConfig config)
@@ -28,8 +29,9 @@ public class SkillDataController : APILoader
         Managers.Skill.FetchConfigData(response.data);
     }
 
-    public void UpgradeSkill()
+    public async Task<bool> UpgradeSkill(SkillUpgradeNetworkData data)
     {
-        
+        GetData<string> response = await base.PostAPI<string>("/skill/upgrade", data);
+        return response.success;
     }
 }

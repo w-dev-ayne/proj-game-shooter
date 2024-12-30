@@ -1,16 +1,26 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SkillManager
 {
     public SkillData[] skills;
     private SkillData[] equippedSkills;
-    private SkillUpgradeConfiguration config = new SkillUpgradeConfiguration();
+    public SkillUpgradeConfiguration config { get; private set; } = new SkillUpgradeConfiguration();
+    
 
     public void Initialize()
     {
         Managers.Network.skillController.GetUserSkills();
         Managers.Network.skillController.GetSkillConfiguration();
+    }
+
+    public async void GetUserSkills(UnityAction onSuccess)
+    {
+        if (await Managers.Network.skillController.GetUserSkills())
+        {
+            onSuccess?.Invoke();
+        }
     }
 
     public void FetchSkill(SkillNetworkData[] skills)
@@ -23,7 +33,7 @@ public class SkillManager
         }
     }
 
-    public async void FetchConfigData(ConfigurationNetworkData[] serverConfig)
+    public void FetchConfigData(ConfigurationNetworkData[] serverConfig)
     {
         this.config.FetchData(serverConfig);
     }
@@ -33,9 +43,19 @@ public class SkillManager
         await Managers.Network.skillController.DrawSkill();
     }
 
-    public void UpgradeSkill()
+    public async void UpgradeSkill(SkillUpgradeNetworkData data)
     {
-        //dataController.UpgradeSkill();
+        bool success = await Managers.Network.skillController.UpgradeSkill(data);
+        
+        if (success)
+        {
+            GetUserSkills(() =>
+            {
+                Managers.UI.FindPopup<UI_SkillManagement>().LoadSkillData();
+                Managers.UI.FindPopup<UI_SkillManagement>().OnClickSkillButton();
+            });
+        }
     }
+    
     
 }

@@ -25,6 +25,7 @@ public class Managers : MonoBehaviour
     private static InstructionManager instructionManager;
     private static StatManager statManager;
     private static NetworkManager networkManager;
+    private static SkillUpgradeManager skillUpgradeManager;
     
     
     
@@ -41,6 +42,7 @@ public class Managers : MonoBehaviour
     public static InstructionManager Instruction {get {Init(); return instructionManager;}}
     public static StatManager Stat { get { Init(); return statManager; } }
     public static NetworkManager Network { get { Init(); return networkManager; } }
+    public static SkillUpgradeManager SkillUpgrade { get { Init(); return skillUpgradeManager; } }
     
     
     
@@ -82,6 +84,8 @@ public class Managers : MonoBehaviour
                     statManager = InstantiateMonoBehaviourManager<StatManager>();
                 if(NetworkManager.Instance == null)
                     networkManager = InstantiateMonoBehaviourManager<NetworkManager>();
+                if(SkillUpgradeManager.Instance == null)
+                    skillUpgradeManager = InstantiateMonoBehaviourManager<SkillUpgradeManager>();
                 break;
             case Define.Scene.Game:
                 enemyManager = InstantiateMonoBehaviourManager<EnemyManager>();
