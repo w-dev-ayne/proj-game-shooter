@@ -1,3 +1,5 @@
+using UnityEngine.Events;
+
 public class CharacterManager
 {
     public CharacterData data { get; private set; } = new CharacterData();
@@ -9,9 +11,12 @@ public class CharacterManager
         Managers.Network.cDataController.GetCharacterUpgradeConfigurationData();
     }
 
-    public void GetCharacterData()
+    public async void GetCharacterData(UnityAction onSuccess = null)
     {
-        Managers.Network.cDataController.GetCharacterData();
+        if (await Managers.Network.cDataController.GetCharacterData())
+        {
+            onSuccess?.Invoke();
+        }
     }
     
     public void FetchData(CharacterNetworkData data)

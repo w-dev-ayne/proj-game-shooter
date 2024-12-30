@@ -15,7 +15,7 @@ public class SkillManager
         Managers.Network.skillController.GetSkillConfiguration();
     }
 
-    public async void GetUserSkills(UnityAction onSuccess)
+    public async void GetUserSkills(UnityAction onSuccess = null)
     {
         if (await Managers.Network.skillController.GetUserSkills())
         {

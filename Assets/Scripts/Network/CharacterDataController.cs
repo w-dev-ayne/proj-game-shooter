@@ -2,10 +2,12 @@ using System.Threading.Tasks;
 
 public class CharacterDataController : APILoader
 {
-    public async void GetCharacterData()
+    public async Task<bool> GetCharacterData()
     {
-        GetData<CharacterNetworkData> nData = await base.GetAPI<CharacterNetworkData>($"/character", null);
-        Managers.Character.FetchData(nData.data);
+        GetData<CharacterNetworkData> response = await base.GetAPI<CharacterNetworkData>($"/character", null);
+        Managers.Character.FetchData(response.data);
+
+        return response.success;
     }
 
     public void CreateCharacterData()

@@ -32,7 +32,17 @@ public class StatButton : MonoBehaviour
     {
         this.initValue = (float)initValue;
         this.statName = statName;
-        this.upAmount = (float)Managers.Skill.config.GetType().GetField(statName).GetValue(Managers.Skill.config);
+        
+        switch (this.buttonType)
+        {
+            case ButtonType.Character:
+                this.upAmount = (float)Managers.Character.config.GetType().GetField(statName).GetValue(Managers.Character.config);
+                break;
+            case ButtonType.Skill:
+                this.upAmount = (float)Managers.Skill.config.GetType().GetField(statName).GetValue(Managers.Skill.config);
+                break;
+        }
+        
         
         this.statNameText.text = this.statName;
         this.statValueText.text = ((float)initValue).ToString();
