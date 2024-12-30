@@ -22,7 +22,7 @@ public class StatButton : MonoBehaviour
     {
         this.initValue = (float)initValue;
         this.statName = statName;
-        this.upAmount = (float)typeof(StatConfiguration).GetField(statName).GetValue(null);
+        this.upAmount = (float)Managers.Character.config.GetType().GetField(statName).GetValue(Managers.Character.config);
         
         this.statNameText.text = this.statName;
         this.statValueText.text = ((float)initValue).ToString();

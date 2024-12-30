@@ -5,10 +5,12 @@ public class SkillManager
 {
     public SkillData[] skills;
     private SkillData[] equippedSkills;
+    private SkillUpgradeConfiguration config = new SkillUpgradeConfiguration();
 
-    private void GetSkills()
+    public void Initialize()
     {
         Managers.Network.skillController.GetUserSkills();
+        Managers.Network.skillController.GetSkillConfiguration();
     }
 
     public void FetchSkill(SkillNetworkData[] skills)
@@ -21,10 +23,14 @@ public class SkillManager
         }
     }
 
+    public async void FetchConfigData(ConfigurationNetworkData[] serverConfig)
+    {
+        this.config.FetchData(serverConfig);
+    }
+
     public async void DrawSkill()
     {
         await Managers.Network.skillController.DrawSkill();
-        Debug.Log("Skill Drew");
     }
 
     public void UpgradeSkill()

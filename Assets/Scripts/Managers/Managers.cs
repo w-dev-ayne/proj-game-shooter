@@ -20,11 +20,11 @@ public class Managers : MonoBehaviour
     private static CharacterManager s_characterManager = new CharacterManager();
     private static UserInfoManager s_userInfoManager = new UserInfoManager();
 
-    private static EnemyManager enemyManager = new EnemyManager();
-    private static StageManager stageManager = new StageManager();
-    private static InstructionManager instructionManager = new InstructionManager();
-    private static StatManager statManager = new StatManager();
-    private static NetworkManager networkManager = new NetworkManager();
+    private static EnemyManager enemyManager;
+    private static StageManager stageManager;
+    private static InstructionManager instructionManager;
+    private static StatManager statManager;
+    private static NetworkManager networkManager;
     
     
     

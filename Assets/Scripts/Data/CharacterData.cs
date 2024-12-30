@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 [System.Serializable]
 public class CharacterData : PostData
@@ -45,4 +46,57 @@ public class CharacterUpgradeNetworkData : PostData
     public int rotateSpeed;
     public int bulletSpeed;
     public int attackSpeed;
+}
+
+public class CharacterUpgradeConfiguration
+{
+    public float hp;
+    public float mp;
+    public float attack;
+    public float moveSpeed;
+    public float rotateSpeed;
+    public float bulletSpeed;
+    public float attackSpeed;
+
+    public void FetchData(ConfigurationNetworkData[] datas)
+    {
+        foreach (ConfigurationNetworkData data in datas)
+        {
+            switch (data.type)
+            {
+                case "HP":
+                    hp = data.amount;
+                    break;
+                case "MP":
+                    mp = data.amount;
+                    break;
+                case "ATTACK":
+                    attack = data.amount;
+                    break;
+                case "MOVE_SPEED":
+                    moveSpeed = data.amount;
+                    break;
+                case "ROTATE_SPEED":
+                    rotateSpeed = data.amount;
+                    break;
+                case "BULLET_SPEED":
+                    bulletSpeed = data.amount;
+                    break;
+                case "ATTACK_SPEED":
+                    attackSpeed = data.amount;
+                    break;
+            }
+        }
+    }
+
+    public void Print()
+    {
+        Debug.Log($"Hp : {hp}");
+        Debug.Log($"Mp : {mp}");
+        Debug.Log($"Attack : {attack}");
+        Debug.Log($"Move Speed : {moveSpeed}");
+        Debug.Log($"Rotate Speed : {rotateSpeed}");
+        Debug.Log($"Bullet Speed: {bulletSpeed}");
+        Debug.Log($"Attack Speed : {attackSpeed}");
+    }
 }

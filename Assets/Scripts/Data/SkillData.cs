@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.Serialization;
 
 [System.Serializable]
@@ -83,5 +84,60 @@ public class SkillNetworkData : PostData
         skillIcon = null;
         description = data.description;
         isEquipped = data.isEquipped ? "Y" : "N";
+    }
+}
+
+[System.Serializable]
+public class ConfigurationNetworkData
+{
+    public string type;
+    public float amount;
+}
+
+public class SkillUpgradeConfiguration
+{
+    public float amount;
+    public float cost;
+    public float range;
+    public float duration;
+    public float delay;
+    public float cooltime;
+
+    public void FetchData(ConfigurationNetworkData[] datas)
+    {
+        foreach (ConfigurationNetworkData data in datas)
+        {
+            switch (data.type)
+            {
+                case "AMOUNT":
+                    amount = data.amount;
+                    break;
+                case "COST":
+                    cost = data.amount;
+                    break;
+                case "RANGE":
+                    range = data.amount;
+                    break;
+                case "DURATION":
+                    duration = data.amount;
+                    break;
+                case "DELAY":
+                    delay = data.amount;
+                    break;
+                case "COOLTIME":
+                    cooltime = data.amount;
+                    break;
+            }
+        }
+    }
+
+    public void Print()
+    {
+        Debug.Log($"Amount : {amount}");
+        Debug.Log($"Cost : {cost}");
+        Debug.Log($"Range : {range}");
+        Debug.Log($"Duration : {duration}");
+        Debug.Log($"Delay : {delay}");
+        Debug.Log($"CoolTime : {cooltime}");
     }
 }

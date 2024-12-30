@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using UnityEditor.VersionControl;
 
 public class CharacterDataController : APILoader
 {
@@ -23,5 +22,11 @@ public class CharacterDataController : APILoader
     {
         GetData<string> response = await base.PostAPI<string>("/character/upgrade", data);
         return response.success;
+    }
+
+    public async Task GetCharacterUpgradeConfigurationData()
+    {
+        GetData<ConfigurationNetworkData[]> response = await base.GetAPI<ConfigurationNetworkData[]>($"/character/config");
+        Managers.Character.FetchConfigData(response.data);
     }
 }
