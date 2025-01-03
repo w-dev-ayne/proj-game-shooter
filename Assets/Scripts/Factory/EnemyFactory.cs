@@ -39,9 +39,10 @@ public class EnemyFactory : MonoBehaviour
     {
         EnemyController enemy = Instantiate(enemyData.prefab).GetComponent<EnemyController>();
 
-        if (NavMesh.SamplePosition(position, out NavMeshHit hit, 100, 0))
+        if (NavMesh.SamplePosition(position, out NavMeshHit hit, 100, NavMesh.AllAreas))
         {
             enemy.transform.position = hit.position;
+            Debug.DrawLine(position, hit.position, Color.blue, 30.0f);
         }
         
         enemy.data = enemyData;

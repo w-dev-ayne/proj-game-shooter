@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     
     private StateContext<EnemyController> stateContext;
 
+    private IState<EnemyController> spawnState;
     private IState<EnemyController> moveState;
     private IState<EnemyController> attackState;
     private IState<EnemyController> hitState;
@@ -38,6 +39,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     public float currentHp;
     
     public Image hpBar;
+    public GameObject spawnVfx;
     
     public UnityEvent onDamage { get; set; }
 
@@ -62,6 +64,7 @@ public class EnemyController : MonoBehaviour, IDamageable
                 break;
         }
         
+        spawnState = gameObject.AddComponent<EnemySpawnState>();
         hitState = gameObject.AddComponent<EnemyHitState>();
         dieState = gameObject.AddComponent<EnemyDieState>();
         victoryState = gameObject.AddComponent<EnemyVictoryState>();
@@ -71,7 +74,7 @@ public class EnemyController : MonoBehaviour, IDamageable
 
         attackCondition = Vector3.Distance(transform.position, cc.transform.position) <= attackRange;
         
-        Move();
+        Spawn();
     }
 
     private void AdjustData()
@@ -95,6 +98,11 @@ public class EnemyController : MonoBehaviour, IDamageable
     void Update()
     {
         attackCondition = Vector3.Distance(transform.position, cc.transform.position) <= attackRange; 
+    }
+
+    public void Spawn()
+    {
+        stateContext.Transition(spawnState);
     }
 
     public void Move()
