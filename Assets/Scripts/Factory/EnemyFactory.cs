@@ -29,6 +29,7 @@ public class EnemyFactory : MonoBehaviour
                     randomY = randomY <= 0 ? randomY - MIN_SPAWN_DISTANCE : randomY + MIN_SPAWN_DISTANCE;
                 }
             
+                Debug.Log($"{randomX}, {randomY}");
                 GenerateEnemy(levelData.enemies[eIdx], new Vector3(randomX, 1.25f, randomY));    
             }
         }

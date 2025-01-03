@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class SkillManager
 {
     public SkillData[] skills;
-    private SkillData[] equippedSkills;
+    public SkillData[] equippedSkills = new SkillData[4];
     public SkillUpgradeConfiguration config { get; private set; } = new SkillUpgradeConfiguration();
     
 
@@ -25,11 +25,22 @@ public class SkillManager
 
     public void FetchSkill(SkillNetworkData[] skills)
     {
+        int count = 0;
         this.skills = new SkillData[skills.Length];
         
         for (int i = 0; i < skills.Length; i++)
         {
-            this.skills[i] = new SkillData(skills[i]);
+            SkillNetworkData currentSkill = skills[i];
+            // 장착된 스킬은 장착
+            if (currentSkill.isEquipped == "Y")
+            {
+                this.equippedSkills[count] = new SkillData(currentSkill);
+                count++;
+            }
+            else
+            {
+                this.skills[i] = new SkillData(currentSkill);
+            }
         }
     }
 
@@ -56,6 +67,9 @@ public class SkillManager
             });
         }
     }
-    
-    
+
+    public bool IsEquippedSkillReady()
+    {
+        return this.equippedSkills.Length == 4;
+    }
 }

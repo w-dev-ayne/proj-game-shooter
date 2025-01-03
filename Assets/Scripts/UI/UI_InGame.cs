@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class UI_InGame : UI_Popup
 {
-    [SerializeField] private GameObject skillButtonPrefab;
     private float maxBarWidth;
     
     public Dictionary<Skill, Button> skillButtons = new Dictionary<Skill, Button>();
@@ -70,6 +69,7 @@ public class UI_InGame : UI_Popup
     // Skill 버튼에 각 Skill 할당 및 Skill 쿨타임 이미지 오브젝트 할당
     public void SetSkillButtons(Skill[] skills)
     {
+        Debug.Log(skills.Length);
         for (int i = 0; i < skills.Length; i++)
         {
             skillButtons[skills[i]] = GetButton(i);

@@ -1063,7 +1063,7 @@ GameObject:
   - component: {fileID: 249370775637430582}
   - component: {fileID: 8635406671979199321}
   m_Layer: 5
-  m_Name: EquipmentedSkillsArea
+  m_Name: EquippedSkillsObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1685,6 +1685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillUIButtonPrefab: {fileID: 912656314743332977, guid: c7718018d3ee94246a6c9a531d97bed3, type: 3}
+  currentSelectedButton: {fileID: 0}
 --- !u!1 &7198216882052190319
 GameObject:
   m_ObjectHideFlags: 0

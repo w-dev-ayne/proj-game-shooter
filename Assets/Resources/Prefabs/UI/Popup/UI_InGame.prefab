@@ -1778,7 +1778,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac917dbc14cb43d6afcc9b0f41d1499f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillButtonPrefab: {fileID: 0}
 --- !u!1 &9160475893193561027
 GameObject:
   m_ObjectHideFlags: 0

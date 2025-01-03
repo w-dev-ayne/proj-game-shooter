@@ -22,6 +22,11 @@ public class UI_Lobby : UI_Popup
 
     private void OnClickGameStartButton()
     {
+        if (!Managers.Skill.IsEquippedSkillReady())
+        {
+            Debug.Log("Equipped Skill Not Enough");
+            return;
+        }
         Managers.Scene.ChangeScene(Define.Scene.Game);
     }
 

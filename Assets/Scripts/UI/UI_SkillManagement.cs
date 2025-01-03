@@ -1,3 +1,4 @@
+using UnityEditor.Analytics;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
@@ -8,6 +9,7 @@ public class UI_SkillManagement : UI_Popup
     
     enum Objects
     {
+        EquippedSkillsObject,
         SkillsObject
     }
 
@@ -42,6 +44,13 @@ public class UI_SkillManagement : UI_Popup
 
     public void LoadSkillData()
     {
+        SkillData[] equippedDatas = Managers.Skill.equippedSkills;
+        Transform equippedSkillButtons = GetObject((int)Objects.EquippedSkillsObject).transform;
+        for (int i = 0; i < equippedDatas.Length; i++)
+        {
+            equippedSkillButtons.GetChild(i).GetComponent<SkillUIButton>().skillData = equippedDatas[i];
+        }
+        
         SkillData[] datas = Managers.Skill.skills;
         Transform skillButtons = GetObject((int)Objects.SkillsObject).transform;
         for (int i = 0; i < datas.Length; i++)
@@ -52,6 +61,8 @@ public class UI_SkillManagement : UI_Popup
 
     public void OnClickSkillButton(SkillUIButton button = null)
     {
+        if (button.skillData == null)
+            return;
         if (button != null)
             currentSelectedButton = button;
         if (currentSelectedButton == null)
@@ -62,6 +73,12 @@ public class UI_SkillManagement : UI_Popup
 
     private void SetDescriptionText(SkillData data)
     {
+        if (data == null)
+        {
+            GetText((int)Texts.DescriptionText).text = "null";
+            return;
+        }
+        
         string description = $"SKILL NAME : {data.name}\n" +
                              $"TYPE : {data.type}\n" +
                              $"AMOUNT : {data.amount}\n" +
