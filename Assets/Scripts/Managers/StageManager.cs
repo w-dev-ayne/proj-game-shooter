@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -22,7 +23,6 @@ public class StageManager : MonoBehaviour
 
     void Awake()
     {
-        
         Init();
         Debug.Log("Hello I'm Stage Manager");
     }
@@ -43,6 +43,8 @@ public class StageManager : MonoBehaviour
         statCount = 0;
         StartNextLevel();
     }
+
+    
 
     public void UpdateEnemyNum()
     {
