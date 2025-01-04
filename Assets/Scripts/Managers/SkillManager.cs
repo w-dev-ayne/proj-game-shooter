@@ -1,3 +1,4 @@
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -24,8 +25,10 @@ public class SkillManager
 
     public void FetchSkill(SkillNetworkData[] skills)
     {
+        int eCount = 0;
         int count = 0;
-        this.skills = new SkillData[skills.Length];
+        
+        this.skills = new SkillData[skills.Length - 4];
         
         for (int i = 0; i < skills.Length; i++)
         {
@@ -33,12 +36,13 @@ public class SkillManager
             // 장착된 스킬은 장착
             if (currentSkill.isEquipped == "Y")
             {
-                this.equippedSkills[count] = new SkillData(currentSkill);
-                count++;
+                this.equippedSkills[eCount] = new SkillData(currentSkill);
+                eCount++;
             }
             else
             {
-                this.skills[i] = new SkillData(currentSkill);
+                this.skills[count] = new SkillData(currentSkill);
+                count++;
             }
         }
     }
@@ -63,6 +67,20 @@ public class SkillManager
             {
                 Managers.UI.FindPopup<UI_SkillManagement>().LoadSkillData();
                 Managers.UI.FindPopup<UI_SkillManagement>().OnClickSkillButton();
+            });
+        }
+    }
+
+    public async void EquipSkill(SkillEquipNetworkData data)
+    {
+        bool success = await Managers.Network.skillController.EquipSkill(data);
+
+        if (success)
+        {
+            GetUserSkills(() =>
+            {
+                Managers.UI.FindPopup<UI_SkillManagement>().LoadSkillData();
+                //Managers.UI.FindPopup<UI_SkillManagement>().OnClickSkillButton();
             });
         }
     }

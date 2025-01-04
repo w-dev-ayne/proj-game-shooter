@@ -174,3 +174,16 @@ public class SkillUpgradeNetworkData : PostData
     public int delay;
     public int cooltime;
 }
+
+[System.Serializable]
+public class SkillEquipNetworkData : PostData
+{
+    public int equip;
+    public int unEquip;
+
+    public SkillEquipNetworkData(int e, int u)
+    {
+        equip = e;
+        unEquip = u;
+    }
+}

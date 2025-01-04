@@ -8,6 +8,7 @@ using UnityEngine.Serialization;
 public class SkillUpgradeManager : Singleton<SkillUpgradeManager>
 {
     public SkillData skillData { get; private set; } = new SkillData();
+    public SkillData previousSkillData { get; private set; } = new SkillData();
     private SkillUpgradeData skillUpgradeData = new SkillUpgradeData(); 
 
     private int initPoint = 0;
@@ -31,6 +32,7 @@ public class SkillUpgradeManager : Singleton<SkillUpgradeManager>
 
     public void SetSkillData(SkillData skillData)
     {
+        previousSkillData = this.skillData;
         this.skillData = skillData;
         skillUpgradeData.FetchData(skillData);
     }

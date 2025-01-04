@@ -6,6 +6,7 @@ public class SkillUIButton : MonoBehaviour
     public SkillData skillData;
 
     [SerializeField] private Image icon;
+    [SerializeField] public GameObject arrow;
 
     void Awake()
     {

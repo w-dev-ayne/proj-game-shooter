@@ -33,4 +33,10 @@ public class SkillDataController : APILoader
         GetData<string> response = await base.PostAPI<string>("/skill/upgrade", data);
         return response.success;
     }
+
+    public async Task<bool> EquipSkill(SkillEquipNetworkData data)
+    {
+        GetData<string> response = await base.PostAPI<string>("/skill/equip", data);
+        return response.success;
+    }
 }

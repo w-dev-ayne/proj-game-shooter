@@ -17,7 +17,8 @@ public class UI_SkillManagement : UI_Popup
     {
         SkillDrawButton,
         CloseButton,
-        SkillUpgradeButton
+        SkillUpgradeButton,
+        SkillEquipButton
     }
 
     enum Texts
@@ -34,6 +35,7 @@ public class UI_SkillManagement : UI_Popup
         GetButton((int)Buttons.SkillDrawButton).gameObject.BindEvent(OnClickSkillDrawButton);
         GetButton((int)Buttons.CloseButton).gameObject.BindEvent(ClosePopupUI);
         GetButton((int)Buttons.SkillUpgradeButton).gameObject.BindEvent(OnClickSkillUpgradeButton);
+        GetButton((int)Buttons.SkillEquipButton).gameObject.BindEvent(OnClickEquipButton);
         
         LoadSkillData();
         
@@ -69,6 +71,29 @@ public class UI_SkillManagement : UI_Popup
             return;
         SetDescriptionText(currentSelectedButton.skillData);
         Managers.SkillUpgrade.SetSkillData(currentSelectedButton.skillData);
+
+        if (!currentSelectedButton.skillData.isEquipped)
+        {
+            foreach (Transform eButton in GetObject((int)Objects.EquippedSkillsObject).transform)
+            {
+                eButton.GetComponent<SkillUIButton>().arrow.SetActive(true);
+            }
+        }
+        else
+        {
+            foreach (Transform eButton in GetObject((int)Objects.EquippedSkillsObject).transform)
+            {
+                eButton.GetComponent<SkillUIButton>().arrow.SetActive(false);
+            }
+
+            if (!Managers.SkillUpgrade.previousSkillData.isEquipped)
+            {
+                SkillEquipNetworkData data = new SkillEquipNetworkData(
+                    Managers.SkillUpgrade.previousSkillData.id,
+                    Managers.SkillUpgrade.skillData.id);
+                Managers.Skill.EquipSkill(data);
+            }
+        }
     }
 
     private void SetDescriptionText(SkillData data)
@@ -100,5 +125,12 @@ public class UI_SkillManagement : UI_Popup
     {
         Managers.UI.ShowPopupUI<UI_SkillUpgrade>();
         Managers.SkillUpgrade.Init();
+    }
+
+    private void OnClickEquipButton()
+    {
+        SkillData currentSkill = Managers.SkillUpgrade.skillData;
+        
+        
     }
 }
