@@ -1,3 +1,5 @@
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -39,6 +41,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     public float currentHp;
     
     public Image hpBar;
+    public TextMeshProUGUI hitTmp;
     public GameObject spawnVfx;
     
     public UnityEvent onDamage { get; set; }
@@ -73,7 +76,6 @@ public class EnemyController : MonoBehaviour, IDamageable
         cc = FindObjectOfType<CharacterController>();
 
         attackCondition = Vector3.Distance(transform.position, cc.transform.position) <= attackRange;
-        
         Spawn();
     }
 
@@ -129,11 +131,18 @@ public class EnemyController : MonoBehaviour, IDamageable
     
     public void TakeDamage(float damage)
     {
+        
         if (currentHp <= 0)
             return;
         
         currentHp -= damage;
         hpBar.fillAmount = currentHp / hp;
+        hitTmp.text = damage.ToString();
+        hitTmp.transform.DOPause();
+        hitTmp.transform.localPosition = Vector3.zero;
+        hitTmp.DOFade(1, 0);
+        hitTmp.transform.DOLocalMoveY(0.2f, 0.5f);
+        hitTmp.DOFade(0, 1);
 
         if (currentHp <= 0)
         {
