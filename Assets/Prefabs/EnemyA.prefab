@@ -248,7 +248,7 @@ MonoBehaviour:
   stat: 0
   currentHp: 0
   hpBar: {fileID: 5914941170233625479}
-  hitTmp: {fileID: 3241820260169204797}
+  hitTmp: {fileID: 2562684838577272092}
   spawnVfx: {fileID: 3665436172694738670}
 --- !u!54 &9073372940743693986
 Rigidbody:
@@ -817,6 +817,7 @@ GameObject:
   - component: {fileID: 1854190550067701756}
   - component: {fileID: 5007008287817140042}
   - component: {fileID: 3241820260169204797}
+  - component: {fileID: 2562684838577272092}
   m_Layer: 0
   m_Name: HitText
   m_TagString: Untagged
@@ -942,6 +943,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2562684838577272092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6905178849971044383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bab9bf4f1097841b1bc93ecbac2bddeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7870160162949860724
 GameObject:
   m_ObjectHideFlags: 0

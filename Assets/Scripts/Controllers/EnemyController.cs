@@ -41,7 +41,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     public float currentHp;
     
     public Image hpBar;
-    public TextMeshProUGUI hitTmp;
+    public EventTMP hitTmp;
     public GameObject spawnVfx;
     
     public UnityEvent onDamage { get; set; }
@@ -131,18 +131,12 @@ public class EnemyController : MonoBehaviour, IDamageable
     
     public void TakeDamage(float damage)
     {
-        
         if (currentHp <= 0)
             return;
         
         currentHp -= damage;
         hpBar.fillAmount = currentHp / hp;
-        hitTmp.text = damage.ToString();
-        hitTmp.transform.DOPause();
-        hitTmp.transform.localPosition = Vector3.zero;
-        hitTmp.DOFade(1, 0);
-        hitTmp.transform.DOLocalMoveY(0.2f, 0.5f);
-        hitTmp.DOFade(0, 1);
+        hitTmp.Animate(damage.ToString());
 
         if (currentHp <= 0)
         {
