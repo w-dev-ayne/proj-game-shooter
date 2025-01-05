@@ -44,6 +44,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     public EventTMP hitTmp;
     public GameObject spawnVfx;
     
+    
     public UnityEvent onDamage { get; set; }
 
     public void Initialize()

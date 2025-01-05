@@ -38,6 +38,8 @@ public class CharacterController : MonoBehaviour, IDamageable
     public Skill[] skills { get; private set; }
     public Transform skillRange;
     public Transform skillRangeParent;
+    public EventTMP hitTmp;
+    public EventTMP healTmp;
 
     void Awake()
     {
@@ -159,11 +161,13 @@ public class CharacterController : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         hp -= damage;
+        hitTmp.Animate(damage.ToString());
         onStatusChanged.Invoke(this);
     }
 
     public void Heal(float amount)
     {
+        healTmp.Animate(amount.ToString());
         hp += amount;
         if (hp > maxHp)
             hp = maxMp;
