@@ -15,19 +15,18 @@ public class StageController : MonoBehaviour
 
     void Awake()
     {
-        moveJoystick.isLock = true;
-        attackJoystick.isLock = true;
         StartCoroutine(InitMoveCamera());
     }
     
     private IEnumerator InitMoveCamera()
     {
+        LockJoystick(true);
+        SetCameraFollowTarget(cameraOffset, new Vector3(0, 1, 0));
+        
         float term = 1.5f;
         float timer = 0;
         WaitForFixedUpdate frame = new WaitForFixedUpdate();
         Vector3 dir = Vector3.zero;
-        followCamera.Follow = cameraOffset;
-        followCamera.GetComponent<CinemachineFollow>().TrackerSettings.PositionDamping = new Vector3(0, 1, 0);
 
         yield return new WaitForSeconds(1.0f);
         for (int i = 0; i < cameraOffsets.childCount; i++)
@@ -50,22 +49,20 @@ public class StageController : MonoBehaviour
 
             timer = 0;
         }
-        followCamera.GetComponent<CinemachineFollow>().TrackerSettings.PositionDamping = new Vector3(1, 1, 1);
-        followCamera.Follow = cc.transform;
-        
-        moveJoystick.isLock = false;
-        attackJoystick.isLock = false;
-    }
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
+
+        SetCameraFollowTarget(cc.transform, new Vector3(1, 1, 1));
+        LockJoystick(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetCameraFollowTarget(Transform target, Vector3 damping)
     {
-        
+        followCamera.Follow = target;
+        followCamera.GetComponent<CinemachineFollow>().TrackerSettings.PositionDamping = damping;
+    }
+
+    public void LockJoystick(bool isLock)
+    {
+        moveJoystick.isLock = isLock;
+        attackJoystick.isLock = isLock;
     }
 }
