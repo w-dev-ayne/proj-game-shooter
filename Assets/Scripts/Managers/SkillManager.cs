@@ -14,6 +14,7 @@ public class SkillManager
         Managers.Network.skillController.GetSkillConfiguration();
     }
 
+    // 서버로부터 유저 스킬 데이터 불러오기
     public async void GetUserSkills(UnityAction onSuccess = null)
     {
         if (await Managers.Network.skillController.GetUserSkills())
@@ -22,6 +23,7 @@ public class SkillManager
         }
     }
 
+    // 서버로부터 받아온 스킬 데이터 로컬 데이터로 동기화
     public void FetchSkill(SkillNetworkData[] skills)
     {
         int eCount = 0;
@@ -46,16 +48,19 @@ public class SkillManager
         }
     }
 
+    // 서버로부터 받아온 스킬 업그레이드 설정 데이터 로컬 데이터로 동기화
     public void FetchConfigData(ConfigurationNetworkData[] serverConfig)
     {
         this.config.FetchData(serverConfig);
     }
 
+    // 스킬 뽑기
     public async void DrawSkill()
     {
         await Managers.Network.skillController.DrawSkill();
     }
 
+    // 서버에 스킬 업그레이드 API 호출
     public async void UpgradeSkill(SkillUpgradeNetworkData data)
     {
         bool success = await Managers.Network.skillController.UpgradeSkill(data);
@@ -70,6 +75,7 @@ public class SkillManager
         }
     }
 
+    // 스킬 장착 변경 후 서버에 API 호출
     public async void EquipSkill(SkillEquipNetworkData data)
     {
         bool success = await Managers.Network.skillController.EquipSkill(data);
@@ -84,6 +90,7 @@ public class SkillManager
         }
     }
 
+    // 로컬 장착 스킬 개수가 4개인지 판별 (false이면 게임 시작 안됨)
     public bool IsEquippedSkillReady()
     {
         return this.equippedSkills.Length == 4;

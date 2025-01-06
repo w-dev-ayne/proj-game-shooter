@@ -11,6 +11,7 @@ public class CharacterManager
         Managers.Network.cDataController.GetCharacterUpgradeConfigurationData();
     }
 
+    // 서버로부터 캐릭터 정보 받아오기
     public async void GetCharacterData(UnityAction onSuccess = null)
     {
         if (await Managers.Network.cDataController.GetCharacterData())
@@ -19,16 +20,19 @@ public class CharacterManager
         }
     }
     
+    // 서버데이터로부터 로컬 캐릭터 데이터 동기화
     public void FetchData(CharacterNetworkData data)
     {
         this.data.FetchData(data);
     }
 
+    // 서버데이터로부터 로컬 캐릭터 업그레이드 설정 데이터 동기화
     public void FetchConfigData(ConfigurationNetworkData[] serverConfig)
     {
         config.FetchData(serverConfig);
     }
 
+    // 캐릭터 데이터 업그레이드 서버에 호출
     public async void UpgradeData(CharacterUpgradeNetworkData data)
     {
         bool success = await Managers.Network.cDataController.UpgradeCharacter(data);

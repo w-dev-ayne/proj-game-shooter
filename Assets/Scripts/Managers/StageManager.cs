@@ -45,7 +45,7 @@ public class StageManager : MonoBehaviour
     }
 
     
-
+    // 현재 레벨에 존재하는 Enemy 개수 Update
     public void UpdateEnemyNum()
     {
         currentLevelData.currentEnemiesNum--;
@@ -62,6 +62,7 @@ public class StageManager : MonoBehaviour
         
     }
 
+    // 현재 스테이지 종료
     private void FinishStage()
     {
         Debug.Log("FinishStage");
@@ -69,6 +70,7 @@ public class StageManager : MonoBehaviour
         Managers.Scene.ChangeScene(Define.Scene.Lobby);
     }
 
+    // 다음 레벨 시작
     private void StartNextLevel()
     {
         currentLevel++;
@@ -86,6 +88,7 @@ public class StageManager : MonoBehaviour
         onCurrentLevelStarted?.Invoke(currentLevelData);
     }
 
+    // 현재 레벨 종료
     private void FinishCurrentLevel()
     {
         Managers.UI.ShowPopupUI<UI_LevelClear>();

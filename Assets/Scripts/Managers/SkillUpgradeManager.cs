@@ -30,13 +30,14 @@ public class SkillUpgradeManager : Singleton<SkillUpgradeManager>
         base.Awake();
     }
 
+    // 현재 선택된 Skill Data 할당
     public void SetSkillData(SkillData skillData)
     {
         previousSkillData = this.skillData;
         this.skillData = skillData;
         skillUpgradeData.FetchData(skillData);
     }
-
+    
     public void SetSkillDataNull()
     {
         skillData = null;
@@ -51,6 +52,7 @@ public class SkillUpgradeManager : Singleton<SkillUpgradeManager>
         InstantiateStatButtons();
     }
 
+    // SkillButton들 생성
     private void InstantiateStatButtons()
     {
         skillButtonsParent = Managers.UI.FindPopup<UI_SkillUpgrade>().GetSkillInfoObject();

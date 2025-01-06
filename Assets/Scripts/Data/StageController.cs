@@ -18,6 +18,7 @@ public class StageController : MonoBehaviour
         StartCoroutine(InitMoveCamera());
     }
     
+    // 게임 시작 대기 시 적 오브젝트 확인용 카메라 무브 코루틴
     private IEnumerator InitMoveCamera()
     {
         LockJoystick(true);
@@ -54,12 +55,14 @@ public class StageController : MonoBehaviour
         LockJoystick(false);
     }
 
+    // 카메라 Follow 타겟 변경
     public void SetCameraFollowTarget(Transform target, Vector3 damping)
     {
         followCamera.Follow = target;
         followCamera.GetComponent<CinemachineFollow>().TrackerSettings.PositionDamping = damping;
     }
 
+    // Joystick 동작 잠금
     public void LockJoystick(bool isLock)
     {
         moveJoystick.isLock = isLock;

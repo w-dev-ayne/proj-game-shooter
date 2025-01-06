@@ -31,6 +31,7 @@ public class NetworkManager : Singleton<NetworkManager>
         token = config.token;
     }
 
+    // 로컬 보유 토큰값 변경
     public void SetToken(string value)
     {
         token = value;
