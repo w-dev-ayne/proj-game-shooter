@@ -5,13 +5,18 @@ using UnityEngine;
 
 public class StageController : MonoBehaviour
 {
-    public CinemachineCamera followCamera;
     public CharacterController cc;
+    public CinemachineCamera followCamera;
     public Transform cameraOffsets;
     public Transform cameraOffset;
 
+    public Joystick moveJoystick;
+    public Joystick attackJoystick;
+
     void Awake()
     {
+        moveJoystick.isLock = true;
+        attackJoystick.isLock = true;
         StartCoroutine(InitMoveCamera());
     }
     
@@ -47,6 +52,9 @@ public class StageController : MonoBehaviour
         }
         followCamera.GetComponent<CinemachineFollow>().TrackerSettings.PositionDamping = new Vector3(1, 1, 1);
         followCamera.Follow = cc.transform;
+        
+        moveJoystick.isLock = false;
+        attackJoystick.isLock = false;
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created

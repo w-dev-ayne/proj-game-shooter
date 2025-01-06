@@ -47,6 +47,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     private Camera cam;
 
     public Vector2 input = Vector2.zero;
+    public bool isLock = false;
 
     protected virtual void Start()
     {
@@ -68,6 +69,9 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
+        if (isLock)
+            return;
+        
         isDragging = true;
         onDrag.Invoke();
         OnDrag(eventData);
