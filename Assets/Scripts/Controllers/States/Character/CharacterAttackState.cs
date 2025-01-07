@@ -21,6 +21,9 @@ public class CharacterAttackState : Rotatable, IState<CharacterController>
         Vector3 direction = Vector3.zero;
         WaitForSeconds attackSpeed = new WaitForSeconds(1.0f / cc.attackSpeed);
         WaitForEndOfFrame oneFrame = new WaitForEndOfFrame();
+
+        // 애니메이션 전환시간 대기
+        yield return new WaitForSeconds(0.2f);
         
         while (cc.attackJoystick.isDragging)
         {
@@ -28,10 +31,9 @@ public class CharacterAttackState : Rotatable, IState<CharacterController>
             direction.y = 0;
             direction.z = cc.attackJoystick.input.y;
             direction.Normalize();
-            
-            if (cc.attackJoystick.input.x == 0.0f & direction.y == 0.0f)
+
+            if (cc.attackJoystick.input.magnitude == 0 || Vector3.Angle(direction, cc.transform.forward) > 10f)
             {
-                Debug.Log("Wait Attack");
                 yield return oneFrame;
                 continue;
             }
