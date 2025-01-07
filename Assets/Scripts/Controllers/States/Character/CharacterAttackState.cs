@@ -18,15 +18,21 @@ public class CharacterAttackState : Rotatable, IState<CharacterController>
     // Attack Speed에 맞춰 Bullet Pool에서 꺼내서 발사
     private IEnumerator Attack()
     {
+        Vector3 direction = Vector3.zero;
         WaitForSeconds attackSpeed = new WaitForSeconds(1.0f / cc.attackSpeed);
+        WaitForEndOfFrame oneFrame = new WaitForEndOfFrame();
+        
         while (cc.attackJoystick.isDragging)
         {
-            yield return attackSpeed;
+            direction.x = cc.attackJoystick.input.x;
+            direction.y = 0;
+            direction.z = cc.attackJoystick.input.y;
+            direction.Normalize();
             
-            Vector3 direction = new Vector3(cc.attackJoystick.input.x, 0, cc.attackJoystick.input.y).normalized;
-            if (direction.x == 0.0f & direction.y == 0.0f)
+            if (cc.attackJoystick.input.x == 0.0f & direction.y == 0.0f)
             {
-                yield return attackSpeed;
+                Debug.Log("Wait Attack");
+                yield return oneFrame;
                 continue;
             }
             
@@ -36,6 +42,7 @@ public class CharacterAttackState : Rotatable, IState<CharacterController>
             bullet.transform.position = cc.bulletPool.shootPositionTransform.position;
             bullet.Shoot(direction, cc.bulletSpeed,cc.attack);
             //bullet 발사 로직 구현
+            yield return attackSpeed;
         }
         // LookAt 방향으로 공격 구현
         Exit(cc);

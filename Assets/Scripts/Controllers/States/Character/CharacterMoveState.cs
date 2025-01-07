@@ -6,7 +6,7 @@ using UnityEngine;
 public class CharacterMoveState : Rotatable, IState<CharacterController>
 {
         private CharacterController cc;
-        private Vector3 targetDirection;
+        private Vector3 targetDirection = Vector3.zero;
         private bool isMoving = false;
 
         public void Enter(CharacterController cc)
@@ -21,8 +21,10 @@ public class CharacterMoveState : Rotatable, IState<CharacterController>
         {
                 if (isMoving && cc.moveJoystick.isDragging)
                 {
-                        targetDirection = new Vector3(cc.moveJoystick.input.x, 0,
-                                cc.moveJoystick.input.y);
+                        targetDirection.x = cc.moveJoystick.input.x;
+                        targetDirection.y = 0;
+                        targetDirection.z = cc.moveJoystick.input.y;
+                        targetDirection.Normalize();
                         
                         if (targetDirection != Vector3.zero)
                         {

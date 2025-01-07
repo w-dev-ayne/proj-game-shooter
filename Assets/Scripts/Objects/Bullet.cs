@@ -57,7 +57,7 @@ public class Bullet : PooledObject
 
         while (true)
         {
-            this.rb.MovePosition(this.transform.position + direction * 30 * speed * Time.deltaTime);
+            this.rb.MovePosition(this.transform.position + direction * 15 * speed * Time.deltaTime);
             // this.transform.position += direction * 30 * speed * Time.deltaTime;
             yield return oneFrame;
         }

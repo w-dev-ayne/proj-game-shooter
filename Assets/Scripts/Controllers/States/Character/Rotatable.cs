@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class Rotatable : MonoBehaviour
 {
-        private Vector3 targetDirection;
+        private Vector3 targetDirection = Vector3.zero;
 
         protected void Rotate(CharacterController cc)
         {
-                targetDirection = new Vector3(cc.attackJoystick.input.x, 0,
-                        cc.attackJoystick.input.y);
+                targetDirection.x = cc.attackJoystick.input.x;
+                targetDirection.y = 0;
+                targetDirection.z = cc.attackJoystick.input.y;
+                targetDirection.Normalize();
+                
                 // 목표 회전 각도
                 
                 if (targetDirection != Vector3.zero)
