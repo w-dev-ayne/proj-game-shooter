@@ -65,4 +65,20 @@ public class SkillTimer : MonoBehaviour
         rangeParent.gameObject.SetActive(false);
         callback.Invoke();
     }
+
+    public void DotAction(int duration, UnityAction onDot)
+    {
+        StartCoroutine(CoDotAttack(duration, onDot));
+    }
+
+    private IEnumerator CoDotAttack(int duration, UnityAction onDot)
+    {
+        WaitForSeconds wait = new WaitForSeconds(1);
+
+        for (int i = 0; i < duration; i++)
+        {
+            onDot.Invoke();
+            yield return wait;
+        }
+    }
 }

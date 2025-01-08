@@ -12,7 +12,7 @@ public class SkillData
     public float amount;
     public float cost;
     public float range;
-    public float duration;
+    public int duration;
     public float delay;
     public bool vfxOnDelay = false;
     public float coolTime;
@@ -80,7 +80,7 @@ public class SkillNetworkData : PostData
     public float amount;
     public float cost;
     public float range;
-    public float duration;
+    public int duration;
     public float delay;
     public string vfxOnDelay;
     public float coolTime;

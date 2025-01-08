@@ -8,7 +8,7 @@ public class Skill : ISkill
     protected float amount;
     public float cost { get; }
     protected float range;
-    protected float duration;
+    public int duration;
     protected float delay;
     protected bool vfxOnDelay;
     public float coolTime { get; }

@@ -13,7 +13,7 @@ public class SkillGenerator : EditorWindow
     public int amount;
     public int cost;
     public float range;
-    public float duration;
+    public int duration;
     public float delay;
     public bool vfxOnDelay = false;
     public float coolTime;
@@ -37,7 +37,7 @@ public class SkillGenerator : EditorWindow
         amount = EditorGUILayout.IntField("Amount", amount);
         cost  = EditorGUILayout.IntField("Cost", cost);
         range = EditorGUILayout.FloatField("Range", range);
-        duration = EditorGUILayout.FloatField("Duration", duration);
+        duration = EditorGUILayout.IntField("Duration", duration);
         delay = EditorGUILayout.FloatField("Delay", delay);
         vfxOnDelay = EditorGUILayout.Toggle("VFX On Delay", vfxOnDelay);
         coolTime = EditorGUILayout.FloatField("Cool Time", coolTime);

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,24 +31,39 @@ public class AttackSkill : Skill
             {
                 PlayVFX(cc);
             }
-            
-            Collider[] colliders = Physics.OverlapSphere(cc.transform.position, range);
-            List<EnemyController> enemies = new List<EnemyController>();
-            foreach (Collider col in colliders)
-            {
-                if (col.CompareTag("Enemy"))
-                {
-                    enemies.Add(col.GetComponent<EnemyController>());
-                }
-            }
 
-            foreach (EnemyController enemy in enemies)
+            if (duration == 0)
             {
-                enemy.TakeDamage(amount);
+                HitDamage(cc, amount);    
+            }
+            else
+            {
+                Managers.Stage.skillTimer.DotAction(duration, () =>
+                {
+                    HitDamage(cc, (float)amount / (float)duration);
+                });
             }
         });
 
         return true;  
+    }
+
+    private void HitDamage(CharacterController cc, float amount)
+    {
+        Collider[] colliders = Physics.OverlapSphere(cc.transform.position, range);
+        List<EnemyController> enemies = new List<EnemyController>();
+        foreach (Collider col in colliders)
+        {
+            if (col.CompareTag("Enemy"))
+            {
+                enemies.Add(col.GetComponent<EnemyController>());
+            }
+        }
+
+        foreach (EnemyController enemy in enemies)
+        {
+            enemy.TakeDamage(amount);
+        }
     }
 
     private void PlayVFX(CharacterController cc)

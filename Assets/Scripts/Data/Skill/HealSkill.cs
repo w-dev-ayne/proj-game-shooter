@@ -27,8 +27,19 @@ public class HealSkill : Skill
             vfxObject.gameObject.SetActive(true);
             vfxObject.Play();
         }
+
+        if (duration == 0)
+        {
+            cc.Heal(amount);    
+        }
+        else
+        {
+            Managers.Stage.skillTimer.DotAction(duration, () =>
+            {
+                cc.Heal((float)amount / (float)duration);
+            });
+        }
         
-        cc.Heal(amount);
         return true;
     }
 }
