@@ -11,7 +11,7 @@ public class EnemyFactory : MonoBehaviour
     private const int MAX_SPAWN_DISTANCE = 20;
     private const int MIN_SPAWN_DISTANCE = 5;
 
-    public void GenerateEnemies(Level levelData)
+    public void GenerateEnemies(Level levelData, bool spawnStart)
     {
         for (int eIdx = 0; eIdx < levelData.enemies.Length; eIdx++)
         {
@@ -29,13 +29,13 @@ public class EnemyFactory : MonoBehaviour
                     randomY = randomY <= 0 ? randomY - MIN_SPAWN_DISTANCE : randomY + MIN_SPAWN_DISTANCE;
                 }
                 
-                GenerateEnemy(levelData.enemies[eIdx], new Vector3(randomX, 1.25f, randomY));    
+                GenerateEnemy(levelData.enemies[eIdx], new Vector3(randomX, 1.25f, randomY), spawnStart);    
             }
         }
     }
 
-    private void GenerateEnemy(EnemyData enemyData, Vector3 position)
-    {
+    private void GenerateEnemy(EnemyData enemyData, Vector3 position, bool spawnStart)
+    { 
         EnemyController enemy = Instantiate(enemyData.prefab).GetComponent<EnemyController>();
 
         if (NavMesh.SamplePosition(position, out NavMeshHit hit, 100, NavMesh.AllAreas))
@@ -45,6 +45,6 @@ public class EnemyFactory : MonoBehaviour
         }
         
         enemy.data = enemyData;
-        enemy.Initialize();
+        enemy.Initialize(spawnStart);
     }
 }

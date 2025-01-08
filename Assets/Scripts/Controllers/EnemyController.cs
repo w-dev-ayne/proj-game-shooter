@@ -47,7 +47,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     
     public UnityEvent onDamage { get; set; }
 
-    public void Initialize()
+    public void Initialize(bool spawnStart = false)
     {
         AdjustData();
         InitializeNavMeshData();
@@ -77,7 +77,14 @@ public class EnemyController : MonoBehaviour, IDamageable
         cc = FindObjectOfType<CharacterController>();
 
         attackCondition = Vector3.Distance(transform.position, cc.transform.position) <= attackRange;
-        Spawn();
+        if (spawnStart)
+        {
+            Spawn();    
+        }
+        else
+        {
+            Move();
+        }
     }
 
     private void AdjustData()

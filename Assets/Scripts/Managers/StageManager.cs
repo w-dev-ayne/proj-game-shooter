@@ -82,7 +82,14 @@ public class StageManager : MonoBehaviour
         }
         
         currentLevelData = levels[currentLevel - 1];
-        Managers.Enemy.factory.GenerateEnemies(currentLevelData);
+        if (currentLevel == 1)
+        {
+            Managers.Enemy.factory.GenerateEnemies(currentLevelData, true);    
+        }
+        else
+        {
+            Managers.Enemy.factory.GenerateEnemies(currentLevelData, false);
+        }
         
         Debug.Log($"Starting stage {currentLevel}");
         onCurrentLevelStarted?.Invoke(currentLevelData);
