@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
 public class Skill : ISkill
 {
     protected Define.SkillType type;
@@ -32,7 +33,7 @@ public class Skill : ISkill
         amount = data.amount;
         range = data.range;
         duration = data.duration;
-        coolTime = data.coolTime;
+        coolTime = data.cooltime;
         delay = data.delay;
         this.vfxOnDelay = data.vfxOnDelay;
         

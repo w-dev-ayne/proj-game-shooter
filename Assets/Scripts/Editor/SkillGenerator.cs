@@ -63,7 +63,7 @@ public class SkillGenerator : EditorWindow
         newSkill.duration = duration;
         newSkill.delay = delay;
         newSkill.vfxOnDelay = vfxOnDelay;
-        newSkill.coolTime = coolTime;
+        newSkill.cooltime = coolTime;
         newSkill.vfx = vfx;
         newSkill.description = description;
         newSkill.isEquipped = isEquipped;

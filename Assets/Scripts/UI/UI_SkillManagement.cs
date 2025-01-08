@@ -112,7 +112,7 @@ public class UI_SkillManagement : UI_Popup
                              $"DURATION : {data.duration}\n" +
                              $"VFX ON DELAY : {data.vfxOnDelay}\n" +
                              $"DELAY : {data.delay}\n" +
-                             $"COOLTIME : {data.coolTime}\n";
+                             $"COOLTIME : {data.cooltime}\n";
         GetText((int)Texts.DescriptionText).text = description;
     }
 
