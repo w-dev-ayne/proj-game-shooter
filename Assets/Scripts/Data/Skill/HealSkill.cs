@@ -39,7 +39,8 @@ public class HealSkill : Skill
                 cc.Heal((float)amount / (float)duration);
             });
         }
-        
+
+        UnLockOtherSkill();
         return true;
     }
 }

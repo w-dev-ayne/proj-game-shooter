@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class SkillTimer : MonoBehaviour
 {
     public List<bool> completes = new List<bool>();
+    public bool skillRunning = false;
     
     public void CoolTimer(Skill skill)
     {
@@ -66,12 +67,12 @@ public class SkillTimer : MonoBehaviour
         callback.Invoke();
     }
 
-    public void DotAction(int duration, UnityAction onDot)
+    public void DotAction(int duration, UnityAction onDot, UnityAction onFinish = null)
     {
-        StartCoroutine(CoDotAttack(duration, onDot));
+        StartCoroutine(CoDotAttack(duration, onDot, onFinish));
     }
 
-    private IEnumerator CoDotAttack(int duration, UnityAction onDot)
+    private IEnumerator CoDotAttack(int duration, UnityAction onDot, UnityAction onFinish = null)
     {
         WaitForSeconds wait = new WaitForSeconds(1);
 
@@ -80,5 +81,7 @@ public class SkillTimer : MonoBehaviour
             onDot.Invoke();
             yield return wait;
         }
+
+        onFinish?.Invoke();
     }
 }

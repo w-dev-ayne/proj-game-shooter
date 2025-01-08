@@ -32,10 +32,12 @@ public class AttackSkill : Skill
                 PlayVFX(cc);
             }
 
+            // 즉발 스킬
             if (duration == 0)
             {
-                HitDamage(cc, amount);    
+                HitDamage(cc, amount);   
             }
+            // 도트 스킬
             else
             {
                 Managers.Stage.skillTimer.DotAction(duration, () =>
@@ -43,6 +45,7 @@ public class AttackSkill : Skill
                     HitDamage(cc, (float)amount / (float)duration);
                 });
             }
+            UnLockOtherSkill();
         });
 
         return true;  

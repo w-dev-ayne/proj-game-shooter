@@ -67,6 +67,13 @@ public class Skill : ISkill
             Managers.Instruction.InstructionOn(InstructionDefine.LOW_MP);
             return false;
         }
+
+        if (Managers.Stage.skillTimer.skillRunning)
+        {
+            Managers.Instruction.InstructionOn(InstructionDefine.SKILL_ALREADY_RUNNING);
+            return false;
+        }
+        LockOtherSkill();
         
         // 스킬 VFX 오브젝트 생성 및 초기화
         if (vfx != null && vfxObject == null)
@@ -77,10 +84,19 @@ public class Skill : ISkill
             vfxObject.transform.localPosition = Vector3.zero;
             vfxObject.gameObject.SetActive(false);   
         }
-
-        
         stateContext.Transition(operateState);
+        
         return true;
+    }
+
+    protected void LockOtherSkill()
+    {
+        Managers.Stage.skillTimer.skillRunning = true;
+    }
+
+    protected void UnLockOtherSkill()
+    {
+        Managers.Stage.skillTimer.skillRunning = false;
     }
 
     public void CoolTime()

@@ -21,9 +21,9 @@ public class BuffSkill : Skill
             vfxObject.Play();
         }
 
+        UnLockOtherSkill();
         cc.SetAttack(amount);
         Managers.Stage.skillTimer.BuffTimer(duration, FinishBuff);
-
         return true;
     }
 
