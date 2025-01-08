@@ -40,6 +40,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     [SerializeField] protected RectTransform background = null;
     [SerializeField] private RectTransform handle = null;
     [SerializeField] private RectTransform lineImage;
+
+    private Vector2 lineVector = Vector2.zero;
     
     private RectTransform baseRect = null;
 
@@ -90,9 +92,10 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         HandleInput(input.magnitude, input.normalized, radius, cam);
         //handle.anchoredPosition = input * radius * handleRange;
         handle.position = eventData.position;
-
-
-        lineImage.sizeDelta = new Vector2(1, Vector2.Distance(Vector3.zero, handle.anchoredPosition));
+        
+        lineVector.x = 1;
+        lineVector.y = Vector2.Distance(Vector3.zero, handle.anchoredPosition);
+        lineImage.sizeDelta = lineVector;
         
         Vector3 dir = handle.position - background.position; 
         float z = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -156,6 +159,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     {
         input = Vector2.zero;
         handle.anchoredPosition = Vector2.zero;
+        lineImage.sizeDelta = Vector2.zero;
         isDragging = false;
         onEndDrag?.Invoke();
     }
