@@ -26,10 +26,8 @@ public class SkillManager
     // 서버로부터 받아온 스킬 데이터 로컬 데이터로 동기화
     public void FetchSkill(SkillNetworkData[] skills)
     {
-        int eCount = 0;
-        int count = 0;
-        
         this.skills = new SkillData[skills.Length - 4];
+        int count = 0;
         
         for (int i = 0; i < skills.Length; i++)
         {
@@ -37,8 +35,7 @@ public class SkillManager
             // 장착된 스킬은 장착
             if (currentSkill.isEquipped == "Y")
             {
-                this.equippedSkills[eCount] = new SkillData(currentSkill);
-                eCount++;
+                this.equippedSkills[currentSkill.equipIndex] = new SkillData(currentSkill);
             }
             else
             {

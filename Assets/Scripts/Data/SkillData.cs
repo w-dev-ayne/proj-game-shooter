@@ -20,6 +20,7 @@ public class SkillData
     public Sprite skillIcon;
     public string description;
     public bool isEquipped;
+    public int equipIndex;
 
     public SkillData()
     {
@@ -47,6 +48,7 @@ public class SkillData
         skillIcon = null;
         description = data.description;
         isEquipped = data.isEquipped == "Y";
+        equipIndex = data.equipIndex;
     }
 }
 
@@ -88,6 +90,7 @@ public class SkillNetworkData : PostData
     public string skillIcon;
     public string description;
     public string isEquipped;
+    public int equipIndex;
     
     public void FetchData(SkillData data)
     {
@@ -105,6 +108,7 @@ public class SkillNetworkData : PostData
         skillIcon = null;
         description = data.description;
         isEquipped = data.isEquipped ? "Y" : "N";
+        equipIndex = data.equipIndex;
     }
 }
 
