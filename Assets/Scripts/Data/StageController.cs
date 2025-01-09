@@ -51,7 +51,7 @@ public class StageController : MonoBehaviour
             timer = 0;
         }
 
-        SetCameraFollowTarget(cc.transform, new Vector3(1, 1, 1));
+        SetCameraFollowTarget(cc.transform, new Vector3(0, 1, 0));
         LockJoystick(false);
     }
 

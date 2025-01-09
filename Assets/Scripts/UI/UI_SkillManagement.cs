@@ -55,14 +55,14 @@ public class UI_SkillManagement : UI_Popup
         Transform equippedSkillButtons = GetObject((int)Objects.EquippedSkillsObject).transform;
         for (int i = 0; i < equippedDatas.Length; i++)
         {
-            equippedSkillButtons.GetChild(i).GetComponent<SkillUIButton>().skillData = equippedDatas[i];
+            equippedSkillButtons.GetChild(i).GetComponent<SkillUIButton>().Initialize(equippedDatas[i]);
         }
         
         SkillData[] datas = Managers.Skill.skills;
         Transform skillButtons = GetObject((int)Objects.SkillsObject).transform;
         for (int i = 0; i < datas.Length; i++)
         {
-            skillButtons.GetChild(i).GetComponent<SkillUIButton>().skillData = datas[i];
+            skillButtons.GetChild(i).GetComponent<SkillUIButton>().Initialize(datas[i]);
         }
     }
 

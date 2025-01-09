@@ -10,11 +10,13 @@ public class SkillUIButton : MonoBehaviour
 
     void Awake()
     {
-        Initialize();
+        
     }
     
-    public void Initialize()
+    public void Initialize(SkillData skillData)
     {
+        this.skillData = skillData;
+        
         this.icon.sprite = skillData.skillIcon;
         this.GetComponent<Button>().onClick.AddListener(() =>
         {
