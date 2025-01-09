@@ -7,10 +7,13 @@ public class UI_SkillManagement : UI_Popup
     [SerializeField] private GameObject skillUIButtonPrefab;
     public SkillUIButton currentSelectedButton;
     
+    private SkillDescriptionArea descriptionArea;
+    
     enum Objects
     {
         EquippedSkillsObject,
-        SkillsObject
+        SkillsObject,
+        DescriptionAreaObject,
     }
 
     enum Buttons
@@ -36,6 +39,8 @@ public class UI_SkillManagement : UI_Popup
         GetButton((int)Buttons.CloseButton).gameObject.BindEvent(ClosePopupUI);
         GetButton((int)Buttons.SkillUpgradeButton).gameObject.BindEvent(OnClickSkillUpgradeButton);
         GetButton((int)Buttons.SkillEquipButton).gameObject.BindEvent(OnClickEquipButton);
+
+        descriptionArea = GetObject((int)Objects.DescriptionAreaObject).GetComponent<SkillDescriptionArea>();
         
         LoadSkillData();
         
@@ -69,7 +74,8 @@ public class UI_SkillManagement : UI_Popup
             currentSelectedButton = button;
         if (currentSelectedButton == null)
             return;
-        SetDescriptionText(currentSelectedButton.skillData);
+        descriptionArea.Initialize(button.skillData);
+        //SetDescriptionText(currentSelectedButton.skillData);
         Managers.SkillUpgrade.SetSkillData(currentSelectedButton.skillData);
 
         if (!currentSelectedButton.skillData.isEquipped)
