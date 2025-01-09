@@ -45,7 +45,7 @@ public class SkillData
         vfxOnDelay = data.vfxOnDelay == "Y";
         cooltime = data.cooltime;
         vfx = Managers.Resource.Load<ParticleSystem>($"VFX/{data.vfx}");
-        skillIcon = null;
+        skillIcon = Managers.Resource.Load<Sprite>($"SkillIcon/{data.skillIcon}");
         description = data.description;
         isEquipped = data.isEquipped == "Y";
         equipIndex = data.equipIndex;

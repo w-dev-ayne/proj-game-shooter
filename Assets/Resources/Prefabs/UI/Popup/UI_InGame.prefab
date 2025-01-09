@@ -2376,6 +2376,10 @@ PrefabInstance:
       propertyPath: m_FillAmount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6282936916202700833, guid: 75d569744afe04279a16ce8a0f2c4cc6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8615124215853597868, guid: 75d569744afe04279a16ce8a0f2c4cc6, type: 3}
       propertyPath: m_Name
       value: SkillAButton

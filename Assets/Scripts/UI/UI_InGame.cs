@@ -76,7 +76,7 @@ public class UI_InGame : UI_Popup
             Skill skill = skills[i]; // 값 복사해서 스킬버튼에 할당하기
             GetButton(i).gameObject.BindEvent(() => OnClickSkillButton(skill));
             if(skill.skillIcon != null)
-                GetButton(i).transform.GetChild(0).GetComponent<Image>().sprite = skill.skillIcon;
+                GetButton(i).transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = skill.skillIcon;
             skills[i].coolTimeImage = GetButton(i).transform.GetChild(1).GetComponent<Image>();
         }
     }
