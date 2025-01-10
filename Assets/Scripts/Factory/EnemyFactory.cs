@@ -13,6 +13,7 @@ public class EnemyFactory : MonoBehaviour
 
     public void GenerateEnemies(Level levelData, bool spawnStart)
     {
+        Managers.Enemy.enemies.Clear();
         for (int eIdx = 0; eIdx < levelData.enemies.Length; eIdx++)
         {
             for (int idx = 0; idx < levelData.enemiesNums[eIdx]; idx++)
@@ -46,5 +47,6 @@ public class EnemyFactory : MonoBehaviour
         
         enemy.data = enemyData;
         enemy.Initialize(spawnStart);
+        Managers.Enemy.enemies.Add(enemy);
     }
 }

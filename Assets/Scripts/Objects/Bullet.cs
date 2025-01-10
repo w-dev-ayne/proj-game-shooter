@@ -10,6 +10,7 @@ public class Bullet : PooledObject
     public Collider collider;
     private Rigidbody rb;
     private float damage;
+    private EnemyController target;
 
     void Awake()
     {
@@ -48,6 +49,7 @@ public class Bullet : PooledObject
     public void Shoot(Vector3 direction, float speed, float damage)
     {
         this.damage = damage;
+        //this.target = Managers.Enemy.FindBulletTarget(this.transform.position, direction);
         StartCoroutine(CoShoot(direction, speed));
     }
 
