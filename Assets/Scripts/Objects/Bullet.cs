@@ -73,14 +73,4 @@ public class Bullet : PooledObject
             yield return oneFrame;
         }
     }
-    
-    private void OnDrawGizmos()
-    {
-        // 타겟 방향 디버그 표시
-        if (target != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(transform.position, target.transform.position);
-        }
-    }
 }

@@ -164,6 +164,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     public void Highlight()
     {
         this.spawnVfx.SetActive(true);
-        spawnVfx.GetComponent<ParticleSystem>().Play();
+        if(! spawnVfx.GetComponent<ParticleSystem>().isPlaying)
+            spawnVfx.GetComponent<ParticleSystem>().Play();
     }
 }
