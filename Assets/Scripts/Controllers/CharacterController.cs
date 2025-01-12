@@ -27,6 +27,8 @@ public class CharacterController : MonoBehaviour, IDamageable
     public float bulletSpeed { get; private set; }
     public float attackSpeed { get; private set; }
     
+    public float bulletAccuracy { get; private set; } = 1;
+    
     public BulletPool bulletPool;
     
     public CharacterAnimator animatorController;

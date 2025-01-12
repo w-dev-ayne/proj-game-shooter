@@ -51,18 +51,36 @@ public class Bullet : PooledObject
         this.damage = damage;
         this.target = Managers.Enemy.FindBulletTarget(this.transform.position, direction);
         target?.Highlight();
-        StartCoroutine(CoShoot(direction, speed));
+        StartCoroutine(CoShoot(direction, speed, Managers.Stage.cc.bulletAccuracy, target));
     }
 
-    private IEnumerator CoShoot(Vector3 direction, float speed)
+    private IEnumerator CoShoot(Vector3 direction, float speed, float accuracy, EnemyController target = null)
     {
         WaitForEndOfFrame oneFrame = new WaitForEndOfFrame();
-
+        Vector3 moveDirection = direction;
+        Vector3 accuracyDirection = Vector3.zero; 
+        
         while (true)
         {
-            this.rb.MovePosition(this.transform.position + direction * 15 * speed * Time.deltaTime);
-            // this.transform.position += direction * 30 * speed * Time.deltaTime;
+            moveDirection = direction;
+            if (target != null)
+            {
+                accuracyDirection = (target.transform.position - this.transform.position).normalized;
+                accuracyDirection.y = 0;
+                moveDirection = Vector3.Lerp(direction, accuracyDirection, 0.3f * accuracy).normalized;
+            }
+            this.rb.MovePosition(this.transform.position + moveDirection * 15 * speed * Time.deltaTime);
             yield return oneFrame;
+        }
+    }
+    
+    private void OnDrawGizmos()
+    {
+        // 타겟 방향 디버그 표시
+        if (target != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, target.transform.position);
         }
     }
 }

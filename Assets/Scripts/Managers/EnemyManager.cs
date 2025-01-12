@@ -15,7 +15,7 @@ public class EnemyManager : MonoBehaviour
         {
             Vector3 enemyDirection = (enemy.transform.position - shootPosition).normalized;
             enemyDirection.y = 0;
-            if (Vector3.Angle(direction, enemyDirection) < 20f)
+            if (Vector3.Angle(direction, enemyDirection) < 30f)
             {
                 dirEnemies.Add(enemy);
             }
