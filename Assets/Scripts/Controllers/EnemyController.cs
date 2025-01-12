@@ -132,9 +132,11 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     private void Die()
     {
+        Managers.Enemy.TakeOffEnemy(this);
         stateContext.Transition(dieState);
         TakeStat();
         Managers.Stage.UpdateEnemyNum();
+        
     }
     
     public void TakeDamage(float damage)
@@ -157,5 +159,11 @@ public class EnemyController : MonoBehaviour, IDamageable
     private void TakeStat()
     {
         Managers.Stage.statCount += this.stat;
+    }
+
+    public void Highlight()
+    {
+        this.spawnVfx.SetActive(true);
+        spawnVfx.GetComponent<ParticleSystem>().Play();
     }
 }

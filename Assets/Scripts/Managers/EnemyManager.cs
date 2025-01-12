@@ -14,7 +14,7 @@ public class EnemyManager : MonoBehaviour
         foreach (EnemyController enemy in enemies)
         {
             Vector3 enemyDirection = (enemy.transform.position - shootPosition).normalized;
-            Debug.Log($"{direction} | {enemyDirection}");
+            enemyDirection.y = 0;
             if (Vector3.Angle(direction, enemyDirection) < 20f)
             {
                 dirEnemies.Add(enemy);
@@ -32,8 +32,21 @@ public class EnemyManager : MonoBehaviour
                 distance = Vector3.Distance(shootPosition, enemy.transform.position);
             }
         }
-
-        Debug.Log(nearEnemy);
+        
         return nearEnemy;
     }
+
+    public void TakeOffEnemy(EnemyController enemy)
+    {
+        if (this.enemies.Contains(enemy))
+        {
+            enemies.Remove(enemy);
+        }
+
+        if (this.dirEnemies.Contains(enemy))
+        {
+            dirEnemies.Remove(enemy);
+        }
+    }
+    
 }

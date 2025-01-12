@@ -49,7 +49,8 @@ public class Bullet : PooledObject
     public void Shoot(Vector3 direction, float speed, float damage)
     {
         this.damage = damage;
-        //this.target = Managers.Enemy.FindBulletTarget(this.transform.position, direction);
+        this.target = Managers.Enemy.FindBulletTarget(this.transform.position, direction);
+        target?.Highlight();
         StartCoroutine(CoShoot(direction, speed));
     }
 
