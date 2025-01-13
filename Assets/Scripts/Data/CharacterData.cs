@@ -11,6 +11,7 @@ public class CharacterData : PostData
     public float rotateSpeed;
     public float bulletSpeed;
     public float attackSpeed;
+    public float bulletAccuracy;
 
     public void FetchData(CharacterNetworkData networkData)
     {
@@ -21,6 +22,7 @@ public class CharacterData : PostData
         rotateSpeed = networkData.rotateSpeed;
         bulletSpeed = networkData.bulletSpeed;
         attackSpeed = networkData.attackSpeed;
+        bulletAccuracy = networkData.bulletAccuracy;
     }
 }
 
@@ -34,6 +36,7 @@ public class CharacterNetworkData
     public float rotateSpeed = 1.0f;
     public float bulletSpeed = 1.0f;
     public float attackSpeed = 4.0f;
+    public float bulletAccuracy = 1.0f;
 }
 
 [System.Serializable]
@@ -46,6 +49,7 @@ public class CharacterUpgradeNetworkData : PostData
     public int rotateSpeed;
     public int bulletSpeed;
     public int attackSpeed;
+    public int bulletAccuracy;
 }
 
 public class CharacterUpgradeConfiguration
@@ -57,6 +61,7 @@ public class CharacterUpgradeConfiguration
     public float rotateSpeed;
     public float bulletSpeed;
     public float attackSpeed;
+    public float bulletAccuracy;
 
     public void FetchData(ConfigurationNetworkData[] datas)
     {
@@ -84,6 +89,9 @@ public class CharacterUpgradeConfiguration
                     break;
                 case "ATTACK_SPEED":
                     attackSpeed = data.amount;
+                    break;
+                case "BULLET_ACCURACY":
+                    bulletAccuracy = data.amount;
                     break;
             }
         }

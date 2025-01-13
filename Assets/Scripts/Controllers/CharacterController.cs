@@ -95,6 +95,7 @@ public class CharacterController : MonoBehaviour, IDamageable
         this.rotateSpeed = data.rotateSpeed;
         this.bulletSpeed = data.bulletSpeed;
         this.attackSpeed = data.attackSpeed;
+        this.bulletAccuracy = data.bulletAccuracy;
     }
 
     // 캐릭터 스킬 생성 및 정보 초기화
