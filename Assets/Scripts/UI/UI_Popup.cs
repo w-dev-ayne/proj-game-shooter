@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_Popup : UI_Base
 {
+    [SerializeField] private bool animation = true;
     public delegate void loadHandler();
     public event loadHandler onImageLoaded;
     
@@ -21,6 +23,8 @@ public class UI_Popup : UI_Base
         this.transform.GetChild(0).gameObject.SetActive(false);*/
 
         //SetButtonSound();
+        if(animation)
+            SetAnimation();
         return true;
     }
 
@@ -37,6 +41,14 @@ public class UI_Popup : UI_Base
             
             Debug.Log($"Button : {button} | Sound : {buttonSound}");
             button.onClick.AddListener(() => {Managers.Sound.PlayAudioClip(Define.Sound.Effect, buttonSound);});
+        }
+    }
+
+    private void SetAnimation()
+    {
+        if (!this.transform.GetChild(0).GetChild(0).TryGetComponent<UIAppearAnimA>(out UIAppearAnimA animA))
+        {
+            this.transform.GetChild(0).GetChild(0).AddComponent<UIAppearAnimA>();
         }
     }
 
