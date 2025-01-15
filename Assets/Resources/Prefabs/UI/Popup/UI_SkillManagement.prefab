@@ -387,7 +387,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1311461806590973835}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -395,7 +395,7 @@ RectTransform:
   - {fileID: 2005025030027550240}
   - {fileID: 1433767433741238383}
   - {fileID: 9112912584424299246}
-  m_Father: {fileID: 1001715635531612893}
+  m_Father: {fileID: 1245949756272301081}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -547,7 +547,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4040987672172787998}
   m_Father: {fileID: 1001715635531612893}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2078,7 +2079,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1245949756272301081}
-  - {fileID: 4040987672172787998}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2161,6 +2161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 166fa951b73ec412ab67e85fb824fa86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animation: 1
   skillUIButtonPrefab: {fileID: 912656314743332977, guid: c7718018d3ee94246a6c9a531d97bed3, type: 3}
   currentSelectedButton: {fileID: 0}
 --- !u!1 &7063710728750406309

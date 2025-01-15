@@ -5,6 +5,7 @@ public class LobbyScene : BaseScene
     void Awake()
     {
         Managers.UI.ShowPopupUI<UI_Lobby>();
+        Application.targetFrameRate = 120;
     }
     protected override bool Init()
     {

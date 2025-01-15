@@ -83,6 +83,11 @@ public abstract class UI_Base : MonoBehaviour
 	{  
 		UI_EventHandler evt = Utils.GetOrAddComponent<UI_EventHandler>(go);
 
+		evt.OnClickHandler += () =>
+		{
+			Managers.UIAnimation.ButtonClickAnimationA(go);
+		};
+
 		/*if (go.TryGetComponent<ButtonSound>(out ButtonSound buttonSound) && buttonSound.GetClip() != null)
 		{
 			evt.OnPointerDownHandler += () =>
