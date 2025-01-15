@@ -19,6 +19,7 @@ public class Managers : MonoBehaviour
     private static SkillManager s_skillManager = new SkillManager();
     private static CharacterManager s_characterManager = new CharacterManager();
     private static UserInfoManager s_userInfoManager = new UserInfoManager();
+    private static UIAnimationManager s_uiAnimationManager = new UIAnimationManager();
 
     private static EnemyManager enemyManager;
     private static StageManager stageManager;
@@ -36,6 +37,7 @@ public class Managers : MonoBehaviour
     public static CharacterManager Character { get { Init(); return s_characterManager; }}
     public static SkillManager Skill { get { Init(); return s_skillManager; } }
     public static UserInfoManager UserInfo { get {Init(); return s_userInfoManager; }}
+    public static UIAnimationManager UIAnimation { get { Init(); return s_uiAnimationManager; } }
     
     public static EnemyManager Enemy { get { Init(); return enemyManager; } }
     public static StageManager Stage { get { Init(); return stageManager; } }
