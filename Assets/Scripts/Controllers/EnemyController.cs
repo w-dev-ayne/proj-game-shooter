@@ -136,7 +136,6 @@ public class EnemyController : MonoBehaviour, IDamageable
         stateContext.Transition(dieState);
         TakeStat();
         Managers.Stage.UpdateEnemyNum();
-        
     }
     
     public void TakeDamage(float damage)
@@ -154,6 +153,11 @@ public class EnemyController : MonoBehaviour, IDamageable
             return;
         }
         stateContext.Transition(hitState);
+    }
+
+    public bool IsDeadByDamage(float damage)
+    {
+        return currentHp - damage <= 0;
     }
 
     private void TakeStat()

@@ -168,6 +168,11 @@ public class CharacterController : MonoBehaviour, IDamageable
         onStatusChanged.Invoke(this);
     }
 
+    public bool IsDeadByDamage(float damage)
+    {
+        return false;
+    }
+
     public void Heal(float amount)
     {
         healTmp.Animate(amount.ToString());

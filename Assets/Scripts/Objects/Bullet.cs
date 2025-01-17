@@ -6,6 +6,7 @@ using UnityEngine;
 public class Bullet : PooledObject
 {
     public ParticleSystem hitParticle;
+    public ParticleSystem explosionParticle;
     public GameObject renderer;
     public Collider collider;
     private Rigidbody rb;
@@ -34,8 +35,18 @@ public class Bullet : PooledObject
             bPool.CameraShake();*/
             
             renderer.SetActive(false);
-            Invoke("Release", hitParticle.duration);
-            hitParticle.Play();
+
+            if (damageable.IsDeadByDamage(this.damage))
+            {
+                Invoke("Release", explosionParticle.duration);
+                explosionParticle.Play();
+            }
+            else
+            {
+                Invoke("Release", hitParticle.duration);
+                hitParticle.Play();    
+            }
+            
             collider.enabled = false;
             StopAllCoroutines(); 
             damageable.TakeDamage(this.damage);
@@ -44,6 +55,11 @@ public class Bullet : PooledObject
         {
             Release();
         }
+    }
+
+    public void Explode()
+    {
+        
     }
 
     public void Shoot(Vector3 direction, float speed, float damage)
