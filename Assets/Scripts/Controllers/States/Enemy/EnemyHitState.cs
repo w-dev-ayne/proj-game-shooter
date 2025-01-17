@@ -6,6 +6,7 @@ public class EnemyHitState : MonoBehaviour, IState<EnemyController>
 {
     public void Enter(EnemyController ec)
     {
+        ec.rb.AddForce(ec.transform.forward * -100);
         ec.animatorController.Hit();
         StartCoroutine(Hit(ec));
     }

@@ -161,11 +161,16 @@ public class CharacterController : MonoBehaviour, IDamageable
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, Bullet bullet = null)
     {
         hp -= damage;
         hitTmp.Animate(damage.ToString());
         onStatusChanged.Invoke(this);
+    }
+
+    public bool IsDeadByDamage(float damage)
+    {
+        return false;
     }
 
     public void Heal(float amount)

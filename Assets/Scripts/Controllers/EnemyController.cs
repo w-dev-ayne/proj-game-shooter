@@ -1,3 +1,4 @@
+using System.Collections;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -19,6 +20,8 @@ public class EnemyController : MonoBehaviour, IDamageable
     private IState<EnemyController> hitState;
     private IState<EnemyController> dieState;
     private IState<EnemyController> victoryState;
+
+    public Rigidbody rb;
     
     public NavMeshAgent agent { get; private set; }
     
@@ -43,7 +46,8 @@ public class EnemyController : MonoBehaviour, IDamageable
     public Image hpBar;
     public EventTMP hitTmp;
     public GameObject spawnVfx;
-    
+    public ParticleSystem hitParticle;
+    public ParticleSystem dieParticle;
     
     public UnityEvent onDamage { get; set; }
 
@@ -75,6 +79,7 @@ public class EnemyController : MonoBehaviour, IDamageable
         
         // 예외 처리 필요
         cc = FindObjectOfType<CharacterController>();
+        rb = this.GetComponent<Rigidbody>();
 
         attackCondition = Vector3.Distance(transform.position, cc.transform.position) <= attackRange;
         if (spawnStart)
@@ -136,10 +141,9 @@ public class EnemyController : MonoBehaviour, IDamageable
         stateContext.Transition(dieState);
         TakeStat();
         Managers.Stage.UpdateEnemyNum();
-        
     }
     
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, Bullet bullet = null)
     {
         if (currentHp <= 0)
             return;
@@ -150,10 +154,29 @@ public class EnemyController : MonoBehaviour, IDamageable
 
         if (currentHp <= 0)
         {
+            StartCoroutine(PlayHitParticle(bullet, this.dieParticle));
             Die();
             return;
         }
+        StartCoroutine(PlayHitParticle(bullet, this.hitParticle));
+        
         stateContext.Transition(hitState);
+    }
+
+    private IEnumerator PlayHitParticle(Bullet bullet, ParticleSystem particle)
+    {
+        particle.Play();
+
+        if (bullet == null)
+            yield break;
+        
+        yield return new WaitForSeconds(particle.duration);
+        bullet.Release();
+    }
+
+    public bool IsDeadByDamage(float damage)
+    {
+        return currentHp - damage <= 0;
     }
 
     private void TakeStat()
