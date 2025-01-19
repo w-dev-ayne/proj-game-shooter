@@ -9,6 +9,7 @@ public class EnemyDieState : MonoBehaviour, IState<EnemyController>
         ec.animatorController.Die();
         ec.GetComponent<Collider>().enabled = false;
         ec.hpBar.transform.parent.gameObject.SetActive(false);
+        ec.spawnVfx.SetActive(false);
         StartCoroutine(WaitAnimation(ec));
     }
 
