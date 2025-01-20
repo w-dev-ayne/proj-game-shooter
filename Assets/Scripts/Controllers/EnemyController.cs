@@ -154,10 +154,12 @@ public class EnemyController : MonoBehaviour, IDamageable
 
         if (currentHp <= 0)
         {
+            Managers.Sound.Play(Define.Sound.Effect2, AudioDefine.ENEMY_DIE_EFFECT);
             StartCoroutine(PlayHitParticle(bullet, this.dieParticle));
             Die();
             return;
         }
+        Managers.Sound.Play(Define.Sound.Effect2, AudioDefine.ENEMY_HIT_EFFECT);
         StartCoroutine(PlayHitParticle(bullet, this.hitParticle));
         
         stateContext.Transition(hitState);
