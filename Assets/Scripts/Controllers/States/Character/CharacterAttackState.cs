@@ -43,7 +43,7 @@ public class CharacterAttackState : Rotatable, IState<CharacterController>
             Bullet bullet = cc.bulletPool.TakeFromPool() as Bullet;
             bullet.transform.position = cc.bulletPool.shootPositionTransform.position;
             bullet.Shoot(direction, cc.bulletSpeed,cc.attack);
-            Managers.Sound.Play(Define.Sound.Effect, AudioDefine.CHARACTER_SHOOT);
+            Managers.Sound.Play(Define.Sound.Effect, AudioDefine.CHARACTER_SHOOT_EFFECT);
             
             //bullet 발사 로직 구현
             yield return attackSpeed;

@@ -14,7 +14,8 @@ public class LobbyScene : BaseScene
 
         SceneType = Define.Scene.Lobby;
         Debug.Log($"{SceneType} Init");
-        
+
+        Managers.Sound.Play(Define.Sound.Bgm, AudioDefine.LOBBY_SCENE_BGM_DEFAULT, 0.6f);
         Managers.UserInfo.GetUserInfo();
         Managers.Character.Initialize();
         Managers.Skill.Initialize();

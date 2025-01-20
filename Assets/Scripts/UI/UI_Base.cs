@@ -86,6 +86,7 @@ public abstract class UI_Base : MonoBehaviour
 		evt.OnClickHandler += () =>
 		{
 			Managers.UIAnimation.ButtonClickAnimationA(go);
+			Managers.Sound.Play(Define.Sound.Effect3, AudioDefine.BUTTON_CLICK_EFFECT);
 		};
 
 		/*if (go.TryGetComponent<ButtonSound>(out ButtonSound buttonSound) && buttonSound.GetClip() != null)
