@@ -113,9 +113,9 @@ public class SoundManager
 			audioSource.Play();
 			return true;
 		}
-		else if (type == Define.Sound.Effect)
+		else if (type == Define.Sound.Effect || type == Define.Sound.Effect2 || type == Define.Sound.Effect3)
 		{
-			AudioClip audioClip = GetAudioClip(path);
+			AudioClip audioClip = GetAudioClipByPath(path);
 			if (audioClip == null)
 				return false;
 
@@ -125,7 +125,7 @@ public class SoundManager
 		}
 		else if (type == Define.Sound.Speech)
 		{
-			AudioClip audioClip = GetAudioClip(path);
+			AudioClip audioClip = GetAudioClipByPath(path);
 			if (audioClip == null)
 				return false;
 
@@ -239,13 +239,13 @@ public class SoundManager
 
 	public float GetAudioClipLength(string path)
 	{
-		AudioClip audioClip = GetAudioClip(path);
+		AudioClip audioClip = GetAudioClipByPath(path);
 		if (audioClip == null)
 			return 0.0f;
 		return audioClip.length;
 	}
 
-	private AudioClip GetAudioClip(string path)
+	private AudioClip GetAudioClipByPath(string path)
 	{
 		AudioClip audioClip = null;
 		if (_audioClips.TryGetValue(path, out audioClip))
@@ -254,6 +254,17 @@ public class SoundManager
 		audioClip = Managers.Resource.Load<AudioClip>(path);
 		_audioClips.Add(path, audioClip);
 		return audioClip;
+	}
+
+	private AudioClip GetAudioClipByFileName(string fileName)
+	{
+		AudioClip clip = null;
+		if(_audioClips.TryGetValue(fileName, out clip))
+			return clip;
+		
+		clip = Managers.Resource.Load<AudioClip>(fileName);
+		_audioClips.Add(fileName, clip);
+		return clip;
 	}
 }
 
