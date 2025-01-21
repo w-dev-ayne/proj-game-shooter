@@ -93,18 +93,24 @@ public class SoundManager
 		if (string.IsNullOrEmpty(path))
 			return false;
 
+		// Audio Source 지정
 		AudioSource audioSource = _audioSources[(int) type];
-		if (path.Contains("Sound/") == false)
-			path = string.Format("Sound/{0}", path);
 
 		audioSource.volume = volume;
 
+		AudioClip audioClip = null;
+
+		if (!_audioClips.TryGetValue(path, out audioClip))
+		{
+			audioClip = Managers.Resource.Load<AudioClip>(path);
+			_audioClips.Add(path, audioClip);
+		}
+
+		if (audioClip == null)
+			return false;
+
 		if (type == Define.Sound.Bgm)
 		{
-			AudioClip audioClip = Managers.Resource.Load<AudioClip>(path);
-			if (audioClip == null)
-				return false;
-
 			if (audioSource.isPlaying)
 				audioSource.Stop();
 
@@ -115,20 +121,12 @@ public class SoundManager
 		}
 		else if (type == Define.Sound.Effect || type == Define.Sound.Effect2 || type == Define.Sound.Effect3)
 		{
-			AudioClip audioClip = GetAudioClipByPath(path);
-			if (audioClip == null)
-				return false;
-
 			audioSource.pitch = pitch;
 			audioSource.PlayOneShot(audioClip);
 			return true;
 		}
 		else if (type == Define.Sound.Speech)
 		{
-			AudioClip audioClip = GetAudioClipByPath(path);
-			if (audioClip == null)
-				return false;
-
 			if (audioSource.isPlaying)
 				audioSource.Stop();
 
