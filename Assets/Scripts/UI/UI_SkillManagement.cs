@@ -77,28 +77,23 @@ public class UI_SkillManagement : UI_Popup
         descriptionArea.Initialize(button.skillData);
         //SetDescriptionText(currentSelectedButton.skillData);
         Managers.SkillUpgrade.SetSkillData(currentSelectedButton.skillData);
-
-        if (!currentSelectedButton.skillData.isEquipped)
+        
+        if (currentSelectedButton.skillData.isEquipped && Managers.Skill.equipReadySkill != null)
         {
-            foreach (Transform eButton in GetObject((int)Objects.EquippedSkillsObject).transform)
+            if (!Managers.Skill.equipReadySkill.isEquipped)
             {
-                eButton.GetComponent<SkillUIButton>().arrow.SetActive(true);
+                SkillEquipNetworkData data = new SkillEquipNetworkData(
+                    Managers.Skill.equipReadySkill.id,
+                    currentSelectedButton.skillData.id);
+                Managers.Skill.EquipSkill(data);
             }
-        }
-        else
-        {
+            
             foreach (Transform eButton in GetObject((int)Objects.EquippedSkillsObject).transform)
             {
                 eButton.GetComponent<SkillUIButton>().arrow.SetActive(false);
             }
 
-            if (!Managers.SkillUpgrade.previousSkillData.isEquipped)
-            {
-                SkillEquipNetworkData data = new SkillEquipNetworkData(
-                    Managers.SkillUpgrade.previousSkillData.id,
-                    Managers.SkillUpgrade.skillData.id);
-                Managers.Skill.EquipSkill(data);
-            }
+            Managers.Skill.equipReadySkill = null;
         }
     }
 
@@ -135,8 +130,15 @@ public class UI_SkillManagement : UI_Popup
 
     private void OnClickEquipButton()
     {
-        SkillData currentSkill = Managers.SkillUpgrade.skillData;
-        
+        if (!currentSelectedButton.skillData.isEquipped)
+        {
+            Managers.Skill.equipReadySkill = currentSelectedButton.skillData;
+            
+            foreach (Transform eButton in GetObject((int)Objects.EquippedSkillsObject).transform)
+            {
+                eButton.GetComponent<SkillUIButton>().arrow.SetActive(true);
+            }
+        }
         
     }
 }
