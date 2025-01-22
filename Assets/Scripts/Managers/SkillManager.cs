@@ -6,7 +6,7 @@ public class SkillManager
     public SkillData[] skills;
     public SkillData[] equippedSkills = new SkillData[4];
     public SkillUpgradeConfiguration config { get; private set; } = new SkillUpgradeConfiguration();
-    
+    public SkillData equipReadySkill;
 
     public void Initialize()
     {

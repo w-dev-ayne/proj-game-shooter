@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AttackSkill : Skill
 {
+    private Vector3 actionPosition;
+    
     public AttackSkill(SkillData data) : base(data)
     {
         
@@ -16,7 +18,7 @@ public class AttackSkill : Skill
             return false;
         }
         
-        
+        actionPosition = cc.transform.position;
         
         // VFX 실행
         if (vfx != null && !vfxOnDelay)
@@ -53,7 +55,7 @@ public class AttackSkill : Skill
 
     private void HitDamage(CharacterController cc, float amount)
     {
-        Collider[] colliders = Physics.OverlapSphere(cc.transform.position, range);
+        Collider[] colliders = Physics.OverlapSphere(actionPosition, range);
         List<EnemyController> enemies = new List<EnemyController>();
         foreach (Collider col in colliders)
         {
