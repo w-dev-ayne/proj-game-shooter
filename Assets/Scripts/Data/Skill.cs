@@ -20,6 +20,8 @@ public class Skill : ISkill
     protected ParticleSystem vfxObject;
 
     public Image coolTimeImage;
+
+    public string sound;
     
     private StateContext<Skill> stateContext;
     private IState<Skill> readyState;
@@ -39,6 +41,7 @@ public class Skill : ISkill
         
         vfx = data.vfx;
         skillIcon = data.skillIcon;
+        sound = data.sound;
         
         stateContext = new StateContext<Skill>(this);
         readyState = new ReadyState();

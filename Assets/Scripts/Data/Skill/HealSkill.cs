@@ -27,6 +27,8 @@ public class HealSkill : Skill
             vfxObject.gameObject.SetActive(true);
             vfxObject.Play();
         }
+        
+        Managers.Sound.Play(Define.Sound.Effect, sound);
 
         if (duration == 0)
         {
