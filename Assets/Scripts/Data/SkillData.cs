@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.Serialization;
@@ -21,6 +22,7 @@ public class SkillData
     public string description;
     public bool isEquipped;
     public int equipIndex;
+    public string sound;
 
     public SkillData()
     {
@@ -49,6 +51,7 @@ public class SkillData
         description = data.description;
         isEquipped = data.isEquipped == "Y";
         equipIndex = data.equipIndex;
+        sound = $"Sound/Skill/{data.sound}";
     }
 }
 
@@ -91,6 +94,7 @@ public class SkillNetworkData : PostData
     public string description;
     public string isEquipped;
     public int equipIndex;
+    public string sound;
     
     public void FetchData(SkillData data)
     {
@@ -109,6 +113,7 @@ public class SkillNetworkData : PostData
         description = data.description;
         isEquipped = data.isEquipped ? "Y" : "N";
         equipIndex = data.equipIndex;
+        sound = data.sound?.ToString();
     }
 }
 
