@@ -93,6 +93,12 @@ public class Skill : ISkill
         return true;
     }
 
+    protected void PlaySound()
+    {
+        if(this.sound != null)
+            Managers.Sound.Play(Define.Sound.Effect, sound);
+    }
+
     protected void LockOtherSkill()
     {
         Managers.Stage.skillTimer.skillRunning = true;

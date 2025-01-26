@@ -22,6 +22,7 @@ public class BuffSkill : Skill
         }
 
         UnLockOtherSkill();
+        base.PlaySound();
         cc.SetAttack(amount);
         Managers.Stage.skillTimer.BuffTimer(duration, FinishBuff);
         return true;
