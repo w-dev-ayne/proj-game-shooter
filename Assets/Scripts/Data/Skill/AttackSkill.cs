@@ -56,8 +56,9 @@ public class AttackSkill : Skill
 
     private void HitDamage(CharacterController cc, float amount)
     {
-        Collider[] colliders = Physics.OverlapSphere(affectPosition, range);
+        base.PlaySound();
         
+        Collider[] colliders = Physics.OverlapSphere(affectPosition, range);
         List<EnemyController> enemies = new List<EnemyController>();
         foreach (Collider col in colliders)
         {
