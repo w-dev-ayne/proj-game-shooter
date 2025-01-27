@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -21,6 +22,7 @@ public class SkillGenerator : EditorWindow
     public Sprite skillIcon;
     public string description;
     public bool isEquipped;
+    public string sound;
 
     [MenuItem("Window/Skill Generator")]
     public static void ShowWindow()
@@ -44,6 +46,7 @@ public class SkillGenerator : EditorWindow
         vfx = EditorGUILayout.ObjectField("VFX", vfx, typeof(ParticleSystem), false) as ParticleSystem;
         skillIcon = (Sprite)EditorGUILayout.ObjectField("Skill Icon", skillIcon, typeof(Sprite), false);
         description = EditorGUILayout.TextField("Description", description);
+        sound = EditorGUILayout.TextField("Sound", sound);
 
         if (GUILayout.Button("Generate"))
         {
@@ -68,6 +71,7 @@ public class SkillGenerator : EditorWindow
         newSkill.description = description;
         newSkill.isEquipped = isEquipped;
         newSkill.skillIcon = skillIcon;
+        newSkill.sound = sound;
 
         SkillNetworkData newSkillData = new SkillNetworkData();
         newSkillData.FetchData(newSkill);
