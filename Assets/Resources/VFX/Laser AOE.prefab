@@ -44168,6 +44168,8 @@ GameObject:
   - component: {fileID: 419305800515105285}
   - component: {fileID: 8705986516592252172}
   - component: {fileID: 9114385727598248433}
+  - component: {fileID: 1328427010582687990}
+  - component: {fileID: -7176765149919898772}
   m_Layer: 0
   m_Name: Laser AOE
   m_TagString: Untagged
@@ -49087,6 +49089,32 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &1328427010582687990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7478731271839673279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2460c2d2082b8424a8197bc9935f1181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  factor: 4.5
+--- !u!114 &-7176765149919898772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7478731271839673279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2e8874f60266498a388d7229a1bac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnlyDeactivate: 1
 --- !u!1 &9063691487585404173
 GameObject:
   m_ObjectHideFlags: 0
