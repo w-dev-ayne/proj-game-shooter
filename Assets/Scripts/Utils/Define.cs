@@ -17,6 +17,7 @@ public class Define
 	public enum Scene
 	{
 		Unknown,
+		Host,
 		Auth,
 		Lobby,
 		Game,
