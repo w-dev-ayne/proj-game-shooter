@@ -12,7 +12,8 @@ public class UI_Auth : UI_Popup
     {
         RegisterButton,
         LoginButton,
-        LoginRegisterButton
+        LoginRegisterButton,
+        SkipButton
     }
 
     enum Texts
@@ -36,6 +37,7 @@ public class UI_Auth : UI_Popup
         GetButton((int)Buttons.RegisterButton).gameObject.BindEvent(OnClickRegisterButton);
         GetButton((int)Buttons.LoginButton).gameObject.BindEvent(OnClickLoginButton);
         GetButton((int)Buttons.LoginRegisterButton).gameObject.BindEvent(OnClickLoginRegisterButton);
+        GetButton((int)Buttons.SkipButton).gameObject.BindEvent(OnClickSkipButton);
         
         GetObject((int)Objects.LoginObject).GetComponent<EnterNavigation>().onClickEnter.AddListener(OnClickLoginButton);
         GetObject((int)Objects.RegisterObject).GetComponent<EnterNavigation>().onClickEnter.AddListener(OnClickRegisterButton);
@@ -88,5 +90,10 @@ public class UI_Auth : UI_Popup
     private void OnClickLoginRegisterButton()
     {
         GetObject((int)Objects.LoginObject).gameObject.SetActive(false);
+    }
+
+    private void OnClickSkipButton()
+    {
+        Managers.Scene.ChangeScene(Define.Scene.Lobby);
     }
 }
