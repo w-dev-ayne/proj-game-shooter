@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,7 +15,9 @@ public class UI_InGame : UI_Popup
     enum Objects
     {
         EnemyNumBarObject,
-        InstructionObject
+        InstructionObject,
+        PointObject,
+        GetPointObject
     }
 
     enum Buttons
@@ -37,7 +40,8 @@ public class UI_InGame : UI_Popup
         RotateSpeedText,
         BulletSpeedText,
         RemainEnemyText,
-        InstructionText
+        InstructionText,
+        PointText
     }
 
     public override bool Init()
@@ -86,7 +90,7 @@ public class UI_InGame : UI_Popup
     {
         GetText((int)Texts.RemainEnemyText).text =
             $"{currentLevelData.currentEnemiesNum} / {currentLevelData.totalEnemiesNum}";
-        GetText((int)Texts.StatText).text = Managers.Stage.statCount.ToString();
+        GetText((int)Texts.StatText).text = Managers.Stage.characterPoint.ToString();
         // Enemy Status Bar Width 변경
         float oneEnemyWidth = maxBarWidth / currentLevelData.totalEnemiesNum;
         RectTransform barRect = GetObject((int)Objects.EnemyNumBarObject).GetComponent<RectTransform>();
@@ -122,5 +126,22 @@ public class UI_InGame : UI_Popup
     private void OnClickSkillButton(Skill skill)
     {
         Managers.Stage.cc.Skill(skill);
+    }
+
+    public void AddPointAnimation(Vector3 point)
+    {
+        GetObject((int)Objects.GetPointObject).transform.position = point;
+        
+        GetObject((int)Objects.GetPointObject).transform
+            .DOMove(GetObject((int)Objects.PointObject).transform.position, 0.5f).OnComplete(
+                () =>
+                {
+                    SetPointText();
+                });
+    }
+
+    private void SetPointText()
+    {
+        GetText((int)Texts.PointText).text = Managers.Stage.characterPoint.ToString();
     }
 }

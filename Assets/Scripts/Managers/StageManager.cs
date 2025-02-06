@@ -19,7 +19,7 @@ public class StageManager : MonoBehaviour
     public CharacterController cc;
     public SkillTimer skillTimer;
 
-    public int statCount = 0; 
+    public int characterPoint { get; private set; }
 
     void Awake()
     {
@@ -40,7 +40,7 @@ public class StageManager : MonoBehaviour
             this.levels[i] = new Level(data.levels[i]);
         }
 
-        statCount = 0;
+        characterPoint = 0;
         StartNextLevel();
     }
 
@@ -66,7 +66,7 @@ public class StageManager : MonoBehaviour
     private void FinishStage()
     {
         Debug.Log("FinishStage");
-        Managers.Stat.SetCurrentPoint(statCount);
+        Managers.UserInfo.AddCharacterPoint(this.characterPoint);
         Managers.Scene.ChangeScene(Define.Scene.Lobby);
     }
 
@@ -101,5 +101,10 @@ public class StageManager : MonoBehaviour
         Managers.UI.ShowPopupUI<UI_LevelClear>();
         onCurrentLevelFinished?.Invoke(currentLevelData);
         StartNextLevel();
+    }
+
+    public void GetPoint()
+    {
+        characterPoint++;
     }
 }

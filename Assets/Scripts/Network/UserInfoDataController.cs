@@ -8,4 +8,11 @@ public class UserInfoDataController : APILoader
         GetData<UserInfoNetworkData> response = await base.GetAPI<UserInfoNetworkData>("/userinfo", null);
         return response;
     }
+
+    public async Task<GetData<string>> AddCharacterPoint(AddCharacterPointData data)
+    {
+        GetData<string> response = await base.PostAPI<string>("/userinfo/add/character", data);
+        return response;
+    }
+    
 }
