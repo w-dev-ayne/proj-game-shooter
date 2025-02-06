@@ -191,5 +191,7 @@ public class EnemyController : MonoBehaviour, IDamageable, ICharacterPointGettab
     public void GetPoint()
     {
         Managers.Stage.GetPoint();
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(this.transform.position);
+        Managers.UI.FindPopup<UI_InGame>().AddPointAnimation(screenPos);
     }
 }

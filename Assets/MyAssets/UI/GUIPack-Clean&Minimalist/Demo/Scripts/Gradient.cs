@@ -18,9 +18,14 @@ namespace Ricimi
 		public Color Color2 = Color.white;
 
 		[Range(-180f, 180f)] public float Angle = -90.0f;
+		private bool isApplied = false; // 추가: 적용 여부 체크
+		public bool isChanging = false;
 
 		public override void ModifyMesh(VertexHelper vh)
 		{
+			if (!enabled || isApplied && !isChanging) // 이미 적용된 경우 스킵
+				return;
+			
 			if (enabled)
 			{
 				var rect = graphic.rectTransform.rect;
@@ -36,6 +41,8 @@ namespace Ricimi
 					vertex.color *= Color.Lerp(Color2, Color1, localPosition.y);
 					vh.SetUIVertex(vertex, i);
 				}
+
+				isApplied = true;
 			}
 		}
 
