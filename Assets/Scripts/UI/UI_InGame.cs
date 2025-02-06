@@ -86,7 +86,7 @@ public class UI_InGame : UI_Popup
     {
         GetText((int)Texts.RemainEnemyText).text =
             $"{currentLevelData.currentEnemiesNum} / {currentLevelData.totalEnemiesNum}";
-        GetText((int)Texts.StatText).text = Managers.Stage.statCount.ToString();
+        GetText((int)Texts.StatText).text = Managers.Stage.characterPoint.ToString();
         // Enemy Status Bar Width 변경
         float oneEnemyWidth = maxBarWidth / currentLevelData.totalEnemiesNum;
         RectTransform barRect = GetObject((int)Objects.EnemyNumBarObject).GetComponent<RectTransform>();

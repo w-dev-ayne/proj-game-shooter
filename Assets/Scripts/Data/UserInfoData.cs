@@ -26,3 +26,14 @@ public class UserInfoNetworkData : PostData
     public int characterPoint;
     public int skilldrawPoint;
 }
+
+[System.Serializable]
+public class AddCharacterPointData : PostData
+{
+    public int amount;
+
+    public AddCharacterPointData(int amount)
+    {
+        this.amount = amount;
+    }
+}

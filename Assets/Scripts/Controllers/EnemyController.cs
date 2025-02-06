@@ -7,7 +7,7 @@ using UnityEngine.Events;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
-public class EnemyController : MonoBehaviour, IDamageable
+public class EnemyController : MonoBehaviour, IDamageable, ICharacterPointGettable
 {
     public Define.EnemyAttackType attackType;
     public ObjectPool bulletPool;
@@ -139,7 +139,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     {
         Managers.Enemy.TakeOffEnemy(this);
         stateContext.Transition(dieState);
-        TakeStat();
+        GetPoint();
         Managers.Stage.UpdateEnemyNum();
     }
     
@@ -181,15 +181,15 @@ public class EnemyController : MonoBehaviour, IDamageable
         return currentHp - damage <= 0;
     }
 
-    private void TakeStat()
-    {
-        Managers.Stage.statCount += this.stat;
-    }
-
     public void Highlight()
     {
         this.spawnVfx.SetActive(true);
         if(! spawnVfx.GetComponent<ParticleSystem>().isPlaying)
             spawnVfx.GetComponent<ParticleSystem>().Play();
+    }
+
+    public void GetPoint()
+    {
+        Managers.Stage.GetPoint();
     }
 }

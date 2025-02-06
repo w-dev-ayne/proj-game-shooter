@@ -14,4 +14,15 @@ public class UserInfoManager
             this.data.FetchData(response.data);    
         }
     }
+
+    public async void AddCharacterPoint(int amount)
+    {
+        AddCharacterPointData data = new AddCharacterPointData(amount);
+        GetData<string> response = await Managers.Network.userInfoDataController.AddCharacterPoint(data);
+
+        if (response.success)
+        {
+            GetUserInfo();
+        }
+    }
 }
