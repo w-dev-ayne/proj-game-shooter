@@ -54,7 +54,15 @@ public class SkillManager
     // 스킬 뽑기
     public async void DrawSkill()
     {
-        await Managers.Network.skillController.DrawSkill();
+        GetData<SkillNetworkData> response = await Managers.Network.skillController.DrawSkill();
+
+        if (response.success)
+        {
+            Managers.UserInfo.GetUserInfo(() =>
+            {
+                Managers.UI.FindPopup<UI_SkillDraw>().SetSkillDrawRemainText();
+            });
+        }
     }
 
     // 서버에 스킬 업그레이드 API 호출
