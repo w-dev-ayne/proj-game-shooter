@@ -25,6 +25,7 @@ public class BuffSkill : Skill
         base.PlaySound();
         cc.SetAttack(amount);
         Managers.Stage.skillTimer.BuffTimer(duration, FinishBuff);
+        Managers.UI.FindPopup<UI_InGame>().StartBuffIcon(this);
         return true;
     }
 
