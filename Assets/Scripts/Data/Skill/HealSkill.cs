@@ -36,6 +36,7 @@ public class HealSkill : Skill
         }
         else
         {
+            Managers.UI.FindPopup<UI_InGame>().StartBuffIcon(this);
             Managers.Stage.skillTimer.DotAction(duration, () =>
             {
                 cc.Heal((float)amount / (float)duration);

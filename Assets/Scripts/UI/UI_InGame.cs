@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class UI_InGame : UI_Popup
 {
+    [SerializeField] private GameObject buffIconPrefab;
+    
     private float maxBarWidth;
     
     public Dictionary<Skill, Button> skillButtons = new Dictionary<Skill, Button>();
@@ -17,7 +19,8 @@ public class UI_InGame : UI_Popup
         EnemyNumBarObject,
         InstructionObject,
         PointObject,
-        GetPointObject
+        GetPointObject,
+        BuffStatusObject
     }
 
     enum Buttons
@@ -143,5 +146,12 @@ public class UI_InGame : UI_Popup
     private void SetPointText()
     {
         GetText((int)Texts.PointText).text = Managers.Stage.characterPoint.ToString();
+    }
+
+    public void StartBuffIcon(Skill skill)
+    {
+        GameObject buffIcon = Instantiate(buffIconPrefab);
+        buffIcon.transform.SetParent(GetObject((int)Objects.BuffStatusObject).transform);
+        buffIcon.GetComponent<BuffIcon>().StartTimer(skill);
     }
 }

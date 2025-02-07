@@ -28,17 +28,17 @@ public class SkillTimer : MonoBehaviour
         skill.Ready();
     }
     
-    public void BuffTimer(float duration, UnityAction<CharacterController> callback)
+    public void BuffTimer(float duration, UnityAction<CharacterController> onComplete)
     {
         Debug.Log("Start Duration");
-        StartCoroutine(BuffTimerRoutine(duration, callback));
+        StartCoroutine(BuffTimerRoutine(duration, onComplete));
     }
     
-    private IEnumerator BuffTimerRoutine(float duration, UnityAction<CharacterController> callback)
+    private IEnumerator BuffTimerRoutine(float duration, UnityAction<CharacterController> onComplete)
     {
         yield return new WaitForSeconds(duration);
         Debug.Log("Finish Duration");
-        callback.Invoke(Managers.Stage.cc);
+        onComplete.Invoke(Managers.Stage.cc);
     }
 
     public void DelayTimer(float duration, float range, UnityAction callback)
