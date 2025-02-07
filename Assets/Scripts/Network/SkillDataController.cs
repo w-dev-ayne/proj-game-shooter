@@ -10,11 +10,10 @@ public class SkillDataController : APILoader
         return response.success;
     }
 
-    public async Task<bool> DrawSkill()
+    public async Task<GetData<SkillNetworkData>> DrawSkill()
     {
         GetData<SkillNetworkData> response =  await base.PostAPI<SkillNetworkData>("/skill/draw");
-        Debug.Log(response.data.name);
-        return response.success;
+        return response;
     }
 
     public async Task AddSkill(SkillNetworkData data, NetworkConfig config)

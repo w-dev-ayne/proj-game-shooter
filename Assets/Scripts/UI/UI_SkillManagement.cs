@@ -21,12 +21,14 @@ public class UI_SkillManagement : UI_Popup
         SkillDrawButton,
         CloseButton,
         SkillUpgradeButton,
-        SkillEquipButton
+        SkillEquipButton,
+        BackButton
     }
 
     enum Texts
     {
-        DescriptionText
+        DescriptionText,
+        SkillDrawRemainText
     }
     
     public override bool Init()
@@ -39,8 +41,11 @@ public class UI_SkillManagement : UI_Popup
         GetButton((int)Buttons.CloseButton).gameObject.BindEvent(ClosePopupUI);
         GetButton((int)Buttons.SkillUpgradeButton).gameObject.BindEvent(OnClickSkillUpgradeButton);
         GetButton((int)Buttons.SkillEquipButton).gameObject.BindEvent(OnClickEquipButton);
+        GetButton((int)Buttons.BackButton).gameObject.BindEvent(OnClickBackButton);
 
         descriptionArea = GetObject((int)Objects.DescriptionAreaObject).GetComponent<SkillDescriptionArea>();
+
+        GetText((int)Texts.SkillDrawRemainText).text = Managers.UserInfo.data.skilldrawPoint.ToString();
         
         LoadSkillData();
         
@@ -119,6 +124,12 @@ public class UI_SkillManagement : UI_Popup
 
     private void OnClickSkillDrawButton()
     {
+        if (Managers.UserInfo.data.skilldrawPoint == 0)
+        {
+            Debug.Log("skilldraw point is 0");
+            return;
+        }
+        
         Managers.UI.ShowPopupUI<UI_SkillDraw>();
     }
 
@@ -139,6 +150,10 @@ public class UI_SkillManagement : UI_Popup
                 eButton.GetComponent<SkillUIButton>().arrow.SetActive(true);
             }
         }
-        
+    }
+
+    private void OnClickBackButton()
+    {
+        ClosePopupUI();
     }
 }

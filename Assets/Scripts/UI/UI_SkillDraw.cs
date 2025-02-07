@@ -19,7 +19,8 @@ public class UI_SkillDraw : UI_Popup
 
     enum Texts
     {
-        
+        SkillDrawRemainText,
+        SkillReDrawRemainText,
     }
     
     public override bool Init()
@@ -38,6 +39,8 @@ public class UI_SkillDraw : UI_Popup
         GetObject((int)Objects.SkillObject).SetActive(false);
         GetObject((int)Objects.DrawingVfxObject).SetActive(false);
         GetObject((int)Objects.DrewVfxObject).SetActive(false);
+
+        GetText((int)Texts.SkillDrawRemainText).text = Managers.UserInfo.data.skilldrawPoint.ToString();
         
         if (!base.Init())
             return false;
@@ -54,6 +57,7 @@ public class UI_SkillDraw : UI_Popup
 
     private IEnumerator CoDrawSkill()
     {
+        Managers.Skill.DrawSkill();
         GetObject((int)Objects.DrawingVfxObject).SetActive(true);
         yield return new WaitForSeconds(2.5f);
         GetObject((int)Objects.DrawingVfxObject).SetActive(false);
@@ -68,6 +72,7 @@ public class UI_SkillDraw : UI_Popup
         GetButton((int)Buttons.CloseButton).gameObject.SetActive(true);
         
         GetObject((int)Objects.SkillObject).SetActive(true);
+        
     }
 
     private void OnClickRedrawButton()
@@ -84,5 +89,11 @@ public class UI_SkillDraw : UI_Popup
     private void OnClickCloseButton()
     {
         ClosePopupUI();
+    }
+
+    public void SetSkillDrawRemainText()
+    {
+        GetText((int)Texts.SkillReDrawRemainText).text = Managers.UserInfo.data.skilldrawPoint.ToString();
+        GetText((int)Texts.SkillDrawRemainText).text = Managers.UserInfo.data.skilldrawPoint.ToString();
     }
 }
