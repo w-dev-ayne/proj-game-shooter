@@ -127,6 +127,7 @@ public class UI_SkillManagement : UI_Popup
         if (Managers.UserInfo.data.skilldrawPoint == 0)
         {
             Debug.Log("skilldraw point is 0");
+            Managers.UI.ShowPopupUI<UI_Error>().SetErrorText("Skilldraw point is 0");
             return;
         }
         
