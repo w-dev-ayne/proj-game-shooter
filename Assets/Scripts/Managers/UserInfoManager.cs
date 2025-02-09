@@ -27,4 +27,15 @@ public class UserInfoManager
             GetUserInfo();
         }
     }
+
+    public async void AddSkillDrawPoint()
+    {
+        AddSkillDrawPointData data = new AddSkillDrawPointData(1);
+        GetData<string> response = await Managers.Network.userInfoDataController.AddSkillDrawPoint(data);
+
+        if (response.success)
+        {
+            GetUserInfo();
+        }
+    }
 }

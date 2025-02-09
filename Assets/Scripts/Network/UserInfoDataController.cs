@@ -15,4 +15,9 @@ public class UserInfoDataController : APILoader
         return response;
     }
     
+    public async Task<GetData<string>> AddSkillDrawPoint(AddSkillDrawPointData data)
+    {
+        GetData<string> response = await base.PostAPI<string>("/userinfo/add/skilldraw", data);
+        return response;
+    }
 }
