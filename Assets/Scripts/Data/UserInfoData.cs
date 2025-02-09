@@ -37,3 +37,14 @@ public class AddCharacterPointData : PostData
         this.amount = amount;
     }
 }
+
+[System.Serializable]
+public class AddSkillDrawPointData : PostData
+{
+    public int amount;
+
+    public AddSkillDrawPointData(int amount)
+    {
+        this.amount = amount;
+    }
+}

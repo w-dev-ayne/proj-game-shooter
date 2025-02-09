@@ -67,6 +67,7 @@ public class StageManager : MonoBehaviour
     {
         Debug.Log("FinishStage");
         Managers.UserInfo.AddCharacterPoint(this.characterPoint);
+        Managers.UserInfo.AddSkillDrawPoint();
         Managers.Scene.ChangeScene(Define.Scene.Lobby);
     }
 
