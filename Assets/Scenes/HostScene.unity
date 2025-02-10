@@ -1116,7 +1116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animation: 0
-  config: {fileID: 11400000, guid: 067221a9cfd2d4c50b5117ff46082193, type: 2}
+  config: {fileID: 11400000, guid: c021882098d194fb0a29e7c34e23556e, type: 2}
 --- !u!114 &1136192584
 MonoBehaviour:
   m_ObjectHideFlags: 0

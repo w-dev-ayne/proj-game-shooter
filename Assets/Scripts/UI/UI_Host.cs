@@ -36,7 +36,7 @@ public class UI_Host : UI_Popup
 
     private void OnClickSubmitButton()
     {
-        config.host = GetText((int)Texts.HostText).text;
+        config.host = GetText((int)Texts.HostText).text.ToString();
         Managers.Scene.ChangeScene(Define.Scene.Auth);
     }
 
