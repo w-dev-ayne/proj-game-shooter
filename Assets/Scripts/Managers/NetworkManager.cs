@@ -28,6 +28,8 @@ public class NetworkManager : Singleton<NetworkManager>
         userInfoDataController = new UserInfoDataController();
 
         host = $"http://{config.host}:{config.port}";
+        
+        Debug.Log(host);
         token = config.token;
     }
 
