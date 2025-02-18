@@ -38,4 +38,24 @@ public class NetworkManager : Singleton<NetworkManager>
     {
         token = value;
     }
+
+    public void StartLoading()
+    {
+        Managers.UI.ShowPopupUI<UI_Loading>();
+    }
+
+    public void FinishLoading()
+    {
+        Managers.UI.FindPopup<UI_Loading>()?.ClosePopupUI();
+    }
+
+    public void StartSceneLoading()
+    {
+        Managers.UI.ShowPopupUI<UI_SceneLoading>();
+    }
+
+    public void FinishSceneLoading()
+    {
+        Managers.UI.FindPopup<UI_SceneLoading>()?.ClosePopupUI();
+    }
 }
