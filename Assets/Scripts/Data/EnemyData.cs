@@ -14,3 +14,20 @@ public class EnemyData : ScriptableObject
     public float bulletSpeed = 2.0f;
     public int gainStat = 0;
 }
+
+[System.Serializable]
+public class EnemyNetworkData : PostData
+{
+    public int stageId;
+    public int levelId;
+    public string name;
+    public int modelingId;
+    public string attackType;
+    public float hp;
+    public float attack;
+    public float attackSpeed;
+    public float moveSpeed;
+    public float attackRange;
+    public float bulletSpeed;
+    public float gainStat;
+}
