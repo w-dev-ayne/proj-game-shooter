@@ -12,8 +12,6 @@ public class AppearElement : MonoBehaviour
     private void Awake()
     {
         targetPosition = this.transform.position;
-        
-        Debug.Log($"Target Position : {targetPosition}");
 
         switch (direction)
         {
@@ -32,8 +30,6 @@ public class AppearElement : MonoBehaviour
             default:
                 break;
         }
-        
-        Debug.Log($"Start Position : {this.transform.position}");
         
         Play();
     }

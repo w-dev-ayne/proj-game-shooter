@@ -1,18 +1,26 @@
+using System.Collections.Generic;
+
 public class Level
 {
-    public EnemyData[] enemies;
-    public int[] enemiesNums;
+    public List<EnemyNetworkData> enemies;
+    public List<int> enemiesNums;
     public int totalEnemiesNum;
     public int currentEnemiesNum;
 
-    public Level(LevelData data)
+    public Level()
     {
-        this.enemies = data.enemies;
-        this.enemiesNums = data.enemiesNums;
+        enemies = new List<EnemyNetworkData>();
+        enemiesNums = new List<int>();
+    }
 
+    public void AddEnemyData(EnemyNetworkData enemyData)
+    {
+        enemies.Add(enemyData);
+        enemiesNums.Add(enemyData.number);
+        
         int amount = 0;
         
-        for (int i = 0; i < this.enemiesNums.Length; i++)
+        for (int i = 0; i < this.enemiesNums.Count; i++)
         {
             amount += enemiesNums[i];
         }
