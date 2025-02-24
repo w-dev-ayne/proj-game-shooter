@@ -79,4 +79,12 @@ public class Define
 		RotateSpeed,
 		BulletSpeed
 	}
+	
+	public enum AppearDirection
+	{
+		left,
+		right,
+		top,
+		bottom
+	}
 }
