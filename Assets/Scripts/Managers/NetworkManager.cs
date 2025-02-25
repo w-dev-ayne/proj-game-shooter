@@ -13,6 +13,7 @@ public class NetworkManager : Singleton<NetworkManager>
     public CharacterDataController cDataController;
     public SkillDataController skillController;
     public UserInfoDataController userInfoDataController;
+    public EnemyDataController enemyDataController;
 
     void Awake()
     {
@@ -26,6 +27,7 @@ public class NetworkManager : Singleton<NetworkManager>
         cDataController = new CharacterDataController();
         skillController = new SkillDataController();
         userInfoDataController = new UserInfoDataController();
+        enemyDataController = new EnemyDataController();
 
         host = $"http://{config.host}:{config.port}";
         

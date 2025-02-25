@@ -75,9 +75,7 @@ public class UIManager
 	{
 		if (string.IsNullOrEmpty(name))
 			name = typeof(T).Name;
-
-		GameObject prefab = Managers.Resource.Load<GameObject>($"Prefabs/UI/Popup/{name}");
-
+		
 		GameObject go = Managers.Resource.Instantiate($"UI/Popup/{name}");
 		T popup = Utils.GetOrAddComponent<T>(go);
 		_popupStack.Push(popup);
@@ -91,7 +89,7 @@ public class UIManager
 			go.transform.SetParent(Root.transform);
 
 		go.transform.localScale = Vector3.one;
-		go.transform.localPosition = prefab.transform.position;
+		//go.transform.localPosition = Vector3.zero;
 
 		return popup;
 	}

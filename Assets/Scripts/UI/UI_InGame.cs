@@ -61,7 +61,7 @@ public class UI_InGame : UI_Popup
         Managers.Stage.onCurrentLevelKilledUpdated += UpdateCurrentEnemies;
         Managers.Stage.cc.onStatusChanged += UpdateCharacterInfo;
 
-        UpdateCurrentLevel(Managers.Stage.currentLevelData);
+        //UpdateCurrentLevel(Managers.Stage.currentLevelData);
         UpdateCharacterInfo(Managers.Stage.cc);
         SetSkillButtons(Managers.Stage.cc.skills);
         
@@ -102,7 +102,7 @@ public class UI_InGame : UI_Popup
     }
 
     // Level 변경 시 UI 업데이트
-    private void UpdateCurrentLevel(Level currentLevelData)
+    public void UpdateCurrentLevel(Level currentLevelData)
     {
         GetText((int)Texts.LevelText).text = Managers.Stage.currentLevel.ToString();
         GetText((int)Texts.RemainEnemyText).text =

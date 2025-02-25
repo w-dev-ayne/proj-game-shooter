@@ -32,7 +32,7 @@ public class EnemyController : MonoBehaviour, IDamageable, ICharacterPointGettab
     public bool attackCondition = false;
 
 
-    public EnemyData data;
+    public EnemyNetworkData data;
     public float attackSpeed = 2.0f;
     public float hp;
     public float attack;

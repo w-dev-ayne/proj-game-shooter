@@ -46,6 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   factory: {fileID: 3373758323417551632}
+  enemyPrefabs:
+  - {fileID: 1678583604939642834, guid: 037ef1dea798c488ca7d5243dfc1c40e, type: 3}
+  - {fileID: 5387768429051151418, guid: a5e3f9a310fff4494930e8342d448b71, type: 3}
+  enemies: []
+  dirEnemies: []
 --- !u!114 &3373758323417551632
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class GameScene : BaseScene
         Managers.UI.ShowPopupUI<UI_InGame>();
         
         Managers.Sound.Play(Define.Sound.Bgm, AudioDefine.GAME_SCENE_BGM_DEFAULT, 0.6f);
-        Managers.Network.StartSceneLoading();
+        //Managers.Network.StartSceneLoading();
         
         return true;
     }

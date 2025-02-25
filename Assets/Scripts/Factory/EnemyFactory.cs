@@ -14,7 +14,7 @@ public class EnemyFactory : MonoBehaviour
     public void GenerateEnemies(Level levelData, bool spawnStart)
     {
         Managers.Enemy.enemies.Clear();
-        for (int eIdx = 0; eIdx < levelData.enemies.Length; eIdx++)
+        for (int eIdx = 0; eIdx < levelData.enemies.Count; eIdx++)
         {
             for (int idx = 0; idx < levelData.enemiesNums[eIdx]; idx++)
             {
@@ -35,9 +35,9 @@ public class EnemyFactory : MonoBehaviour
         }
     }
 
-    private void GenerateEnemy(EnemyData enemyData, Vector3 position, bool spawnStart)
+    private void GenerateEnemy(EnemyNetworkData enemyData, Vector3 position, bool spawnStart)
     { 
-        EnemyController enemy = Instantiate(enemyData.prefab).GetComponent<EnemyController>();
+        EnemyController enemy = Instantiate(Managers.Enemy.EnemyPrefabDictionary[enemyData.modelingId]).GetComponent<EnemyController>();
 
         if (NavMesh.SamplePosition(position, out NavMeshHit hit, 100, NavMesh.AllAreas))
         {
