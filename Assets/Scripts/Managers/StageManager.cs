@@ -76,11 +76,9 @@ public class StageManager : MonoBehaviour
     }
 
     // 현재 스테이지 종료
-    private void FinishStage()
+    private async void FinishStage()
     {
-        Debug.Log("FinishStage");
-        Managers.UserInfo.AddCharacterPoint(this.characterPoint);
-        Managers.UserInfo.AddSkillDrawPoint();
+        await Managers.UserInfo.FinishStage(this.characterPoint);
         Managers.Scene.ChangeScene(Define.Scene.Lobby);
     }
 
