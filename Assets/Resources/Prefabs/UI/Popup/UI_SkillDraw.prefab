@@ -477,7 +477,7 @@ GameObject:
   - component: {fileID: 3990862645706056377}
   - component: {fileID: 2581761249081999118}
   m_Layer: 12
-  m_Name: Image
+  m_Name: SkillIconImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1859,15 +1859,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1034700375001605414, guid: f6fd568b816c64943a44efc3add3a881, type: 3}
       propertyPath: m_Color.g
-      value: 0.30157745
+      value: 0.26737964
       objectReference: {fileID: 0}
     - target: {fileID: 1034700375001605414, guid: f6fd568b816c64943a44efc3add3a881, type: 3}
       propertyPath: m_Color.r
-      value: 0.5555062
+      value: 0.76470584
       objectReference: {fileID: 0}
     - target: {fileID: 1034700375001605414, guid: f6fd568b816c64943a44efc3add3a881, type: 3}
       propertyPath: m_Intensity
-      value: 3.2236333
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2990870103442498292, guid: f6fd568b816c64943a44efc3add3a881, type: 3}
       propertyPath: clearBehavior

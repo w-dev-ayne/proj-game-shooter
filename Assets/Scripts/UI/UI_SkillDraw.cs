@@ -22,12 +22,18 @@ public class UI_SkillDraw : UI_Popup
         SkillDrawRemainText,
         SkillReDrawRemainText,
     }
+
+    enum Images
+    {
+        SkillIconImage
+    }
     
     public override bool Init()
     {
         BindObject(typeof(Objects));
         BindButton(typeof(Buttons));
         BindText(typeof(Texts));
+        BindImage(typeof(Images));
         
         GetButton((int)Buttons.DrawButton).gameObject.BindEvent(OnClickDrawButton);
         GetButton((int)Buttons.RedrawButton).gameObject.BindEvent(OnClickRedrawButton);
@@ -70,9 +76,12 @@ public class UI_SkillDraw : UI_Popup
     {
         GetButton((int)Buttons.RedrawButton).gameObject.SetActive(true);
         GetButton((int)Buttons.CloseButton).gameObject.SetActive(true);
-        
         GetObject((int)Objects.SkillObject).SetActive(true);
-        
+    }
+
+    public void SetDrewSkillObject(SkillData skillData)
+    {
+        GetImage((int)Images.SkillIconImage).sprite = skillData.skillIcon;
     }
 
     private void OnClickRedrawButton()

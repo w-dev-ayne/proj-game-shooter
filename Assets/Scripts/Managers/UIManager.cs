@@ -150,6 +150,8 @@ public class UIManager
 		Managers.Resource.Destroy(popup.gameObject);
 		popup = null;
 		_order--;
+		
+		_popupStack.Peek().OnFocus();
 	}
 
 	public void CloseAllPopupUI()

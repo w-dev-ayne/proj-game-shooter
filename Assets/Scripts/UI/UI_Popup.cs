@@ -33,6 +33,11 @@ public class UI_Popup : UI_Base
         
     }
 
+    public virtual void OnFocus()
+    {
+        
+    }
+
     void SetButtonSound()
     {
         foreach (Button button in FindObjectsOfType<Button>())
