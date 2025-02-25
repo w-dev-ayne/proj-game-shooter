@@ -54,6 +54,11 @@ public class UI_SkillManagement : UI_Popup
         return true;
     }
 
+    public override void OnFocus()
+    {
+        GetText((int)Texts.SkillDrawRemainText).text = Managers.UserInfo.data.skilldrawPoint.ToString();
+    }
+
     public void LoadSkillData()
     {
         SkillData[] equippedDatas = Managers.Skill.equippedSkills;
