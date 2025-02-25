@@ -14,7 +14,8 @@ public class UI_SkillDraw : UI_Popup
     {
         DrawButton,
         RedrawButton,
-        CloseButton
+        CloseButton,
+        BackButton
     }
 
     enum Texts
@@ -38,6 +39,7 @@ public class UI_SkillDraw : UI_Popup
         GetButton((int)Buttons.DrawButton).gameObject.BindEvent(OnClickDrawButton);
         GetButton((int)Buttons.RedrawButton).gameObject.BindEvent(OnClickRedrawButton);
         GetButton((int)Buttons.CloseButton).gameObject.BindEvent(OnClickCloseButton);
+        GetButton((int)Buttons.BackButton).gameObject.BindEvent(ClosePopupUI);
         
         GetButton((int)Buttons.RedrawButton).gameObject.SetActive(false);
         GetButton((int)Buttons.CloseButton).gameObject.SetActive(false);

@@ -66,6 +66,10 @@ public class SkillManager
             SkillData drewSkill = new SkillData(response.data);
             Managers.UI.FindPopup<UI_SkillDraw>().SetDrewSkillObject(drewSkill);
         }
+        else
+        {
+            Managers.UI.ShowPopupUI<UI_Error>().SetErrorText(response.error.ToString());
+        }
     }
 
     // 서버에 스킬 업그레이드 API 호출
