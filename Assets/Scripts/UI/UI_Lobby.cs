@@ -8,10 +8,16 @@ public class UI_Lobby : UI_Popup
         SkillButton,
         StatButton,
     }
+
+    enum Texts
+    {
+        StageText
+    }
     
     public override bool Init()
     {
         BindButton(typeof(Buttons));
+        BindText(typeof(Texts));
         
         GetButton((int)Buttons.GameStartButton).gameObject.BindEvent(OnClickGameStartButton);
         GetButton((int)Buttons.StatButton).gameObject.BindEvent(OnClickStatButton);
@@ -38,5 +44,10 @@ public class UI_Lobby : UI_Popup
     private void OnClickSkillButton()
     {
         Managers.UI.ShowPopupUI<UI_SkillManagement>();
+    }
+
+    public void FetchUserInfoData()
+    {
+        GetText((int)Texts.StageText).text = $"Stage {Managers.UserInfo.data.currentStage}";
     }
 }
