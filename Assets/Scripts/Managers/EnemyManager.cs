@@ -5,8 +5,25 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public EnemyFactory factory;
+    public List<GameObject> enemyPrefabs = new List<GameObject>();
+    public Dictionary<string, GameObject> EnemyPrefabDictionary = new Dictionary<string, GameObject>();
     public List<EnemyController> enemies = new List<EnemyController>();
     public List<EnemyController> dirEnemies = new List<EnemyController>();
+
+    void Awake()
+    {
+        foreach (GameObject prefab in enemyPrefabs)
+        {
+            EnemyPrefabDictionary.Add(prefab.name, prefab);
+        }
+    }
+    
+    public async void GetEnemiesData()
+    {
+        EnemyNetworkData[] enemyData = await Managers.Network.enemyDataController.GetEnemiesData(Managers.UserInfo.data.currentStage);
+        Managers.Stage.InsertEnemies(enemyData);
+        
+    }
     
     public EnemyController FindBulletTarget(Vector3 shootPosition, Vector3 direction)
     {

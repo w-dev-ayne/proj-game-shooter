@@ -2,6 +2,7 @@ using System;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class UIAppearAnimA : MonoBehaviour
 {
@@ -19,15 +20,12 @@ public class UIAppearAnimA : MonoBehaviour
             Play();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void DisappearAnim(UnityAction onComplete)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        this.transform.localScale = Vector3.one * 1.0f;
+        this.transform.DOScale(Vector3.zero, 0.25f).OnComplete(() =>
+        {
+            onComplete?.Invoke();
+        });
     }
 }

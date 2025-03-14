@@ -7,8 +7,6 @@ using UnityEngine.TextCore.Text;
 public class StageManager : MonoBehaviour
 {
     public int currentLevel { get; private set; } = 0;
-
-    public StageData data;
     public Level[] levels { get; private set; }
     public Level currentLevelData { get; private set; }
 
@@ -24,24 +22,39 @@ public class StageManager : MonoBehaviour
     void Awake()
     {
         Init();
-        Debug.Log("Hello I'm Stage Manager");
+    }
+
+    void Start()
+    {
+        Managers.Enemy.GetEnemiesData();
     }
 
     private void Init()
     {
         Application.targetFrameRate = 120;
-        //base.Awake();
         cc = FindAnyObjectByType<CharacterController>();
 
-        this.levels = new Level[data.levels.Length];
+        this.levels = new Level[5];
 
-        for (int i = 0; i < data.levels.Length; i++)
+        for (int i = 0; i < 5; i++)
         {
-            this.levels[i] = new Level(data.levels[i]);
+            this.levels[i] = new Level();
         }
 
         characterPoint = 0;
+        // StartNextLevel();
+    }
+
+    public void InsertEnemies(EnemyNetworkData[] enemies)
+    {
+        foreach (EnemyNetworkData enemy in enemies)
+        {
+            levels[enemy.levelId - 1].AddEnemyData(enemy);
+        }
+        
         StartNextLevel();
+        
+        //Managers.UI.FindPopup<UI_InGame>().UpdateCurrentLevel(currentLevelData);
     }
 
     
@@ -63,11 +76,9 @@ public class StageManager : MonoBehaviour
     }
 
     // 현재 스테이지 종료
-    private void FinishStage()
+    private async void FinishStage()
     {
-        Debug.Log("FinishStage");
-        Managers.UserInfo.AddCharacterPoint(this.characterPoint);
-        Managers.UserInfo.AddSkillDrawPoint();
+        await Managers.UserInfo.FinishStage(this.characterPoint);
         Managers.Scene.ChangeScene(Define.Scene.Lobby);
     }
 

@@ -62,6 +62,13 @@ public class SkillManager
             {
                 Managers.UI.FindPopup<UI_SkillDraw>().SetSkillDrawRemainText();
             });
+
+            SkillData drewSkill = new SkillData(response.data);
+            Managers.UI.FindPopup<UI_SkillDraw>().SetDrewSkillObject(drewSkill);
+        }
+        else
+        {
+            Managers.UI.ShowPopupUI<UI_Error>().SetErrorText(response.error.ToString());
         }
     }
 

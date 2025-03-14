@@ -36,11 +36,11 @@ public class EnemyGenerator : EditorWindow
 
         if (GUILayout.Button("Generate"))
         {
-            GenerateEnemy();
+            //GenerateEnemy();
         }
     }
 
-    private void GenerateEnemy()
+    /*private void GenerateEnemy()
     {
         string folderPath = "Assets/Data/Enemies";
 
@@ -67,5 +67,5 @@ public class EnemyGenerator : EditorWindow
         AssetDatabase.SaveAssets();
         
         EditorUtility.DisplayDialog("Skill Generator", $"Skill {name} generated at {assetPath}", "OK");
-    }
+    }*/
 }

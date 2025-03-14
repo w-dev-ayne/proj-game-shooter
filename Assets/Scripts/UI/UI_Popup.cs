@@ -33,6 +33,11 @@ public class UI_Popup : UI_Base
         
     }
 
+    public virtual void OnFocus()
+    {
+        
+    }
+
     void SetButtonSound()
     {
         foreach (Button button in FindObjectsOfType<Button>())
@@ -59,7 +64,18 @@ public class UI_Popup : UI_Base
 
     public virtual void ClosePopupUI()
     {
-        Managers.UI.ClosePopupUI(this);
+        if (animation)
+        {
+            this.transform.GetChild(0).GetChild(0).GetComponent<UIAppearAnimA>().DisappearAnim(() =>
+            {
+                
+                Managers.UI.ClosePopupUI(this);
+            });
+        }
+        else
+        {
+            Managers.UI.ClosePopupUI(this);    
+        }
     }
 
     private void OnDestroy()

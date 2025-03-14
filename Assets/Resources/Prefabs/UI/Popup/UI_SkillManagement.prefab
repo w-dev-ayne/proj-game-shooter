@@ -573,6 +573,7 @@ GameObject:
   - component: {fileID: 9112912584424299246}
   - component: {fileID: 2582157431735759054}
   - component: {fileID: 1911338576158261914}
+  - component: {fileID: 7566499492000260012}
   m_Layer: 5
   m_Name: ScrollViewArea
   m_TagString: Untagged
@@ -640,6 +641,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7566499492000260012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2185740160558255658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbedc696742ba4b7999428e2c5b878dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 1
 --- !u!1 &2278708660576637284
 GameObject:
   m_ObjectHideFlags: 0
@@ -1884,6 +1898,7 @@ GameObject:
   - component: {fileID: 8112821119106054390}
   - component: {fileID: 249370775637430582}
   - component: {fileID: 8635406671979199321}
+  - component: {fileID: 6634312855486753756}
   m_Layer: 5
   m_Name: EquippedSkillsObject
   m_TagString: Untagged
@@ -1978,6 +1993,19 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &6634312855486753756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5039433235109994280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbedc696742ba4b7999428e2c5b878dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 0
 --- !u!1 &5120553575614608892
 GameObject:
   m_ObjectHideFlags: 0
@@ -2357,6 +2385,7 @@ GameObject:
   - component: {fileID: 8028703498123684128}
   - component: {fileID: 1287472602588661550}
   - component: {fileID: 1129374086815289977}
+  - component: {fileID: 1293267535787742440}
   m_Layer: 5
   m_Name: DescriptionAreaObject
   m_TagString: Untagged
@@ -2444,6 +2473,19 @@ MonoBehaviour:
   duration: {fileID: 8009337818675597771}
   delay: {fileID: 8638012353701998879}
   cooltime: {fileID: 6723860229683267803}
+--- !u!114 &1293267535787742440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5870886924266560188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbedc696742ba4b7999428e2c5b878dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 2
 --- !u!1 &6706245964165841553
 GameObject:
   m_ObjectHideFlags: 0

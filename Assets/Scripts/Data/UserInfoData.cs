@@ -6,6 +6,7 @@ public class UserInfoData
     public int skillPoint;
     public int characterPoint;
     public int skilldrawPoint;
+    public int currentStage;
 
     public void FetchData(UserInfoNetworkData data)
     {
@@ -14,6 +15,7 @@ public class UserInfoData
         skillPoint = data.skillPoint;
         characterPoint = data.characterPoint;
         skilldrawPoint = data.skilldrawPoint;
+        currentStage = data.currentStage;
     }
 }
 
@@ -25,6 +27,7 @@ public class UserInfoNetworkData : PostData
     public int skillPoint;
     public int characterPoint;
     public int skilldrawPoint;
+    public int currentStage;
 }
 
 [System.Serializable]

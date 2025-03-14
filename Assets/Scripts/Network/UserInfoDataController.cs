@@ -20,4 +20,16 @@ public class UserInfoDataController : APILoader
         GetData<string> response = await base.PostAPI<string>("/userinfo/add/skilldraw", data);
         return response;
     }
+
+    public async Task<GetData<string>> AddCurrentStage()
+    {
+        GetData<string> response = await base.PostAPI<string>("/userinfo/add/currentStage");
+        return response;
+    }
+
+    public async Task<GetData<string>> FinishStage(AddCharacterPointData data)
+    {
+        GetData<string> response = await base.PostAPI<string>("/userinfo/stage/finish", data);
+        return response;
+    }
 }

@@ -4,6 +4,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UI_InGame : UI_Popup
@@ -28,7 +29,8 @@ public class UI_InGame : UI_Popup
         SkillAButton = 0,
         SkillBButton = 1,
         SkillCButton = 2,
-        SkillDButton = 3
+        SkillDButton = 3,
+        StopButton
     }
 
     enum Texts
@@ -61,12 +63,14 @@ public class UI_InGame : UI_Popup
         Managers.Stage.onCurrentLevelKilledUpdated += UpdateCurrentEnemies;
         Managers.Stage.cc.onStatusChanged += UpdateCharacterInfo;
 
-        UpdateCurrentLevel(Managers.Stage.currentLevelData);
+        //UpdateCurrentLevel(Managers.Stage.currentLevelData);
         UpdateCharacterInfo(Managers.Stage.cc);
         SetSkillButtons(Managers.Stage.cc.skills);
         
         GetObject((int)Objects.InstructionObject).SetActive(false);
         Managers.Instruction.Init(GetObject((int)Objects.InstructionObject), GetText((int)Texts.InstructionText));
+        
+        GetButton((int)Buttons.StopButton).gameObject.BindEvent(OnClickStopButton);
         
         if (base.Init() == false)
             return false;
@@ -102,7 +106,7 @@ public class UI_InGame : UI_Popup
     }
 
     // Level 변경 시 UI 업데이트
-    private void UpdateCurrentLevel(Level currentLevelData)
+    public void UpdateCurrentLevel(Level currentLevelData)
     {
         GetText((int)Texts.LevelText).text = Managers.Stage.currentLevel.ToString();
         GetText((int)Texts.RemainEnemyText).text =
@@ -153,5 +157,10 @@ public class UI_InGame : UI_Popup
         GameObject buffIcon = Instantiate(buffIconPrefab);
         buffIcon.transform.SetParent(GetObject((int)Objects.BuffStatusObject).transform);
         buffIcon.GetComponent<BuffIcon>().StartTimer(skill);
+    }
+
+    private void OnClickStopButton()
+    {
+        Managers.Scene.ChangeScene(Define.Scene.Lobby);
     }
 }
