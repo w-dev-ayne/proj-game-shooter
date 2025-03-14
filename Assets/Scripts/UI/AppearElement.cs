@@ -11,7 +11,7 @@ public class AppearElement : MonoBehaviour
 
     private void Awake()
     {
-        targetPosition = this.transform.position;
+        targetPosition = this.transform.localPosition;
 
         switch (direction)
         {
@@ -39,6 +39,6 @@ public class AppearElement : MonoBehaviour
 
     private void Play()
     {
-        this.transform.DOMove(targetPosition, duration, true);
+        this.transform.DOLocalMove(targetPosition, duration, true);
     }
 }

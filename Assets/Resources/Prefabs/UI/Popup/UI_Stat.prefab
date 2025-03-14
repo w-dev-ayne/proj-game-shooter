@@ -286,6 +286,7 @@ GameObject:
   - component: {fileID: 5216986123429789208}
   - component: {fileID: 5635523057385758822}
   - component: {fileID: 4467174778063929054}
+  - component: {fileID: 8321971617646953666}
   m_Layer: 5
   m_Name: CompleteButton
   m_TagString: Untagged
@@ -432,6 +433,19 @@ MonoBehaviour:
   Color2: {r: 0.75686276, g: 0.83137256, b: 0.85490197, a: 1}
   Angle: -90
   isChanging: 0
+--- !u!114 &8321971617646953666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446278877649068758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbedc696742ba4b7999428e2c5b878dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 1
 --- !u!1 &1680335642028424989
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,6 +1011,7 @@ GameObject:
   - component: {fileID: 612823381497565298}
   - component: {fileID: 6932005341485350768}
   - component: {fileID: 6468556777625259750}
+  - component: {fileID: 2455908113006621381}
   m_Layer: 5
   m_Name: CurrentPoint
   m_TagString: Untagged
@@ -1099,6 +1114,19 @@ MonoBehaviour:
   Color2: {r: 0.75686276, g: 0.83137256, b: 0.85490197, a: 1}
   Angle: -90
   isChanging: 0
+--- !u!114 &2455908113006621381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3178353142220269906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbedc696742ba4b7999428e2c5b878dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 0
 --- !u!1 &4015678788479021185
 GameObject:
   m_ObjectHideFlags: 0
@@ -1113,6 +1141,7 @@ GameObject:
   - component: {fileID: 8733748959955348564}
   - component: {fileID: 4354411060781704226}
   - component: {fileID: 5984963855228395123}
+  - component: {fileID: 287188081947664952}
   m_Layer: 5
   m_Name: CancelButton
   m_TagString: Untagged
@@ -1259,6 +1288,19 @@ MonoBehaviour:
   Color2: {r: 0.75686276, g: 0.83137256, b: 0.85490197, a: 1}
   Angle: -90
   isChanging: 0
+--- !u!114 &287188081947664952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4015678788479021185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbedc696742ba4b7999428e2c5b878dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 1
 --- !u!1 &4126623599617712299
 GameObject:
   m_ObjectHideFlags: 0
@@ -1741,6 +1783,7 @@ GameObject:
   - component: {fileID: 358118814095694262}
   - component: {fileID: 4948340611614524421}
   - component: {fileID: 7023729140613512655}
+  - component: {fileID: 7493424025469954458}
   m_Layer: 5
   m_Name: UndoButton
   m_TagString: Untagged
@@ -1887,6 +1930,19 @@ MonoBehaviour:
   Color2: {r: 0.75686276, g: 0.83137256, b: 0.85490197, a: 1}
   Angle: -90
   isChanging: 0
+--- !u!114 &7493424025469954458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4959496168871754878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbedc696742ba4b7999428e2c5b878dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 1
 --- !u!1 &5185548410130976367
 GameObject:
   m_ObjectHideFlags: 0
