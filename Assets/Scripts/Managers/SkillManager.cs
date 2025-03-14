@@ -68,7 +68,7 @@ public class SkillManager
         }
         else
         {
-            Managers.UI.ShowPopupUI<UI_Error>().SetErrorText(response.error.ToString());
+            Managers.UI.ShowPopupUI<UI_Error>().SetErrorText(response.error.msg.ToString());
         }
     }
 

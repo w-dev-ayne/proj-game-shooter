@@ -70,7 +70,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b897eba05647b4a619d0332523726187, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b2244e1fc6ecd41e2889690d232a075e, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 2
 --- !u!114 &1563205553804429583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,9 +167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 783a6def8fc5e4d80af0b3066d73111b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Color1: {r: 1, g: 0.55372715, b: 0, a: 1}
-  Color2: {r: 1, g: 0.78902745, b: 0, a: 1}
+  Color1: {r: 1, g: 1, b: 1, a: 1}
+  Color2: {r: 0.81960785, g: 0.7137255, b: 0.8352941, a: 1}
   Angle: -90
+  isChanging: 0
 --- !u!1 &2999998830080177595
 GameObject:
   m_ObjectHideFlags: 0
