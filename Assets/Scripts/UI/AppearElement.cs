@@ -30,7 +30,10 @@ public class AppearElement : MonoBehaviour
             default:
                 break;
         }
-        
+    }
+
+    private void OnEnable()
+    {
         Play();
     }
 

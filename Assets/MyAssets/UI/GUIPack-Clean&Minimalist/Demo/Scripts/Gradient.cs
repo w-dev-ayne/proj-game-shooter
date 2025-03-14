@@ -23,8 +23,8 @@ namespace Ricimi
 
 		public override void ModifyMesh(VertexHelper vh)
 		{
-			// if (!enabled || isApplied && !isChanging) // 이미 적용된 경우 스킵
-			// 	return;
+			if (!enabled || isApplied && !isChanging) // 이미 적용된 경우 스킵
+				return;
 			
 			if (enabled)
 			{
