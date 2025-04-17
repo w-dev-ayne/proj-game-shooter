@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class SkillDataController : APILoader
+public class SkillApiService : APILoader
 {
     public async Task<bool> GetUserSkills()
     {

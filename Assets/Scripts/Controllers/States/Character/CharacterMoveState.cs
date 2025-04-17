@@ -32,7 +32,7 @@ public class CharacterMoveState : Rotatable, IState<CharacterController>
                                 cc.transform.rotation = targetRotation;
                         }
                         
-                        cc.rb.MovePosition(cc.transform.position + targetDirection * Time.deltaTime * cc.moveSpeed);
+                        cc.rb.MovePosition(cc.transform.position + targetDirection * Time.deltaTime * cc.moveSpeed * FactorDefine.MOVE_SPEED);
                         base.Rotate(cc);
                 }
                 else if (isMoving && !cc.moveJoystick.isDragging)

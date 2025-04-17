@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Unity.Cinemachine;
 
-public class UserInfoDataController : APILoader
+public class UserInfoApiService : APILoader
 {
     public async Task<GetData<UserInfoNetworkData>> GetUserInfo()
     {

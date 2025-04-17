@@ -20,7 +20,7 @@ public class EnemyManager : MonoBehaviour
     
     public async void GetEnemiesData()
     {
-        EnemyNetworkData[] enemyData = await Managers.Network.enemyDataController.GetEnemiesData(Managers.UserInfo.data.currentStage);
+        EnemyNetworkData[] enemyData = await Managers.Network.EnemyApiService.GetEnemiesData(Managers.UserInfo.data.currentStage);
         Managers.Stage.InsertEnemies(enemyData);
         
     }

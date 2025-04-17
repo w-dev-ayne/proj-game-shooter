@@ -27,7 +27,7 @@ public class CharacterAnimator : AnimatorController
 
     public void StartMove()
     {
-        animator.speed = cc.moveSpeed / 2;
+        animator.speed = cc.moveSpeed * FactorDefine.MOVE_SPEED / 2;
         animator.SetBool(CharacterAnimatorParameters.IsMove, true);
     }
 

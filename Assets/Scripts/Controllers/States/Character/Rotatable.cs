@@ -23,7 +23,7 @@ public class Rotatable : MonoBehaviour
                         cc.transform.rotation = Quaternion.RotateTowards(
                                 cc.transform.rotation,
                                 targetRotation,
-                                cc.rotateSpeed * Time.deltaTime * 180 // 가변적인 rotateSpeed 적용
+                                cc.rotateSpeed * Time.deltaTime * FactorDefine.ROTATE_SPEED // 가변적인 rotateSpeed 적용
                         );   
                 }
         }

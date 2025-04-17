@@ -19,7 +19,7 @@ public class CharacterAttackState : Rotatable, IState<CharacterController>
     private IEnumerator Attack()
     {
         Vector3 direction = Vector3.zero;
-        WaitForSeconds attackSpeed = new WaitForSeconds(1.0f / cc.attackSpeed);
+        WaitForSeconds attackSpeed = new WaitForSeconds(FactorDefine.ATTACK_SPEED / cc.attackSpeed);
         WaitForEndOfFrame oneFrame = new WaitForEndOfFrame();
 
         // 애니메이션 전환시간 대기
@@ -38,8 +38,8 @@ public class CharacterAttackState : Rotatable, IState<CharacterController>
                 continue;
             }
             
-            this.cc.animatorController.Attack();
-            cc.bulletPool.attackParticle.Play();
+            this.cc.animatorController.Attack(); // Animator
+            cc.bulletPool.attackParticle.Play(); // Particle
             Bullet bullet = cc.bulletPool.TakeFromPool() as Bullet;
             bullet.transform.position = cc.bulletPool.shootPositionTransform.position;
             bullet.Shoot(direction, cc.bulletSpeed,cc.attack);

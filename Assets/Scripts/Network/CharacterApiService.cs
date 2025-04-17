@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-public class CharacterDataController : APILoader
+public class CharacterApiService : APILoader
 {
     public async Task<bool> GetCharacterData()
     {
