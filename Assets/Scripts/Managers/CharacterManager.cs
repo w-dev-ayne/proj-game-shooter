@@ -7,14 +7,14 @@ public class CharacterManager
 
     public void Initialize()
     {
-        Managers.Network.cDataController.GetCharacterData();
-        Managers.Network.cDataController.GetCharacterUpgradeConfigurationData();
+        Managers.Network.CApiService.GetCharacterData();
+        Managers.Network.CApiService.GetCharacterUpgradeConfigurationData();
     }
 
     // 서버로부터 캐릭터 정보 받아오기
     public async void GetCharacterData(UnityAction onSuccess = null)
     {
-        if (await Managers.Network.cDataController.GetCharacterData())
+        if (await Managers.Network.CApiService.GetCharacterData())
         {
             onSuccess?.Invoke();
         }
@@ -35,7 +35,7 @@ public class CharacterManager
     // 캐릭터 데이터 업그레이드 서버에 호출
     public async void UpgradeData(CharacterUpgradeNetworkData data)
     {
-        bool success = await Managers.Network.cDataController.UpgradeCharacter(data);
+        bool success = await Managers.Network.CApiService.UpgradeCharacter(data);
 
         if (success)
         {

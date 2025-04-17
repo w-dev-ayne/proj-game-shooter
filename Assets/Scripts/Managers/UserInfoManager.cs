@@ -9,7 +9,7 @@ public class UserInfoManager
     // 서버로부터 UserInfo 받아오기
     public async void GetUserInfo(UnityAction onComplete = null)
     {
-        GetData<UserInfoNetworkData> response = await Managers.Network.userInfoDataController.GetUserInfo();
+        GetData<UserInfoNetworkData> response = await Managers.Network.UserInfoApiService.GetUserInfo();
 
         if (response.success)
         {
@@ -21,7 +21,7 @@ public class UserInfoManager
     public async void AddCharacterPoint(int amount)
     {
         AddCharacterPointData data = new AddCharacterPointData(amount);
-        GetData<string> response = await Managers.Network.userInfoDataController.AddCharacterPoint(data);
+        GetData<string> response = await Managers.Network.UserInfoApiService.AddCharacterPoint(data);
 
         if (response.success)
         {
@@ -32,7 +32,7 @@ public class UserInfoManager
     public async void AddSkillDrawPoint()
     {
         AddSkillDrawPointData data = new AddSkillDrawPointData(1);
-        GetData<string> response = await Managers.Network.userInfoDataController.AddSkillDrawPoint(data);
+        GetData<string> response = await Managers.Network.UserInfoApiService.AddSkillDrawPoint(data);
 
         if (response.success)
         {
@@ -44,7 +44,7 @@ public class UserInfoManager
     {
         AddCharacterPointData cpData = new AddCharacterPointData(amount);
 
-        GetData<string> response = await Managers.Network.userInfoDataController.FinishStage(cpData);
+        GetData<string> response = await Managers.Network.UserInfoApiService.FinishStage(cpData);
 
         if (response.success)
         {

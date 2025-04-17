@@ -10,10 +10,10 @@ public class NetworkManager : Singleton<NetworkManager>
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXJ2aWNlIjoiVVNFUiIsInRva2VuVHlwZSI6ImFjY2Vzc1Rva2VuIiwiaWQiOjEzLCJpYXQiOjE3MzQ5NTc2NzR9.rdbcEFDGEy6dmqRjW-BoPE98AIch_rg2Dc9Q9X34JJg";
 
     public AuthController authController;
-    public CharacterDataController cDataController;
-    public SkillDataController skillController;
-    public UserInfoDataController userInfoDataController;
-    public EnemyDataController enemyDataController;
+    public CharacterApiService CApiService;
+    public SkillApiService skillController;
+    public UserInfoApiService UserInfoApiService;
+    public EnemyApiService EnemyApiService;
 
     void Awake()
     {
@@ -24,10 +24,10 @@ public class NetworkManager : Singleton<NetworkManager>
     void Init()
     {
         authController = new AuthController();
-        cDataController = new CharacterDataController();
-        skillController = new SkillDataController();
-        userInfoDataController = new UserInfoDataController();
-        enemyDataController = new EnemyDataController();
+        CApiService = new CharacterApiService();
+        skillController = new SkillApiService();
+        UserInfoApiService = new UserInfoApiService();
+        EnemyApiService = new EnemyApiService();
 
         host = $"http://{config.host}:{config.port}";
         

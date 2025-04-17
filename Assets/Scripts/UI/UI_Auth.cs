@@ -77,7 +77,7 @@ public class UI_Auth : UI_Popup
     private void OnLoginSuccess(string message)
     {
         Debug.Log("Login Success");
-        Managers.Network.cDataController.GetCharacterData();
+        Managers.Network.CApiService.GetCharacterData();
         Managers.UserInfo.GetUserInfo();
         Managers.Scene.ChangeScene(Define.Scene.Lobby);
     }

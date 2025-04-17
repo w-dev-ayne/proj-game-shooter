@@ -76,7 +76,7 @@ public class SkillGenerator : EditorWindow
         SkillNetworkData newSkillData = new SkillNetworkData();
         newSkillData.FetchData(newSkill);
 
-        SkillDataController dataController = new SkillDataController();
-        await dataController.AddSkill(newSkillData, config);
+        SkillApiService apiService = new SkillApiService();
+        await apiService.AddSkill(newSkillData, config);
     }
 }

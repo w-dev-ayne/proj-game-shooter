@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-public class EnemyDataController : APILoader
+public class EnemyApiService : APILoader
 {
     public async Task<EnemyNetworkData[]> GetEnemiesData(int stageId)
     {
