@@ -4187,7 +4187,7 @@ MonoBehaviour:
   Color1: {r: 0.9231605, g: 0.36320752, b: 1, a: 1}
   Color2: {r: 0, g: 0.94305634, b: 1, a: 1}
   Angle: 90
-  isChanging: 0
+  isChanging: 1
 --- !u!1001 &509937355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11566,7 +11566,7 @@ MonoBehaviour:
   Color1: {r: 0.9231605, g: 0.36320752, b: 1, a: 1}
   Color2: {r: 0, g: 0.94305634, b: 1, a: 1}
   Angle: 90
-  isChanging: 0
+  isChanging: 1
 --- !u!1001 &1740489816
 PrefabInstance:
   m_ObjectHideFlags: 0
