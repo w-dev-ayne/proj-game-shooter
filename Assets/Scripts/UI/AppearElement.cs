@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class AppearElement : MonoBehaviour
 {
-    public Define.AppearDirection direction;
+    public Define.AppearDirection direction; // enum 변수로 방향 설정
 
-    private Vector3 targetPosition;
+    private Vector3 targetPosition; // 최종 이동할 포지션
     private static float duration = 0.3f;
 
     private void Awake()

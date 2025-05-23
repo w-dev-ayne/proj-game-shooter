@@ -64,7 +64,7 @@ public class Bullet : PooledObject
             {
                 accuracyDirection = (target.transform.position - this.transform.position).normalized;
                 accuracyDirection.y = 0;
-                moveDirection = Vector3.Lerp(direction, accuracyDirection, 0.3f * accuracy).normalized;
+                moveDirection = Vector3.Lerp(direction, accuracyDirection, 0.3f * accuracy).normalized; // Bullet Accuracy 보정
             }
             this.rb.MovePosition(this.transform.position + moveDirection * FactorDefine.BULLET_SPEED * speed * Time.deltaTime);
             yield return oneFrame;

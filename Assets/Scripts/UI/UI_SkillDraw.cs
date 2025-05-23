@@ -66,6 +66,7 @@ public class UI_SkillDraw : UI_Popup
     private IEnumerator CoDrawSkill()
     {
         Managers.Skill.DrawSkill();
+        GetObject((int)Objects.DrewVfxObject).SetActive(false);
         GetObject((int)Objects.DrawingVfxObject).SetActive(true);
         yield return new WaitForSeconds(2.5f);
         GetObject((int)Objects.DrawingVfxObject).SetActive(false);

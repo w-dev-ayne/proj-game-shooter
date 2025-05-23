@@ -6,8 +6,10 @@ public class NetworkManager : Singleton<NetworkManager>
     [SerializeField] private NetworkConfig config;
 
     public string host { get; private set; } = "http://localhost:3000";
+    
+    // Just Sample Token
     public string token { get; private set; } =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXJ2aWNlIjoiVVNFUiIsInRva2VuVHlwZSI6ImFjY2Vzc1Rva2VuIiwiaWQiOjEzLCJpYXQiOjE3MzQ5NTc2NzR9.rdbcEFDGEy6dmqRjW-BoPE98AIch_rg2Dc9Q9X34JJg";
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXJ2aWNlIjoiVVNFUiIsInRva2VuVHlwZSI6ImFjY2Vzc1Rva2VuIiwiaWQiOjEzLCJpYXQiOjE3MzQ5NTc2NzR9.rdbcEFDGEy6dmqRjW-BoPE98AIch_rg2Dc9Q9X34JJg"; 
 
     public AuthController authController;
     public CharacterApiService CApiService;
